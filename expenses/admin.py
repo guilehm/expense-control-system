@@ -1,6 +1,5 @@
 from django.contrib import admin
 from expenses.models import Expense
-from core.models import Tag
 
 # Register your models here.
 class TagInline(admin.StackedInline):
