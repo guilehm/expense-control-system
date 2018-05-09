@@ -12,14 +12,14 @@ class Expense(models.Model):
     note = models.TextField(blank=True, null=True)
     slug = models.SlugField()
     category = models.ForeignKey(
-        'expenses.Category',
+        'core.Category',
         related_name='expenses',
         on_delete=models.CASCADE,
     )
     tags = models.ManyToManyField(
-        'expenses.Tags',
-        on_delete=models.CASCADE,
-        related_name='expenses',
+        'core.Tag',
+        related_name='tags',
+        blank=True,
     )
 
     date_added = models.DateTimeField(auto_now_add=True, db_index=True)
@@ -29,30 +29,3 @@ class Expense(models.Model):
         return self.title
 
     # repeat
-
-
-class Category(models.Model):
-    title = models.CharField(max_length=50)
-    slug = models.SlugField()
-    description = models.TextField(blank=True, null=True)
-
-    date_added = models.DateTimeField(auto_now_add=True, db_index=True)
-    date_changed = models.DateTimeField(auto_now=True, db_index=True)
-
-    class Meta:
-        verbose_name_plural = 'Categories'
-
-    def __str__(self):
-        return self.title
-
-
-class Tags(models.Model):
-    title = models.CharField(max_length=50)
-    slug = models.SlugField()
-    description = models.TextField(blank=True, null=True)
-
-    date_added = models.DateTimeField(auto_now_add=True, db_index=True)
-    date_changed = models.DateTimeField(auto_now=True, db_index=True)
-
-    def __str__(self):
-        return self.title
