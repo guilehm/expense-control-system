@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'core/css/signin.css' %}">
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin" method="post">
+      {% csrf_token %}
+      <h1 class="display-4 mb-2">Controller</h1>
+      <h1 class="h5 mb-3 font-weight-normal">Faça seu cadastro</h1>
+      <input type="text" name="username" maxlength="150" autofocus required id="id_username" class="form-control mb-3" placeholder="Usuário"/>
+      <input type="password" name="password1" required id="id_password1" class="form-control mt-2" placeholder="Senha" />
+      <input type="password" name="password2" required id="id_password2" class="form-control" placeholder="Repita sua senha" />
+      <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Cadastrar</button>
+      <br>
+      <p class="text-danger">
+        {{ form.username.errors.as_text }}
+        {{ form.password1.errors.as_text }}
+        {{ form.password2.errors.as_text }}
+      </p>
+      <a href="{% url 'core:login' %}" class="">Se já tem cadastro, faça o login aqui</a>
+      <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
+    </form>
+  </body>
+</html>
