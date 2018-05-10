@@ -11,6 +11,7 @@ class BankAccount(models.Model):
     agency = models.CharField(max_length=8, blank=True, null=True)
     account_number = models.CharField(max_length=15, blank=True, null=True)
     when_opened = models.DateField()
+    img = models.ImageField(upload_to='bank/logos', blank=True, null=True)
 
     @property
     def balance(self):
