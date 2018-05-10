@@ -1,18 +1,27 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate ,login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.contrib.auth import authenticate ,login, logout
 
-from bank.models import BankAccount
+from bank.models import BankAccount, Cashing, Deposit
+from transactions.models import Expense, Revenue
 
 
 # Create your views here.
 def index(request):
     bank = BankAccount.objects.get(owner=request.user)
+    cashing = Cashing.objects.filter(user=request.user)
+    deposits = Deposit.objects.filter(user=request.user)
+    expenses = Expense.objects.filter(user=request.user)
+    revenues = Revenue.objects.filter(user=request.user)
     return render(request, 'core/index.html', {
         'bank': bank,
+        'cashing': cashing,
+        'deposits': deposits,
+        'expenses': expenses,
+        'revenues': revenues,
     })
 
 

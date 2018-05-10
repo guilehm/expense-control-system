@@ -11,4 +11,21 @@
         </div>
     </div>
 </div>
+{% for cash in cashing %}
+{{ cash.total|intcomma }}
+{% endfor%}
+
+
+{% for deposit in deposits %}
+{{ deposit.total|intcomma }}
+{% endfor%}
+
+{% for expense in expenses %}
+{{ expense.value }}
+{% endfor%}
+
+{% for revenue in revenues %}
+{{ revenue.value }}
+{% endfor%}
+
 {% endblock %}
