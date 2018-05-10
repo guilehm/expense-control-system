@@ -9,7 +9,7 @@ class BankAccount(models.Model):
     bank_number = models.CharField(max_length=15, blank=True, null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     agency = models.CharField(max_length=8, blank=True, null=True)
-    acc_number = models.CharField(max_length=15, blank=True, null=True)
+    account_number = models.CharField(max_length=15, blank=True, null=True)
     when_opened = models.DateField()
 
     @property
@@ -22,7 +22,7 @@ class BankAccount(models.Model):
             result += sum(x.total for x in self.deposits.on_date(current_date))
             current_date += timedelta(days=1)
         return result
-    
+
     def __str__(self):
         return self.name
 
@@ -37,15 +37,20 @@ class Deposit(models.Model):
     account = models.ForeignKey(BankAccount, on_delete=models.CASCADE, related_name='deposits')
     total = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    when = models.DateTimeField()
+    when = models.DateField()
 
     objects = OperationManager()
 
+    def __str__(self):
+        return 'Deposit_' + str(self.id) + '_in_' + str(self.when)
 
 class Cashing(models.Model):
     account = models.ForeignKey(BankAccount, on_delete=models.CASCADE, related_name='cashing')
     total = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    when = models.DateTimeField()
+    when = models.DateField()
 
     objects = OperationManager()
+
+    def __str__(self):
+        return 'Cashing_' + str(self.id) + '_in_' + str(self.when)
