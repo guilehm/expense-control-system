@@ -11,13 +11,13 @@ from transactions.models import Expense, Revenue
 
 # Create your views here.
 def index(request):
-    bank = BankAccount.objects.get(owner=request.user)
+    banks = BankAccount.objects.filter(owner=request.user)
     cashing = Cashing.objects.filter(user=request.user)
     deposits = Deposit.objects.filter(user=request.user)
     expenses = Expense.objects.filter(user=request.user)
     revenues = Revenue.objects.filter(user=request.user)
     return render(request, 'core/index.html', {
-        'bank': bank,
+        'banks': banks,
         'cashing': cashing,
         'deposits': deposits,
         'expenses': expenses,

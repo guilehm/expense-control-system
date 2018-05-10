@@ -2,30 +2,32 @@
 {% load humanize %}
 
 {% block content %}
-<div class="container">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <p class="">Olá, {{ request.user }}!</p>
-            <p class="card-text">R$ {{ bank.balance|intcomma }}</p>
-            <span class="small">saldo geral</span>
+
+<!-- Banks -->
+<section id="team" class="pb-5">
+    <div class="container">
+        <h5 class="section-title h1">Contas Bancárias</h5>
+        <div class="row">
+            {% for bank in banks %}
+                <!-- Bank -->
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="mainflip">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="{{ bank.img.url }}" alt="card image"></p>
+                                    <h4 class="card-title">{{ bank }}</h4>
+                                    <a href="#" class="btn btn-primary btn-sm">R$ {{ bank.balance }}</a>
+                                    <p class="text-muted mt-1">saldo geral</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bank -->
+            {% endfor  %}
         </div>
     </div>
-</div>
-{% for cash in cashing %}
-{{ cash.total|intcomma }}
-{% endfor%}
-
-
-{% for deposit in deposits %}
-{{ deposit.total|intcomma }}
-{% endfor%}
-
-{% for expense in expenses %}
-{{ expense.value }}
-{% endfor%}
-
-{% for revenue in revenues %}
-{{ revenue.value }}
-{% endfor%}
-
+</section>
+<!-- Banks -->
 {% endblock %}
