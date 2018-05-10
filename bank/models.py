@@ -14,7 +14,7 @@ class BankAccount(models.Model):
 
     @property
     def balance(self):
-        today = timezone.now()
+        today = timezone.now().date()
         result = 0
         current_date = self.when_opened
         while current_date <= today:
