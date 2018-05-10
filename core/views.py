@@ -5,10 +5,15 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate ,login, logout
 
+from bank.models import BankAccount
+
 
 # Create your views here.
 def index(request):
-    return render(request, 'core/index.html')
+    bank = BankAccount.objects.get(owner=request.user)
+    return render(request, 'core/index.html', {
+        'bank': bank,
+    })
 
 
 def login_view(request):
