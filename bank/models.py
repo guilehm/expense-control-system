@@ -6,9 +6,10 @@ from django.utils import timezone
 
 class BankAccount(models.Model):
     name = models.CharField(max_length=50)
+    bank_number = models.CharField(max_length=15, blank=True, null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    agency = models.CharField(max_length=6, blank=True, null=True)
-    number = models.IntegerField(blank=True, null=True)
+    agency = models.CharField(max_length=8, blank=True, null=True)
+    acc_number = models.CharField(max_length=15, blank=True, null=True)
     when_opened = models.DateField()
 
     @property
@@ -21,10 +22,12 @@ class BankAccount(models.Model):
             result += sum(x.total for x in self.deposits.on_date(current_date))
             current_date += timedelta(days=1)
         return result
+    
+    def __str__(self):
+        return self.name
 
 
 class OperationManager(models.Manager):
-
     def on_date(self, date):
         return (super(OperationManager, self).get_queryset()).filter(when__gte=date, when__lte=date)
 
@@ -37,6 +40,7 @@ class Deposit(models.Model):
     when = models.DateTimeField()
 
     objects = OperationManager()
+
 
 class Cashing(models.Model):
     account = models.ForeignKey(BankAccount, on_delete=models.CASCADE, related_name='cashing')
