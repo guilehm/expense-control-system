@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Revenue(models.Model):
+    account = models.ForeignKey('bank.BankAccount', on_delete=models.CASCADE, related_name='revenues')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
@@ -31,6 +32,7 @@ class Revenue(models.Model):
 
 
 class Expense(models.Model):
+    account = models.ForeignKey('bank.BankAccount', on_delete=models.CASCADE, related_name='expenses')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)

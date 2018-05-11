@@ -8,16 +8,16 @@
     <div class="container">
         <h5 class="section-title h1">Contas Bancárias</h5>
         <div class="row">
-            {% for bank in banks %}
+            {% for acc in accounts %}
                 <!-- Bank -->
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="mainflip">
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="{{ bank.img.url }}" alt="card image"></p>
-                                    <h4 class="card-title">{{ bank }}</h4>
-                                    <a href="#" class="btn btn-primary btn-sm">R$ {{ bank.total_debits }}</a>
+                                    <p><img class=" img-fluid" src="{{ acc.bank.img.url }}" alt="card image"></p>
+                                    <h4 class="card-title">{{ acc.bank.name }}</h4>
+                                    <a href="#" class="btn btn-primary btn-sm">R$ {{ acc.balance|intcomma }}</a>
                                     <p class="text-muted mt-1">saldo geral</p>
                                 </div>
                             </div>

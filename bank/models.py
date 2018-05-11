@@ -3,17 +3,24 @@ from django.db.models import Sum
 from django.contrib.auth.models import User
 
 
-class BankAccount(models.Model):
+class Bank(models.Model):
     name = models.CharField(max_length=50)
-    bank_number = models.CharField(max_length=15, blank=True, null=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    agency = models.CharField(max_length=8, blank=True, null=True)
-    account_number = models.CharField(max_length=15, blank=True, null=True)
-    when_opened = models.DateField()
+    number = models.CharField(max_length=3)
     img = models.ImageField(upload_to='bank/logos', blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+
+class BankAccount(models.Model):
+    bank = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name='bank')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    agency = models.CharField(max_length=8, blank=True, null=True)
+    account_number = models.CharField(max_length=15, blank=True, null=True)
+    when_opened = models.DateField()
+
+    def __str__(self):
+        return self.bank.name
 
     @property
     def balance(self):
@@ -46,3 +53,5 @@ class Credit(models.Model):
 
     def __str__(self):
         return 'Credit_' + str(self.id) + '_in_' + str(self.when)
+
+
