@@ -35,6 +35,22 @@ class BankAccount(models.Model):
     def total_credits(self):
         return self.credits.all().aggregate(Sum('total'))['total__sum'] or 0.00
 
+    @property
+    def total_expenses(self):
+        return self.expenses.all().aggregate(Sum('total'))['total__sum'] or 0.00
+
+    @property
+    def total_paid_expenses(self):
+        return self.expenses.filter(paid_out=True).aggregate(Sum('total'))['total__sum'] or 0.00
+
+    @property
+    def total_revenues(self):
+        return self.revenues.all().aggregate(Sum('total'))['total__sum'] or 0.00
+
+    @property
+    def total_received_revenues(self):
+        return self.revenues.filter(received_out=True).aggregate(Sum('total'))['total__sum'] or 0.00
+
 
 class Debit(models.Model):
     account = models.ForeignKey(BankAccount, on_delete=models.CASCADE, related_name='debits')

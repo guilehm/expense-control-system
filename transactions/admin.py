@@ -8,7 +8,7 @@ class RevenueTagInline(admin.StackedInline):
 
 @admin.register(Revenue)
 class RevenueAdmin(admin.ModelAdmin):
-    list_display = ['title', 'value', 'category', 'received_out',]
+    list_display = ['title', 'total', 'category', 'received_out',]
     list_filter = ['title', 'category', 'received_out',]
     exclude = (
         ['tags',]
@@ -28,7 +28,7 @@ class ExpenseTagInline(admin.StackedInline):
 
 @admin.register(Expense)
 class ExpenseAdmin(admin.ModelAdmin):
-    list_display = ['title', 'value', 'category', 'paid_out',]
+    list_display = ['title', 'total', 'category', 'paid_out',]
     list_filter = ['title', 'category', 'paid_out',]
     exclude = (
         ['tags',]

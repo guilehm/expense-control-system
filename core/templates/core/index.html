@@ -17,8 +17,23 @@
                                 <div class="card-body text-center">
                                     <p><img class=" img-fluid" src="{{ acc.bank.img.url }}" alt="card image"></p>
                                     <h4 class="card-title">{{ acc.bank.name }}</h4>
-                                    <a href="#" class="btn btn-primary btn-sm">R$ {{ acc.balance|intcomma }}</a>
+                                    <button href="#" class="btn btn-primary btn-sm">R$ {{ acc.balance|intcomma }}</button>
                                     <p class="text-muted mt-1">saldo geral</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title">Despesas</h4>
+                                    <button class="btn btn-danger btn-sm">R$ {{ acc.total_expenses|intcomma }}</button>
+                                    <button class="btn btn-danger btn-sm">R$ {{ acc.total_paid_expenses|intcomma }}</button>
+                                    <p class="text-muted mt-1">total de despesas</p>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h4 class="card-title">Receitas</h4>
+                                    <button class="btn btn-success btn-sm">R$ {{ acc.total_revenues|intcomma }}</button>
+                                    <p class="text-muted mt-1">total de receitas</p>
                                 </div>
                             </div>
                         </div>
