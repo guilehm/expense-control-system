@@ -5,21 +5,21 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from bank.models import BankAccount, Cashing, Deposit
+from bank.models import BankAccount, Credit, Debit
 from transactions.models import Expense, Revenue
 
 
 # Create your views here.
 def index(request):
     banks = BankAccount.objects.filter(owner=request.user)
-    cashing = Cashing.objects.filter(user=request.user)
-    deposits = Deposit.objects.filter(user=request.user)
+    debits = Debit.objects.filter(user=request.user)
+    credits = Credit.objects.filter(user=request.user)
     expenses = Expense.objects.filter(user=request.user)
     revenues = Revenue.objects.filter(user=request.user)
     return render(request, 'core/index.html', {
         'banks': banks,
-        'cashing': cashing,
-        'deposits': deposits,
+        'debits': debits,
+        'credits': credits,
         'expenses': expenses,
         'revenues': revenues,
     })

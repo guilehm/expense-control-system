@@ -1,8 +1,7 @@
-from datetime import timedelta
-
 from django.db import models
+from django.db.models import Sum
 from django.contrib.auth.models import User
-from django.utils import timezone
+
 
 class BankAccount(models.Model):
     name = models.CharField(max_length=50)
@@ -13,45 +12,37 @@ class BankAccount(models.Model):
     when_opened = models.DateField()
     img = models.ImageField(upload_to='bank/logos', blank=True, null=True)
 
-    @property
-    def balance(self):
-        today = timezone.now().date()
-        result = 0
-        current_date = self.when_opened
-        while current_date <= today:
-            result -= sum(x.total for x in self.cashing.on_date(current_date))
-            result += sum(x.total for x in self.deposits.on_date(current_date))
-            current_date += timedelta(days=1)
-        return result
-
     def __str__(self):
         return self.name
 
+    @property
+    def balance(self):
+        return self.total_credits - self.total_debits
 
-class OperationManager(models.Manager):
-    def on_date(self, date):
-        return (super(OperationManager, self).get_queryset()).filter(when__gte=date, when__lte=date)
+    @property
+    def total_debits(self):
+        return self.debits.all().aggregate(Sum('total'))['total__sum'] or 0.00
 
 
+    @property
+    def total_credits(self):
+        return self.credits.all().aggregate(Sum('total'))['total__sum'] or 0.00
 
-class Deposit(models.Model):
-    account = models.ForeignKey(BankAccount, on_delete=models.CASCADE, related_name='deposits')
+
+class Debit(models.Model):
+    account = models.ForeignKey(BankAccount, on_delete=models.CASCADE, related_name='debits')
     total = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     when = models.DateField()
 
-    objects = OperationManager()
-
     def __str__(self):
-        return 'Deposit_' + str(self.id) + '_in_' + str(self.when)
+        return 'Debit_' + str(self.id) + '_in_' + str(self.when)
 
-class Cashing(models.Model):
-    account = models.ForeignKey(BankAccount, on_delete=models.CASCADE, related_name='cashing')
+class Credit(models.Model):
+    account = models.ForeignKey(BankAccount, on_delete=models.CASCADE, related_name='credits')
     total = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     when = models.DateField()
 
-    objects = OperationManager()
-
     def __str__(self):
-        return 'Cashing_' + str(self.id) + '_in_' + str(self.when)
+        return 'Credit_' + str(self.id) + '_in_' + str(self.when)
