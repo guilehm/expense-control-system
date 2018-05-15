@@ -7,6 +7,7 @@ from django.urls import reverse
 
 from bank.models import BankAccount
 from transactions.models import Expense, Revenue
+from transactions.forms import ExpenseForm, RevenueForm
 
 
 # Create your views here.
@@ -54,3 +55,21 @@ def register_view(request):
         form = UserCreationForm()
         context = {'form':form}
         return render(request, 'core/register.html', context)
+
+def expenses_include(request):
+    if request.method == 'POST':
+        form = ExpenseForm(request.POST)
+        if form.is_valid():
+            expense = form.save(commit=False)
+            expense.user = request.user
+            expense.save()
+            return redirect('core:index')
+        else:
+            return render(request, 'core/expenses_include.html', {
+                'form': form,
+            })
+    else:
+        form = ExpenseForm()
+        return render(request, 'core/expenses_include.html', {
+            'form': form,
+        })
