@@ -48,17 +48,25 @@
         <div class="row">
             <div class="col-6">
                 <h4>Despesas</h4>
+                <small><a href="#">incluir</a></small>
                 <ul>
                     {% for expense in expenses %}
-                    <li>{{ expense.title }}</li>
+                    <li>{{ expense.title }} - R$ -{{ expense.total }} -
+                        <a href="#">editar</a>
+                        <p><small>{{ expense.paid_out }}</small></p>
+                    </li>
                     {% endfor %}
                 </ul>
             </div>
             <div class="col-6">
                 <h4>Receitas</h4>
+                <small><a href="#">incluir</a></small>
                 <ul>
                     {% for revenue in revenues %}
-                    <li>{{ revenue.title }}</li>
+                    <li>{{ revenue.title }} - R$ {{ revenue.total }} -
+                        <a href="#">editar</a>
+                        <p><small>{{ revenue.received_out }}</small></p>
+                    </li>
                     {% endfor %}
                 </ul>
             </div>
