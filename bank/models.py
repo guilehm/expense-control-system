@@ -69,5 +69,3 @@ class Credit(models.Model):
 
     def __str__(self):
         return 'Credit_' + str(self.id) + '_in_' + str(self.when)
-
-

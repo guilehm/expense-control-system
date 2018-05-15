@@ -27,7 +27,7 @@
                                 <div class="card-body text-center">
                                     <h4 class="card-title">Despesas</h4>
                                     <button class="btn btn-danger btn-sm">R$ {{ acc.total_expenses|intcomma }}</button>
-                                    <button class="btn btn-danger btn-sm">R$ {{ acc.total_paid_expenses|intcomma }}</button>
+                                    <!--<button class="btn btn-danger btn-sm">R$ {{ acc.total_paid_expenses|intcomma }}</button>-->
                                     <p class="text-muted mt-1">total de despesas</p>
                                 </div>
                                 <div class="card-body text-center">
@@ -41,6 +41,27 @@
                 </div>
                 <!-- Bank -->
             {% endfor  %}
+        </div>
+    </div>
+    <div class="container">
+        <hr>
+        <div class="row">
+            <div class="col-6">
+                <h4>Despesas</h4>
+                <ul>
+                    {% for expense in expenses %}
+                    <li>{{ expense.title }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-6">
+                <h4>Receitas</h4>
+                <ul>
+                    {% for revenue in revenues %}
+                    <li>{{ revenue.title }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 </section>

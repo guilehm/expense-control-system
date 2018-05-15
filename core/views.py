@@ -6,13 +6,18 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from bank.models import BankAccount
+from transactions.models import Expense, Revenue
 
 
 # Create your views here.
 def index(request):
     accounts = BankAccount.objects.filter(owner=request.user)
+    expenses = Expense.objects.filter(user=request.user)
+    revenues = Revenue.objects.filter(user=request.user)
     return render(request, 'core/index.html', {
         'accounts': accounts,
+        'expenses': expenses,
+        'revenues': revenues,
     })
 
 
