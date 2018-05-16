@@ -12,15 +12,16 @@ from transactions.forms import ExpenseForm, RevenueForm
 
 # Create your views here.
 def index(request):
-    accounts = BankAccount.objects.filter(owner=request.user)
-    expenses = Expense.objects.filter(user=request.user)
-    revenues = Revenue.objects.filter(user=request.user)
-    return render(request, 'core/index.html', {
-        'accounts': accounts,
-        'expenses': expenses,
-        'revenues': revenues,
-    })
-
+    if request.user.is_authenticated:
+        accounts = BankAccount.objects.filter(owner=request.user)
+        expenses = Expense.objects.filter(user=request.user)
+        revenues = Revenue.objects.filter(user=request.user)
+        return render(request, 'core/index.html', {
+            'accounts': accounts,
+            'expenses': expenses,
+            'revenues': revenues,
+        })
+    return render(request, 'core/index.html')
 
 def login_view(request):
     if request.method == 'POST':

@@ -1,49 +1,45 @@
+{% extends 'core/base.html' %}
 {% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Login</title>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
-
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{% static 'core/css/signin.css' %}">
-  </head>
-
-  <body class="text-center">
-    <form class="form-signin" method="post">
-      {% csrf_token %}
-      <h1 class="display-4 mb-2">Controller</h1>
-      <h1 class="h5 mb-3 font-weight-normal">Faça o login</h1>
-
-      <input type="text"
-         class="form-control"
-         name="{{ login_form.username.name }}"
-         placeholder="{{ login_form.username.label }}"
-         id="{{ login_form.username.id_for_label }}"
-         {% if login_form.username.value != None %}value="{{ login_form.username.value|stringformat:'s' }}"{% endif %}
-         maxlength="{{ login_form.username.field.max_length }}"
-         {% if login_form.username.field.required %}required{% endif %}>
-
-      <input type="password"
-         class="form-control"
-         name="{{ login_form.password.name }}"
-         placeholder="{{ login_form.password.label }}"
-         id="{{ login_form.password.id_for_label }}"
-         {% if login_form.password.value != None %}value="{{ login_form.password.value|stringformat:'s' }}"{% endif %}
-         maxlength="{{ login_form.password.field.max_length }}"
-         {% if login_form.password.field.required %}required{% endif %}>
-
-      <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Login</button>
-      <a href="{% url 'core:register' %}" class="">Ou registre-se aqui</a>
-      <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
-    </form>
-  </body>
-</html>
+{% block main-banner %}
+<!-- Start Banner Area -->
+<section class="banner-area relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row fullscreen justify-content-center align-items-center">
+            <div class="col-lg-8">
+                <div class="banner-content" align="center">
+                    <p class="text-uppercase text-white">Aproveite nosso sistema</p>
+                    <h1 class="text-uppercase text-white mb-2">Faça o login</h1>
+                    <form class="form-signin" method="post">
+                        {% csrf_token %}
+                        <div class="single-input color-2 mb-10">
+                            <input type="text"
+                             class="form-control"
+                             name="{{ login_form.username.name }}"
+                             placeholder="nome de usuário"
+                             id="{{ login_form.username.id_for_label }}"
+                             {% if login_form.username.value != None %}value="{{ login_form.username.value|stringformat:'s' }}"{% endif %}
+                             maxlength="{{ login_form.username.field.max_length }}"
+                             {% if login_form.username.field.required %}required{% endif %} style="max-width:300px;">
+                        </div>
+                        <div class="single-input color-2">
+                            <input type="password"
+                             class="form-control"
+                             name="{{ login_form.password.name }}"
+                             placeholder="senha"
+                             id="{{ login_form.password.id_for_label }}"
+                             {% if login_form.password.value != None %}value="{{ login_form.password.value|stringformat:'s' }}"{% endif %}
+                             maxlength="{{ login_form.password.field.max_length }}"
+                             {% if login_form.password.field.required %}required{% endif %} style="max-width:300px;">
+                        </div>
+                        <button class="primary-btn banner-btn my-4" type="submit">Login</button>
+                        <br>
+                        <a href="{% url 'core:register' %}" class="text-white">Ou registre-se aqui</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+{% endblock %}

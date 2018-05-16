@@ -2,6 +2,7 @@
 {% load humanize %}
 
 {% block content %}
+{% if request.user.is_authenticated %}
 <section class="section-full gray-bg">
     <div class="container">
         <div class="row justify-content-center">
@@ -118,5 +119,5 @@
         </div>
     </div>
 </section>
-
+{% endif %}
 {% endblock %}
