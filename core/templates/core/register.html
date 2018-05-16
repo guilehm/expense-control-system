@@ -15,13 +15,13 @@
                       <input type="text" name="username" maxlength="150" autofocus required id="id_username" class="form-control mb-3" placeholder="Usuário" style="max-width:300px;"/>
                       <input type="password" name="password1" required id="id_password1" class="form-control" placeholder="Senha"  style="max-width:300px;"/>
                       <input type="password" name="password2" required id="id_password2" class="form-control" placeholder="Repita sua senha"  style="max-width:300px;"/>
-                      <button class="primary-btn banner-btn mb-2" type="submit">Cadastrar</button>
-                      <br>
-                      <p class="text-danger">
+                      <p class="text-danger mt-3 mb-3">
                         {{ form.username.errors.as_text }}
                         {{ form.password1.errors.as_text }}
                         {{ form.password2.errors.as_text }}
                       </p>
+                      <button class="primary-btn banner-btn mb-2 mt-3" type="submit">Cadastrar</button>
+                      <br>
                       <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
                     </form>
                 </div>

@@ -32,6 +32,9 @@
                              maxlength="{{ login_form.password.field.max_length }}"
                              {% if login_form.password.field.required %}required{% endif %} style="max-width:300px;">
                         </div>
+                        {% if login_form.errors %}
+                        <p class="text-white mt-3">usuário ou senha inválidos</p>
+                        {% endif %}
                         <button class="primary-btn banner-btn my-4" type="submit">Login</button>
                         <br>
                         <a href="{% url 'core:register' %}" class="text-white">Ou registre-se aqui</a>

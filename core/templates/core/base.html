@@ -75,6 +75,11 @@
 							<a href="{% url 'core:register' %}" class="primary-btn banner-btn mb-2">Cadastre-se agora!</a><br>
                             <a href="{% url 'core:login' %}" class="text-muted">ou faça login</a>
                             {% endif %}
+						{% if messages %}
+							{% for message in messages %}
+						<a href="" class="primary-btn banner-btn mb-2">{{ message }}</a>
+							{% endfor %}
+						{% endif %}
 						</div>
 					</div>
 				</div>

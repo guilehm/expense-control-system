@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate ,login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
@@ -29,6 +30,7 @@ def login_view(request):
         if form.is_valid():
             authenticated_user = authenticate(username=request.POST['username'], password=request.POST['password'])
             login(request, authenticated_user)
+            messages.add_message(request, messages.SUCCESS, 'Olá, {}, seu login foi efetuado com sucesso'.format(request.user))
             return redirect('core:index')
         else:
             return render(request, 'core/login.html', {'login_form':form})
