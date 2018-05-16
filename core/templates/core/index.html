@@ -2,76 +2,32 @@
 {% load humanize %}
 
 {% block content %}
-
-<!-- Banks -->
-<section id="team" class="pb-5">
+<section class="section-full gray-bg">
     <div class="container">
-        <h5 class="section-title h1">Contas Bancárias</h5>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="section-title text-center">
+                    <p class="text-uppercase">Contas Bancárias</p>
+                    <h3>Acompanhe aqui as principais informações sobre suas contas bancárias.</h3>
+                </div>
+            </div>
+        </div>
         <div class="row">
             {% for acc in accounts %}
-                <!-- Bank -->
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="{{ acc.bank.img.url }}" alt="card image"></p>
-                                    <h4 class="card-title">{{ acc.bank.name }}</h4>
-                                    <button href="#" class="btn btn-primary btn-sm">R$ {{ acc.balance|intcomma }}</button>
-                                    <p class="text-muted mt-1">saldo geral</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <h4 class="card-title">Despesas</h4>
-                                    <button class="btn btn-danger btn-sm">R$ {{ acc.total_expenses|intcomma }}</button>
-                                    <!--<button class="btn btn-danger btn-sm">R$ {{ acc.total_paid_expenses|intcomma }}</button>-->
-                                    <p class="text-muted mt-1">total de despesas</p>
-                                </div>
-                                <div class="card-body text-center">
-                                    <h4 class="card-title">Receitas</h4>
-                                    <button class="btn btn-success btn-sm">R$ {{ acc.total_revenues|intcomma }}</button>
-                                    <p class="text-muted mt-1">total de receitas</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-6">
+                    <figure class="signle-service">
+                        <img src="img/s1.jpg" class="img-fluid" alt="">
+                        <figcaption class="text-center">
+                            <!--<img src="{{ acc.bank.img.url }}" alt="">-->
+                            <h5 class="text-uppercase">{{ acc.bank.name }}</h5>
+                            <small>saldo geral</small>
+                            <br>
+                            <a href="#" class="primary-btn d-inline-flex align-items-center">R$ {{ acc.balance|intcomma }}</a>
+                        </figcaption>
+                    </figure>
                 </div>
-                <!-- Bank -->
-            {% endfor  %}
-        </div>
-    </div>
-    <div class="container">
-        <hr>
-        <div class="row">
-            <div class="col-6">
-                <h4>Despesas</h4>
-                <small><a href="#">incluir</a></small>
-                <ul>
-                    {% for expense in expenses %}
-                    <li>{{ expense.title }} - R$ -{{ expense.total }} -
-                        <a href="#">editar</a>
-                        <p><small>{{ expense.paid_out }}</small></p>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col-6">
-                <h4>Receitas</h4>
-                <small><a href="#">incluir</a></small>
-                <ul>
-                    {% for revenue in revenues %}
-                    <li>{{ revenue.title }} - R$ {{ revenue.total }} -
-                        <a href="#">editar</a>
-                        <p><small>{{ revenue.received_out }}</small></p>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
-<!-- Banks -->
 {% endblock %}

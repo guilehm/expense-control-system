@@ -1,49 +1,89 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <title>Controller</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="d-flex flex-column flex-md-row align-items-center px-3 pt-3 mb-0 px-md-4 bg-white border-bottom box-shadow">
-                <h5 class="my-0 mr-md-auto font-weight-normal">Controller</h5>
-                {% if user.is_authenticated %}
-                    <span class="mr-auto small">Olá, {{ request.user }}!</span>
-                {% endif %}
-                <nav class="my-2 my-md-0 mr-md-3">
-                    <a class="p-2 text-dark small" href="{% url 'core:index' %}">Visão Geral</a>
-                    <a class="p-2 text-dark small" href="{% url 'core:index' %}">Lançamentos</a>
-                </nav>
-                {% if user.is_authenticated %}
-                    <a class="btn btn-sm btn-outline-danger small" href="{% url 'core:logout' %}">Logout</a>
-                {% else %}
-                    <a class="btn btn-sm btn-outline-primary small" href="{% url 'core:login' %}">Login</a>
-                {% endif %}
-            </div>
-        </div>
-        {% block content %}
-        {% endblock %}
+<html lang="zxx" class="no-js">
+<head>
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="img/fav.png">
+	<!-- Author Meta -->
+	<meta name="author" content="CodePixar">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>Expense Control System</title>
 
-        <div class="container">
-            <footer class="pt-4 my-md-5 pt-md-5 border-top">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <small class="d-block mb-3 text-muted">&copy; Desenvolvido em Python por Guilherme Luis</small>
-                    </div>
-                </div>
-            </footer>
-        </div>
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </body>
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,500,600" rel="stylesheet">
+		<!--
+		CSS
+		============================================= -->
+		<link rel="stylesheet" href="{% static 'core/css/linearicons.css' %}">
+		<link rel="stylesheet" href="{% static 'core/css/owl.carousel.css' %}">
+		<link rel="stylesheet" href="{% static 'core/css/font-awesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'core/css/animate.css' %}">
+		<link rel="stylesheet" href="{% static 'core/css/bootstrap.css' %}">
+		<link rel="stylesheet" href="{% static 'core/css/main.css' %}">
+	</head>
+	<body>
+		<div id="top"></div>
+		<!-- Start Header Area -->
+		<header class="default-header">
+			<div class="sticky-header">
+				<div class="container">
+					<div class="header-content d-flex justify-content-between align-items-center">
+						<div class="logo">
+							<a href="#top" class="smooth"><img src="img/logo.png" alt=""></a>
+						</div>
+						<div class="right-bar d-flex align-items-center">
+							<nav class="d-flex align-items-center">
+								<ul class="main-menu">
+									<li><a href="#top">Home</a></li>
+								</ul>
+								<a href="#" class="mobile-btn"><span class="lnr lnr-menu"></span></a>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- End Header Area -->
+		<!-- Start Banner Area -->
+		<section class="banner-area relative">
+			<div class="overlay overlay-bg"></div>
+			<div class="container">
+				<div class="row fullscreen justify-content-center align-items-center">
+					<div class="col-lg-8">
+						<div class="banner-content text-center">
+							<p class="text-uppercase text-white">Aproveite nosso sistema</p>
+							<h1 class="text-uppercase text-white">Controle suas despesas</h1>
+							<a href="#" class="primary-btn banner-btn">Comece agora!</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Banner Area -->
+        {% block content %}
+        {% endblock%}
+		<footer class="section-full pt-0">
+			<div class="container">
+				<div class="pt-5 d-flex justify-content-between align-items-center">
+					<p class="footer-text m-0">Copyright &copy; 2018  |  Desenvolvido em Python por <a href="#">Guilherme Luis</a></p>
+				</div>
+			</div>
+		</footer>
+
+		<script src="{% static 'core/js/vendor/jquery-2.2.4.min.js' %}"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+		<script src="{% static 'core/js/vendor/bootstrap.min.js' %}"></script>
+		<script src="{% static 'core/js/jquery.ajaxchimp.min.js' %}"></script>
+		<script src="{% static 'core/js/jquery.sticky.js' %}"></script>
+		<script src="{% static 'core/js/owl.carousel.min.js' %}"></script>
+		<script src="{% static 'core/js/mixitup.min.js' %}"></script>
+		<script src="{% static 'core/js/main.js' %}"></script>
+	</body>
 </html>
