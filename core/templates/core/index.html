@@ -54,12 +54,56 @@
                             </div>
                             <h6 class="text-uppercase"><a>{{ expense.title }}</a></h6>
                         </div>
-                        <span class="mb-30">Vencimento: {{ expense.due_date|date:'d/m/Y' }}</span><br>
+                        <b class="mb-30">Vencimento: {{ expense.due_date|date:'d/m/Y' }}</b><br>
                         {% if expense.category %}<span class="mb-30">Categoria: {{ expense.category }}</span>{% endif %}<br>
                         <blockquote class="mb-30 mt-2">{{ expense.description }}</blockquote>
                         {% if expense.tags.all %}
                             <small>Tags:</small>
                             {% for tag in expense.tags.all %}
+                                {% if forloop.last %}
+                                    <small>{{ tag }}.</small>
+                                {% else %}
+                                <small>{{ tag }},</small>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}<br>
+                        <a href="#" class="primary-btn d-inline-flex align-items-center mt-2">Detalhes</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="revenues" class="section-full gray-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="product-area-title text-center">
+                    <p class="text-uppercase">Veja tudo que tem à receber</p>
+                    <h2 class="h1">Receitas</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for revenue in revenues %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-publish">
+                        <img src="img/p1.jpg" class="img-fluid" alt="">
+                        <div class="top">
+                            <div class="mb-15 d-flex">
+                                <a>Banco a creditar</a>
+                                <span class="line">|</span>
+                                <a>{{ revenue.account }}</a>
+                            </div>
+                            <h6 class="text-uppercase"><a>{{ revenue.title }}</a></h6>
+                        </div>
+                        <b class="mb-30">Vencimento: {{ revenue.due_date|date:'d/m/Y' }}</b><br>
+                        {% if revenue.category %}<span class="mb-30">Categoria: {{ revenue.category }}</span>{% endif %}<br>
+                        <blockquote class="mb-30 mt-2">{{ revenue.description }}</blockquote>
+                        {% if revenue.tags.all %}
+                            <small>Tags:</small>
+                            {% for tag in revenue.tags.all %}
                                 {% if forloop.last %}
                                     <small>{{ tag }}.</small>
                                 {% else %}
