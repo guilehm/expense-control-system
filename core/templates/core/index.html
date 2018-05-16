@@ -2,76 +2,121 @@
 {% load humanize %}
 
 {% block content %}
-
-<!-- Banks -->
-<section id="team" class="pb-5">
+<section class="section-full gray-bg">
     <div class="container">
-        <h5 class="section-title h1">Contas Bancárias</h5>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="section-title text-center">
+                    <p class="text-uppercase">Contas Bancárias</p>
+                    <h3>Acompanhe aqui as principais informações sobre suas contas bancárias.</h3>
+                </div>
+            </div>
+        </div>
         <div class="row">
             {% for acc in accounts %}
-                <!-- Bank -->
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="{{ acc.bank.img.url }}" alt="card image"></p>
-                                    <h4 class="card-title">{{ acc.bank.name }}</h4>
-                                    <button href="#" class="btn btn-primary btn-sm">R$ {{ acc.balance|intcomma }}</button>
-                                    <p class="text-muted mt-1">saldo geral</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <h4 class="card-title">Despesas</h4>
-                                    <button class="btn btn-danger btn-sm">R$ {{ acc.total_expenses|intcomma }}</button>
-                                    <!--<button class="btn btn-danger btn-sm">R$ {{ acc.total_paid_expenses|intcomma }}</button>-->
-                                    <p class="text-muted mt-1">total de despesas</p>
-                                </div>
-                                <div class="card-body text-center">
-                                    <h4 class="card-title">Receitas</h4>
-                                    <button class="btn btn-success btn-sm">R$ {{ acc.total_revenues|intcomma }}</button>
-                                    <p class="text-muted mt-1">total de receitas</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-6">
+                    <figure class="signle-service">
+                        <img src="img/s1.jpg" class="img-fluid" alt="">
+                        <figcaption class="text-center">
+                            <img src="{{ acc.bank.img.url }}" class="img-circle mb-2" alt="" style="max-width:60px;">
+                            <h5 class="text-uppercase">{{ acc.bank.name }}</h5>
+                            <small>saldo geral</small>
+                            <br>
+                            <a href="#" class="primary-btn d-inline-flex align-items-center">R$ {{ acc.balance|intcomma }}</a>
+                        </figcaption>
+                    </figure>
                 </div>
-                <!-- Bank -->
-            {% endfor  %}
-        </div>
-    </div>
-    <div class="container">
-        <hr>
-        <div class="row">
-            <div class="col-6">
-                <h4>Despesas</h4>
-                <small><a href="#">incluir</a></small>
-                <ul>
-                    {% for expense in expenses %}
-                    <li>{{ expense.title }} - R$ -{{ expense.total }} -
-                        <a href="#">editar</a>
-                        <p><small>{{ expense.paid_out }}</small></p>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col-6">
-                <h4>Receitas</h4>
-                <small><a href="#">incluir</a></small>
-                <ul>
-                    {% for revenue in revenues %}
-                    <li>{{ revenue.title }} - R$ {{ revenue.total }} -
-                        <a href="#">editar</a>
-                        <p><small>{{ revenue.received_out }}</small></p>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
-<!-- Banks -->
+
+<section id="blog" class="section-full">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="product-area-title text-center">
+                    <p class="text-uppercase">Acompanhe suas contas a pagar</p>
+                    <h2 class="h1">Despesas</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for expense in expenses %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-publish">
+                        <img src="img/p1.jpg" class="img-fluid" alt="">
+                        <div class="top">
+                            <div class="mb-15 d-flex">
+                                <a>Banco a debitar</a>
+                                <span class="line">|</span>
+                                <a>{{ expense.account }}</a>
+                            </div>
+                            <h6 class="text-uppercase"><a>{{ expense.title }}</a></h6>
+                        </div>
+                        <b class="mb-30">Vencimento: {{ expense.due_date|date:'d/m/Y' }}</b><br>
+                        {% if expense.category %}<span class="mb-30">Categoria: {{ expense.category }}</span>{% endif %}<br>
+                        <blockquote class="mb-30 mt-2">{{ expense.description }}</blockquote>
+                        {% if expense.tags.all %}
+                            <small>Tags:</small>
+                            {% for tag in expense.tags.all %}
+                                {% if forloop.last %}
+                                    <small>{{ tag }}.</small>
+                                {% else %}
+                                <small>{{ tag }},</small>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}<br>
+                        <a href="#" class="primary-btn d-inline-flex align-items-center mt-2">Detalhes</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="revenues" class="section-full gray-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="product-area-title text-center">
+                    <p class="text-uppercase">Veja tudo que tem à receber</p>
+                    <h2 class="h1">Receitas</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for revenue in revenues %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-publish">
+                        <img src="img/p1.jpg" class="img-fluid" alt="">
+                        <div class="top">
+                            <div class="mb-15 d-flex">
+                                <a>Banco a creditar</a>
+                                <span class="line">|</span>
+                                <a>{{ revenue.account }}</a>
+                            </div>
+                            <h6 class="text-uppercase"><a>{{ revenue.title }}</a></h6>
+                        </div>
+                        <b class="mb-30">Vencimento: {{ revenue.due_date|date:'d/m/Y' }}</b><br>
+                        {% if revenue.category %}<span class="mb-30">Categoria: {{ revenue.category }}</span>{% endif %}<br>
+                        <blockquote class="mb-30 mt-2">{{ revenue.description }}</blockquote>
+                        {% if revenue.tags.all %}
+                            <small>Tags:</small>
+                            {% for tag in revenue.tags.all %}
+                                {% if forloop.last %}
+                                    <small>{{ tag }}.</small>
+                                {% else %}
+                                <small>{{ tag }},</small>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}<br>
+                        <a href="#" class="primary-btn d-inline-flex align-items-center mt-2">Detalhes</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
 {% endblock %}
