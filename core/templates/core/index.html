@@ -54,11 +54,20 @@
                             </div>
                             <h6 class="text-uppercase"><a>{{ expense.title }}</a></h6>
                         </div>
-                        {% if expense.competition_date %}<span class="mb-30">Competência: {{ expense.competition_date|date:'d/m/Y' }}</span>{% endif %}<br>
                         <span class="mb-30">Vencimento: {{ expense.due_date|date:'d/m/Y' }}</span><br>
                         {% if expense.category %}<span class="mb-30">Categoria: {{ expense.category }}</span>{% endif %}<br>
-                        <p class="mb-30 mt-2">{{ expense.description }}</p>
-                        <a href="#" class="primary-btn d-inline-flex align-items-center">Pagar</a>
+                        <blockquote class="mb-30 mt-2">{{ expense.description }}</blockquote>
+                        {% if expense.tags.all %}
+                            <small>Tags:</small>
+                            {% for tag in expense.tags.all %}
+                                {% if forloop.last %}
+                                    <small>{{ tag }}.</small>
+                                {% else %}
+                                <small>{{ tag }},</small>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}<br>
+                        <a href="#" class="primary-btn d-inline-flex align-items-center mt-2">Detalhes</a>
                     </div>
                 </div>
             {% endfor %}
