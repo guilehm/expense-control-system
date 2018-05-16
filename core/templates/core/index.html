@@ -30,4 +30,40 @@
         </div>
     </div>
 </section>
+
+<section id="blog" class="section-full">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="product-area-title text-center">
+                    <p class="text-uppercase">Acompanhe suas contas a pagar</p>
+                    <h2 class="h1">Despesas</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for expense in expenses %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-publish">
+                        <img src="img/p1.jpg" class="img-fluid" alt="">
+                        <div class="top">
+                            <div class="mb-15 d-flex">
+                                <a>Banco a debitar</a>
+                                <span class="line">|</span>
+                                <a>{{ expense.account }}</a>
+                            </div>
+                            <h6 class="text-uppercase"><a>{{ expense.title }}</a></h6>
+                        </div>
+                        {% if expense.competition_date %}<span class="mb-30">Competência: {{ expense.competition_date|date:'d/m/Y' }}</span>{% endif %}<br>
+                        <span class="mb-30">Vencimento: {{ expense.due_date|date:'d/m/Y' }}</span><br>
+                        {% if expense.category %}<span class="mb-30">Categoria: {{ expense.category }}</span>{% endif %}<br>
+                        <p class="mb-30 mt-2">{{ expense.description }}</p>
+                        <a href="#" class="primary-btn d-inline-flex align-items-center">Pagar</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
 {% endblock %}
