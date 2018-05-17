@@ -35,7 +35,8 @@
             <div class="col-lg-10">
                 <div class="section-title text-center">
                     <h2 class="h1">Contas Bancárias</h2>
-                    <h3>Veja aqui as principais informações sobre suas contas bancárias.</h3>
+                    <h3 class="mb-5">Veja aqui as principais informações sobre suas contas bancárias.</h3>
+                    <a href="{% url 'core:bank-accounts-create' %}" class="text-info">+ criar nova conta</a>
                 </div>
             </div>
         </div>
@@ -43,11 +44,14 @@
             {% for acc in accounts %}
                 <div class="col-md-6">
                     <figure class="signle-service">
-                        <img src="img/s1.jpg" class="img-fluid" alt="">
                         <figcaption class="text-center">
+                            {% if acc.bank.img %}
                             <img src="{{ acc.bank.img.url }}" class="img-circle mb-2" alt="" style="max-width:60px;">
-                            <h5 class="text-uppercase">{{ acc.bank.name }}</h5>
-                            <small>saldo geral</small>
+                            {% endif %}
+                            <h5 class="text-uppercase mb-0">{{ acc.bank.name }}</h5>
+                            <p><small>agência: {{ acc.agency }} <br>
+                                conta: {{ acc.account_number }}</small></p>
+                            <small class="mt-5">saldo geral</small>
                             <br>
                             <a href="#" class="primary-btn d-inline-flex align-items-center">R$ {{ acc.balance|intcomma }}</a>
                         </figcaption>
