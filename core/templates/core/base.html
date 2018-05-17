@@ -37,12 +37,11 @@
 				<div class="container">
 					<div class="header-content d-flex justify-content-between align-items-center">
 						<div class="logo">
-							<a href="#top" class="smooth"><img src="img/logo.png" alt=""></a>
+							<a href="#" class="smooth"><img src="img/logo.png" alt=""></a>
 						</div>
 						<div class="right-bar d-flex align-items-center">
 							<nav class="d-flex align-items-center">
 								<ul class="main-menu-items">
-
                                     {% if request.user.is_authenticated %}
                                     <li><a>Olá, {{ request.user }}</a></li> |
                                     {% endif %}
