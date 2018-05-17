@@ -7,8 +7,31 @@
         <div class="row fullscreen justify-content-center align-items-center">
             <div class="col-lg-8">
                 <div class="banner-content text-center">
-                    <h1 class="text-uppercase text-white">Cadastre seu banco</h1>
-                    {{ form.as_p }}
+                    <h1 class="text-uppercase text-white mb-5">Cadastre seu banco</h1>
+                    <form method="post" class="contact-form">
+                        {% csrf_token %}
+                        <div class="single-input color-2 mb-10">
+                            <label class="text-white" for="agency">Escolha o banco:</label>
+                            <select name="bank" id="bank" class="">
+                                {% for option in form.bank %}
+                                    {{ option }}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="single-input color-2 mb-10">
+                            <label class="text-white" for="agency">Digite o número da agência:</label>
+                            <input type="text" name="agency" placeholder="digite o número da agência" id="agency" required>
+                        </div>
+                        <div class="single-input color-2 mb-10">
+                            <label class="text-white" for="account_number">Digite o número da conta:</label>
+                            <input type="text" name="account_number" placeholder="digite o número da conta" id="account_number" required>
+                        </div>
+                        <div class="single-input color-2 mb-10">
+                            <label class="text-white" for="when_opened">Digite a data de abertura da conta:</label>
+                            <input type="date" name="when_opened" id="when_opened" placeholder="digite o número da conta" required>
+                        </div>
+                        <button class="primary-btn banner-btn my-4" type="submit">criar conta</button>
+                    </form>
                 </div>
             </div>
         </div>

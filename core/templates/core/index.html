@@ -21,7 +21,7 @@
                 {% endif %}
 
                 {% if request.user.is_authenticated and not accounts %}
-                    <a href="" class="primary-btn banner-btn mb-2">Para começar cadastre sua conta bancária</a>
+                    <a href="{% url 'core:bank-accounts-create' %}" class="primary-btn banner-btn mb-2">Para começar cadastre sua conta bancária</a>
                 {% endif %}
                 </div>
             </div>
@@ -57,7 +57,7 @@
         </div>
     </div>
 </section>
-
+{% if expenses %}
 <section id="blog" class="section-full">
     <div class="container">
         <div class="row justify-content-center">
@@ -101,7 +101,8 @@
         </div>
     </div>
 </section>
-
+{% endif %}
+{% if revenues %}
 <section id="revenues" class="section-full gray-bg">
     <div class="container">
         <div class="row justify-content-center">
@@ -145,6 +146,7 @@
         </div>
     </div>
 </section>
+{% endif %}
 {% elif request.user.is_authenticated %}
 <section class="banner-area relative">
     <div class="overlay overlay-bg"></div>

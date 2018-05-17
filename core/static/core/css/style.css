@@ -53,3 +53,12 @@
   .default-header .main-menu-items a {
     margin: 5px 20px !important;
   }
+
+
+  #bank {
+    width: 100%;
+    line-height: 40px;
+    padding: 0 20px;
+    background: #fff;
+    border: 10px, solid, red;
+}

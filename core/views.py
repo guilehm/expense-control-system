@@ -85,6 +85,7 @@ def bank_accounts_create(request):
             bank_account = form.save(commit=False)
             bank_account.owner = request.user
             bank_account.save()
+            messages.add_message(request, messages.SUCCESS, 'Parabéns, sua conta foi criada com sucesso!'.format(request.user))
             return redirect('core:index')
         else:
             return render(request, 'core/bank_accounts_create.html', {
