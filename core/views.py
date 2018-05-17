@@ -60,6 +60,9 @@ def register_view(request):
         context = {'form':form}
         return render(request, 'core/register.html', context)
 
+def expenses(request):
+    return render(request, 'core/expenses.html')
+
 def expenses_include(request):
     if request.method == 'POST':
         form = ExpenseForm(request.POST)
