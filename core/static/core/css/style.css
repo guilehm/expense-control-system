@@ -102,3 +102,7 @@
 .bg10 {
   background: #2F3061
 }
+
+.bg11 {
+  background: linear-gradient(to right, rgba(60, 64, 143, 0.95) 100%, rgba(91, 97, 207, 0.95) 0%);
+}
