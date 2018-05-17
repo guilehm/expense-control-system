@@ -6,9 +6,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
+from core.forms import BankAccountCreateForm
 from bank.models import BankAccount
 from transactions.models import Expense, Revenue
-from transactions.forms import ExpenseForm, RevenueForm
+from transactions.forms import ExpenseForm
 
 
 # Create your views here.
@@ -74,5 +75,23 @@ def expenses_include(request):
     else:
         form = ExpenseForm()
         return render(request, 'core/expenses_include.html', {
+            'form': form,
+        })
+
+def bank_accounts_create(request):
+    if request.method == 'POST':
+        form = BankAccountCreateForm(request.POST)
+        if form.is_valid():
+            bank_account = form.save(commit=False)
+            bank_account.owner = request.user
+            bank_account.save()
+            return redirect('core:index')
+        else:
+            return render(request, 'core/bank_accounts_create.html', {
+                'form': form,
+            })
+    else:
+        form = BankAccountCreateForm()
+        return render(request, 'core/bank_accounts_create.html', {
             'form': form,
         })

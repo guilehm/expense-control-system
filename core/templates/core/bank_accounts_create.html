@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<section class="banner-area relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row fullscreen justify-content-center align-items-center">
+            <div class="col-lg-8">
+                <div class="banner-content text-center">
+                    <h1 class="text-uppercase text-white">Cadastre seu banco</h1>
+                    {{ form.as_p }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
