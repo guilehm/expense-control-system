@@ -53,7 +53,7 @@
   .default-header .main-menu-items a {
     margin: 5px 20px !important;
   }
-
+}
 
   #bank {
     width: 100%;
@@ -61,4 +61,44 @@
     padding: 0 20px;
     background: #fff;
     border: 10px, solid, red;
+}
+
+.bg01 {
+  background: #EDF67D;
+}
+
+.bg02 {
+  background: #724CF9;
+}
+
+.bg03 {
+  background: #6622CC;
+}
+
+.bg04 {
+  background: #61E8E1;
+}
+
+.bg05 {
+  background: #F25757;
+}
+
+.bg06 {
+  background: #61E8E1;
+}
+
+.bg07 {
+  background: #818AA3
+}
+
+.bg08 {
+  background: #297373
+}
+
+.bg09 {
+  background: #261C15
+}
+
+.bg10 {
+  background: #2F3061
 }
