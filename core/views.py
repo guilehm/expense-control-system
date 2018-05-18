@@ -71,11 +71,12 @@ def expenses(request):
 
 def expenses_include(request):
     if request.method == 'POST':
-        form = ExpenseForm(request.POST)
+        form = ExpenseForm(request.user, request.POST)
         if form.is_valid():
             expense = form.save(commit=False)
             expense.user = request.user
             expense.save()
+            messages.add_message(request, messages.SUCCESS, 'sua despesa foi cadastrada com sucesso'.format(request.user))
             return redirect('core:index')
         else:
             return render(request, 'core/expenses_include.html', {

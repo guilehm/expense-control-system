@@ -8,4 +8,91 @@
     <button type="submit" class="btn btn-outline-success">Salvar</button>
 </form>
 
+<section id="contact" class="section-full gray-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="product-area-title text-center">
+                    <h2 class="h1">incluir despesa</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 mt-30">
+                <p>Dramatically reintermediate effective applications after high-payoff core competencies. Authoritatively optimize collaborative benefits for error-free communities. Dramatically reintermediate effective applications after high-payoff core competencies. Authoritatively optimize collaborative benefits for error-free communities.</p>
+            </div>
+            <div class="col-lg-6 mt-30">
+                <form id="myForm" method="post" class="contact-form">
+                    {% csrf_token %}
+                    <div class="single-input color-2 mb-10">
+                        <label for="account">Conta:</label>
+                        <select name="account" id="account" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Full Name'" required="">
+                            {% for option in form.account %}
+                            {{ option }}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="single-input color-2 mb-10">
+                        <input type="text" name="title" placeholder="título da despesa" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'" required="">
+                    </div>
+
+                    <div class="single-input color-2 mb-10">
+                        <textarea name="description" placeholder="insira uma descrição" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Digite aqui uma descrição'" required=""></textarea>
+                    </div>
+
+                    <div class="single-input color-2 mb-10">
+                        <input type="number" name="total" step="0.01" placeholder="valor da despesa" onfocus="this.placeholder = ''" onblur="this.placeholder = 'valor da despesa'" required="">
+                    </div>
+
+                    <div class="single-input color-2 mb-10">
+                        <label class="text-dark" for="competition_date">Digite a data de competência da despesa:</label>
+                        <input type="date" id="competition_date" name="competition_date" placeholder="data de competência" onfocus="this.placeholder = ''" onblur="this.placeholder = 'data de competência'" required="">
+                    </div>
+
+                    <div class="single-input color-2 mb-10">
+                        <label class="text-dark" for="due_date">Digite a data de vencimento da despesa:</label>
+                        <input type="date" name="due_date" id="due_date" placeholder="data de vencimento" onfocus="this.placeholder = ''" onblur="this.placeholder = 'data de vencimento'" required="">
+                    </div>
+
+                    <div class="single-input color-2 mb-10">
+                        <label for="id_paid_out">Marcar como pago:</label>
+                        <input type="checkbox" name="paid_out" id="id_paid_out">
+                    </div>
+
+                    <div class="single-input color-2 mb-10">
+                        <label for="id_note">Note:</label>
+                        <textarea name="note" cols="40" rows="10" id="id_note" placeholder="caso tenha alguma observação a fazer, escreva aqui"></textarea>
+                    </div>
+
+                    <div class="single-input color-2 mb-10">
+                        <input type="text" name="slug" maxlength="50" required="" id="id_slug" placeholder="slug">
+                    </div>
+
+                    <div class="single-input color-2 mb-10">
+                        <label for="category">Categoria:</label>
+                        <select name="category" id="category" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Full Name'" required="">
+                            {% for option in form.category %}
+                            {{ option }}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="single-input color-2 mb-10">
+                        <label for="tags">Tags:</label>
+                        <select name="tags" id="tags" multiple="multiple" style="height: 100px;">
+                            {% for option in form.tags %}
+                            {{ option }}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button class="primary-btn banner-btn my-4 text-dark" type="submit">cadastrar despesa</button>
+
+                    <div class="alert"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
