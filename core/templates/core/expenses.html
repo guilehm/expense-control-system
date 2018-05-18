@@ -17,7 +17,14 @@
 <section class="section-full bg01">
     <div class="container">
         <div class="row justify-content-center">
-            <h1 class="text-uppercase text-black">Categorias</h1>
+            <h1 class="text-uppercase text-black mb-5">Categorias</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="controls d-flex flex-wrap justify-content-center">
+            {% for category in categories %}
+            <a class="filter">{{ category }}</a>
+            {% endfor %}
         </div>
     </div>
 </section>

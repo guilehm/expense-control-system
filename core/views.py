@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from core.forms import BankAccountCreateForm
+from core.models import Category, Tag
 from bank.models import BankAccount
 from transactions.models import Expense, Revenue
 from transactions.forms import ExpenseForm
@@ -61,7 +62,12 @@ def register_view(request):
         return render(request, 'core/register.html', context)
 
 def expenses(request):
-    return render(request, 'core/expenses.html')
+    categories = Category.objects.filter(owner=request.user)
+    tags = Tag.objects.filter(owner=request.user)
+    return render(request, 'core/expenses.html', {
+        'categories': categories,
+        'tags': tags,
+    })
 
 def expenses_include(request):
     if request.method == 'POST':
@@ -76,7 +82,7 @@ def expenses_include(request):
                 'form': form,
             })
     else:
-        form = ExpenseForm()
+        form = ExpenseForm(request.user)
         return render(request, 'core/expenses_include.html', {
             'form': form,
         })
