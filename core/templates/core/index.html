@@ -53,7 +53,7 @@
                                 conta: {{ acc.account_number }}</small></p>
                             <small class="mt-5">saldo geral</small>
                             <br>
-                            <a href="#" class="primary-btn d-inline-flex align-items-center">R$ {{ acc.balance }}</a>
+                            <a class="primary-btn d-inline-flex align-items-center">R$ {{ acc.balance|intcomma }}</a>
                         </figcaption>
                     </figure>
                 </div>
