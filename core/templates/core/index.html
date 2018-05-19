@@ -85,6 +85,7 @@
                             </div>
                             <h6 class="text-uppercase"><a>{{ expense.title }}</a></h6>
                         </div>
+                        <b class="mb-30">Valor: R$ {{ expense.total|intcomma }}</b><br>
                         <b class="mb-30">Vencimento: {{ expense.due_date|date:'d/m/Y' }}</b><br>
                         {% if expense.category %}<span class="mb-30">Categoria: {{ expense.category }}</span>{% endif %}<br>
                         <blockquote class="mb-30 mt-2">{{ expense.description }}</blockquote>
@@ -130,6 +131,7 @@
                             </div>
                             <h6 class="text-uppercase"><a>{{ revenue.title }}</a></h6>
                         </div>
+                        <b class="mb-30">Valor: R$ {{ revenue.total|intcomma }}</b><br>
                         <b class="mb-30">Vencimento: {{ revenue.due_date|date:'d/m/Y' }}</b><br>
                         {% if revenue.category %}<span class="mb-30">Categoria: {{ revenue.category }}</span>{% endif %}<br>
                         <blockquote class="mb-30 mt-2">{{ revenue.description }}</blockquote>
