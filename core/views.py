@@ -17,8 +17,8 @@ from transactions.forms import ExpenseForm
 def index(request):
     if request.user.is_authenticated:
         accounts = BankAccount.objects.filter(owner=request.user)
-        expenses = Expense.objects.filter(user=request.user)
-        revenues = Revenue.objects.filter(user=request.user)
+        expenses = Expense.objects.filter(user=request.user).order_by('due_date')
+        revenues = Revenue.objects.filter(user=request.user).order_by('due_date')
         return render(request, 'core/index.html', {
             'accounts': accounts,
             'expenses': expenses,
