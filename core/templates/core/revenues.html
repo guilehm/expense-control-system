@@ -52,35 +52,39 @@
                 <div class="section-title text-center">
                     <h2 class="h1 mb-60">Próximas Contas a Receber</h2>
                 </div>
-                    <table class="table table-sm table-responsive table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Título</th>
-                            <th scope="col">Conta</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Categoria</th>
-                            <th scope="col">Vencimento</th>
-                            <th scope="col">Editar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for revenue in revenues %}
+                    {% if revenues %}
+                        <table class="table table-sm table-responsive table-hover">
+                        <thead>
                             <tr>
-                                <td>{{ revenue.title }}</td>
-                                <td>{{ revenue.account }}</td>
-                                <td>R$ {{ revenue.total }}</td>
-                                <td>{{ revenue.category }}</td>
-                                <td>{{ revenue.due_date|date:'d/m/Y' }}</td>
-                                <td><a href="#">editar</a></td>
+                                <th scope="col">Título</th>
+                                <th scope="col">Conta</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Vencimento</th>
+                                <th scope="col">Editar</th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                            {% for revenue in revenues %}
+                                <tr>
+                                    <td>{{ revenue.title }}</td>
+                                    <td>{{ revenue.account }}</td>
+                                    <td>R$ {{ revenue.total }}</td>
+                                    <td>{{ revenue.category }}</td>
+                                    <td>{{ revenue.due_date|date:'d/m/Y' }}</td>
+                                    <td><a href="#">editar</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        </table>
+                    {% else %}
+                        <p class=" text-uppercase text-center">nenhuma conta a receber foi encontrada :(</p>
+                    {% endif %}
             </div>
         </div>
     </div>
 </section>
-
+{% if categories %}
 <section class="section-full bg01">
     <div class="container">
         <div class="row justify-content-center">
@@ -96,4 +100,5 @@
         </div>
     </div>
 </section>
+{% endif %}
 {% endblock%}
