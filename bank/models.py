@@ -13,8 +13,8 @@ class Bank(models.Model):
 
 
 class BankAccount(models.Model):
-    bank = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name='bank')
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    bank = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name='accounts')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='accounts')
     agency = models.CharField(max_length=8, blank=True, null=True)
     account_number = models.CharField(max_length=15, blank=True, null=True)
     when_opened = models.DateField()

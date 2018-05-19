@@ -22,16 +22,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-sm-6">
-                <a href="{% url 'core:revenues-include'%}">
-                    <div class="single-product">
-                        <div class="desc">
-                            <h4>Incluir conta a Receber</h4>
-                            <p>Faça aqui o lançamento da sua receita</p>
+            {% if request.user.accounts.first %}
+                <div class="col-lg-3 col-sm-6">
+                    <a href="{% url 'core:revenues-include'%}">
+                        <div class="single-product">
+                            <div class="desc">
+                                <h4>Incluir conta a Receber</h4>
+                                <p>Faça aqui o lançamento da sua receita</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>
+            {% endif %}
             <div class="col-lg-3 col-sm-6">
                 <div class="single-product">
                     <div class="desc">
