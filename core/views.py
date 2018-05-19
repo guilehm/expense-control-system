@@ -52,7 +52,8 @@ def register_view(request):
         form = UserCreationForm(request.POST)
         context = {'form':form}
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('core:index')
         else:
             if form.errors:
