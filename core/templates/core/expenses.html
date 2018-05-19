@@ -62,7 +62,7 @@
                                 <td>R$ {{ expense.total }}</td>
                                 <td>{{ expense.category }}</td>
                                 <td>{{ expense.due_date|date:'d/m/Y' }}</td>
-                                <td><a href="">editar</a></td>
+                                <td><a href="{% url 'core:expenses-edit' expense.id %}">editar</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>

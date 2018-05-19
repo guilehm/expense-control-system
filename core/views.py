@@ -3,14 +3,14 @@ from django.contrib.auth import authenticate ,login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
 from core.forms import BankAccountCreateForm
 from core.models import Category, Tag
 from bank.models import BankAccount
 from transactions.models import Expense, Revenue
-from transactions.forms import ExpenseForm
+from transactions.forms import ExpenseEditForm, ExpenseForm
 
 
 # Create your views here.
@@ -63,11 +63,35 @@ def register_view(request):
 
 def expenses(request):
     categories = Category.objects.filter(owner=request.user)
+    expenses = Expense.objects.filter(user=request.user)
     tags = Tag.objects.filter(owner=request.user)
     return render(request, 'core/expenses.html', {
+        'expenses': expenses,
         'categories': categories,
         'tags': tags,
     })
+
+def expenses_edit(request, expense_id):
+    expense = get_object_or_404(
+        Expense.objects.filter(user=request.user).filter(id=expense_id)
+    )
+    if request.method == 'POST':
+        form = ExpenseEditForm(instance=expense, data=request.POST, owner=request.user)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Despesa editada com sucesso.')
+            return redirect('core:expenses')
+        else:
+            return render(request, 'core/expenses_edit.html', {
+                'expense': expense,
+                'form': form,
+            })
+    else:
+        form = ExpenseEditForm(instance=expense, owner=request.user)
+        return render(request, 'core/expenses_edit.html', {
+            'expense': expense,
+            'form': form,
+        })
 
 def expenses_include(request):
     if request.method == 'POST':

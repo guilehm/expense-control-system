@@ -13,6 +13,7 @@ urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('expenses/', views.expenses, name='expenses'),
     path('expenses/include', views.expenses_include, name='expenses-include'),
+    path('expenses/edit/<int:expense_id>', views.expenses_edit, name='expenses-edit'),
     path('bank-accounts/create', views.bank_accounts_create, name='bank-accounts-create'),
 ]
 
