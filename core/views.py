@@ -26,6 +26,7 @@ def index(request):
         })
     return render(request, 'core/index.html')
 
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -61,6 +62,7 @@ def register_view(request):
         context = {'form':form}
         return render(request, 'core/register.html', context)
 
+
 def expenses(request):
     categories = Category.objects.filter(owner=request.user)
     expenses = Expense.objects.filter(user=request.user)
@@ -70,6 +72,18 @@ def expenses(request):
         'categories': categories,
         'tags': tags,
     })
+
+
+def revenues(request):
+    categories = Category.objects.filter(owner=request.user)
+    revenues = Revenue.objects.filter(user=request.user)
+    tags = Tag.objects.filter(owner=request.user)
+    return render(request, 'core/revenues.html', {
+        'revenues': revenues,
+        'categories': categories,
+        'tags': tags,
+    })
+
 
 def expenses_edit(request, expense_id):
     expense = get_object_or_404(
@@ -93,6 +107,7 @@ def expenses_edit(request, expense_id):
             'form': form,
         })
 
+
 def expenses_include(request):
     if request.method == 'POST':
         form = ExpenseForm(request.user, request.POST)
@@ -112,24 +127,26 @@ def expenses_include(request):
             'form': form,
         })
 
-def revenue_include(request):
+
+def revenues_include(request):
     if request.method == 'POST':
         form = RevenueForm(request.user, request.POST)
         if form.is_valid():
-            expense = form.save(commit=False)
-            expense.user = request.user
-            expense.save()
-            messages.add_message(request, messages.SUCCESS, 'sua despesa foi cadastrada com sucesso'.format(request.user))
+            revenue = form.save(commit=False)
+            revenue.user = request.user
+            revenue.save()
+            messages.add_message(request, messages.SUCCESS, 'sua receita foi cadastrada com sucesso')
             return redirect('core:index')
         else:
-            return render(request, 'core/expenses_include.html', {
+            return render(request, 'core/revenues_include.html', {
                 'form': form,
             })
     else:
         form = ExpenseForm(request.user)
-        return render(request, 'core/expenses_include.html', {
+        return render(request, 'core/revenues_include.html', {
             'form': form,
         })
+
 
 def bank_accounts_create(request):
     if request.method == 'POST':
@@ -138,7 +155,7 @@ def bank_accounts_create(request):
             bank_account = form.save(commit=False)
             bank_account.owner = request.user
             bank_account.save()
-            messages.add_message(request, messages.SUCCESS, 'Parabéns, sua conta foi criada com sucesso!'.format(request.user))
+            messages.add_message(request, messages.SUCCESS, 'Parabéns, sua conta foi criada com sucesso!')
             return redirect('core:index')
         else:
             return render(request, 'core/bank_accounts_create.html', {
