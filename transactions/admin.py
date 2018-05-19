@@ -13,9 +13,6 @@ class RevenueAdmin(admin.ModelAdmin):
     exclude = (
         ['tags',]
     )
-    prepopulated_fields = {
-        'slug': ('title',)
-    }
     inlines = [
         RevenueTagInline,
     ]
@@ -33,9 +30,6 @@ class ExpenseAdmin(admin.ModelAdmin):
     exclude = (
         ['tags',]
     )
-    prepopulated_fields = {
-        'slug': ('title',)
-    }
     inlines = [
         ExpenseTagInline,
     ]

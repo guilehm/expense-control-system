@@ -24,48 +24,28 @@ class BankAccount(models.Model):
 
     @property
     def balance(self):
-        return self.total_credits - self.total_debits
-
-    @property
-    def total_debits(self):
-        return self.debits.all().aggregate(Sum('total'))['total__sum'] or 0.00
-
-
-    @property
-    def total_credits(self):
-        return self.credits.all().aggregate(Sum('total'))['total__sum'] or 0.00
+        return self.total_received_revenues - self.total_paid_expenses
 
     @property
     def total_expenses(self):
-        return self.expenses.all().aggregate(Sum('total'))['total__sum'] or 0.00
+        return self.expenses.all().aggregate(Sum('total'))['total__sum'] or 0
 
     @property
     def total_paid_expenses(self):
-        return self.expenses.filter(paid_out=True).aggregate(Sum('total'))['total__sum'] or 0.00
+        return self.expenses.filter(paid_out=True).aggregate(Sum('total'))['total__sum'] or 0
+
+    @property
+    def total_expenses_to_pay(self):
+        return self.total_expenses - self.total_paid_expenses
 
     @property
     def total_revenues(self):
-        return self.revenues.all().aggregate(Sum('total'))['total__sum'] or 0.00
+        return self.revenues.all().aggregate(Sum('total'))['total__sum'] or 0
 
     @property
     def total_received_revenues(self):
-        return self.revenues.filter(received_out=True).aggregate(Sum('total'))['total__sum'] or 0.00
+        return self.revenues.filter(received_out=True).aggregate(Sum('total'))['total__sum'] or 0
 
-
-class Debit(models.Model):
-    account = models.ForeignKey(BankAccount, on_delete=models.CASCADE, related_name='debits')
-    total = models.FloatField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    when = models.DateField()
-
-    def __str__(self):
-        return 'Debit_' + str(self.id) + '_in_' + str(self.when)
-
-class Credit(models.Model):
-    account = models.ForeignKey(BankAccount, on_delete=models.CASCADE, related_name='credits')
-    total = models.FloatField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    when = models.DateField()
-
-    def __str__(self):
-        return 'Credit_' + str(self.id) + '_in_' + str(self.when)
+    @property
+    def total_revenues_to_receive(self):
+        return self.total_revenues - self.total_received_revenues

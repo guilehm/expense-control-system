@@ -1,5 +1,5 @@
 from django.contrib import admin
-from bank.models import Bank, BankAccount, Debit, Credit
+from bank.models import Bank, BankAccount
 
 # Register your models here.
 class BankAdmin(admin.ModelAdmin):
@@ -21,5 +21,3 @@ class CreditAdmin(admin.ModelAdmin):
 
 admin.site.register(Bank, BankAdmin)
 admin.site.register(BankAccount, BankAccountAdmin)
-admin.site.register(Debit, DebitAdmin)
-admin.site.register(Credit, CreditAdmin)

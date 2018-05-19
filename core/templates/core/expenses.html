@@ -2,36 +2,26 @@
 
 {% block content %}
 
-<section class="section-full bg11">
-    <div class="container">
-        <div class="row justify-content-center">
-            <p class="text-uppercase text-white">aqui você encontra todos detalhes de suas contas a pagar</p>
-        </div>
-        <div class="row justify-content-center">
-        <h1 class="text-uppercase text-white">Despesas</h1>
-
-        </div>
-    </div>
-</section>
-
 <section id="services" class="title-bg section-full">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="product-area-title text-center">
-                    <p class="text-white text-uppercase">Why Choose Us</p>
-                    <h2 class="text-white h1">We ensure perfect quality Digital <br> products for you</h2>
+                    <p class="text-white text-uppercase">aqui você encontra todos detalhes de suas contas a pagar</p>
+                    <h2 class="text-white h1">Despesas</h2>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-3 col-sm-6">
-                <div class="single-product">
-                    <div class="desc">
-                        <h4>Incluir conta a pagar</h4>
-                        <p>Faça aqui o lançamento da sua despesa</p>
+                <a href="{% url 'core:expenses-include'%}">
+                    <div class="single-product">
+                        <div class="desc">
+                            <h4>Incluir conta a pagar</h4>
+                            <p>Faça aqui o lançamento da sua despesa</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="single-product">
@@ -44,6 +34,20 @@
         </div>
     </div>
     </section>
+
+
+<section class="section-full gray-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="section-title text-center">
+                    <h2 class="h1">Próximas Contas a Pagar</h2>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section class="section-full bg01">
     <div class="container">

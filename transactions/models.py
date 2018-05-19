@@ -8,11 +8,10 @@ class Revenue(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     total = models.DecimalField(max_digits=9, decimal_places=2)
-    competition_date = models.DateField(db_index=True)
+    competition_date = models.DateField(db_index=True, blank=True, null=True)
     due_date = models.DateField(db_index=True)
     received_out = models.BooleanField(default=False)
     note = models.TextField(blank=True, null=True)
-    slug = models.SlugField()
     category = models.ForeignKey(
         'core.Category',
         related_name='revenues',
@@ -37,11 +36,10 @@ class Expense(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     total = models.DecimalField(max_digits=9, decimal_places=2)
-    competition_date = models.DateField(db_index=True)
+    competition_date = models.DateField(db_index=True, blank=True, null=True)
     due_date = models.DateField(db_index=True)
     paid_out = models.BooleanField(default=False)
     note = models.TextField(blank=True, null=True)
-    slug = models.SlugField()
     category = models.ForeignKey(
         'core.Category',
         related_name='expenses',
