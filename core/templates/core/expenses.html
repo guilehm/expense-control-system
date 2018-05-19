@@ -6,6 +6,15 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="m-alert m-alert--outline alert alert-success alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 <div class="product-area-title text-center">
                     <p class="text-white text-uppercase">aqui você encontra todos detalhes de suas contas a pagar</p>
                     <h2 class="text-white h1">Despesas</h2>
