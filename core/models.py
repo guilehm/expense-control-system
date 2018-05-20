@@ -1,5 +1,14 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Sum
+
+
+class CategoryQuerySet(models.QuerySet):
+    def total_expenses(self):
+        return self.aggregate(Sum('expenses__total'))['expenses__total__sum']
+
+    def total_revenues(self):
+        return self.aggregate(Sum('revenues__total'))['revenues__total__sum']
 
 
 # Create your models here.
@@ -16,6 +25,13 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+    objects = CategoryQuerySet.as_manager()
+
+    def total_expenses(self):
+        print('CHAMOU TOTAL_EXPENSES ')
+        print(self.expenses.all().aggregate(Sum('total'))['total__sum']) or 0
+        return self.expenses.all().aggregate(Sum('total'))['total__sum'] or 0
 
 
 class Tag(models.Model):
