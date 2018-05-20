@@ -14,6 +14,7 @@ from transactions.forms import ExpenseEditForm, ExpenseForm, RevenueEditForm, Re
 
 
 # Create your views here.
+# FIXME: revenue_categories 0 - bug
 def index(request):
     if request.user.is_authenticated:
         accounts = BankAccount.objects.filter(owner=request.user)
@@ -152,6 +153,10 @@ def revenues_include(request):
             'form': form,
         })
 
+
+# TODO: include revenues edit form
+def revenues_edit(request, expense_id):
+    pass
 
 def bank_accounts_create(request):
     if request.method == 'POST':

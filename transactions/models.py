@@ -1,5 +1,17 @@
 from django.db import models
+from django.db.models import Sum
 from django.contrib.auth.models import User
+
+
+class ExpenseQuerySet(models.QuerySet):
+    def total(self):
+        return self.aggregate(Sum('total'))['total__sum'] or 0
+
+
+class RevenueQuerySet(models.QuerySet):
+    def total(self):
+        return self.aggregate(Sum('total'))['total__sum'] or 0
+
 
 # Create your models here.
 class Revenue(models.Model):
@@ -22,6 +34,8 @@ class Revenue(models.Model):
         related_name='revenues',
         blank=True,
     )
+
+    objects = RevenueQuerySet
 
     date_added = models.DateTimeField(auto_now_add=True, db_index=True)
     date_changed = models.DateTimeField(auto_now=True, db_index=True)
@@ -50,6 +64,8 @@ class Expense(models.Model):
         related_name='expenses',
         blank=True,
     )
+
+    objects = ExpenseQuerySet.as_manager()
 
     date_added = models.DateTimeField(auto_now_add=True, db_index=True)
     date_changed = models.DateTimeField(auto_now=True, db_index=True)
