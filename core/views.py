@@ -117,7 +117,7 @@ def expenses_include(request):
             expense.user = request.user
             expense.save()
             messages.add_message(request, messages.SUCCESS, 'sua despesa foi cadastrada com sucesso'.format(request.user))
-            return redirect('core:index')
+            return redirect('core:expenses')
         else:
             return render(request, 'core/expenses_include.html', {
                 'form': form,
