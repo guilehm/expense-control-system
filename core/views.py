@@ -21,6 +21,7 @@ def index(request):
         revenues = Revenue.objects.filter(user=request.user).order_by('due_date')
         expense_categories = Category.objects.filter(expenses__user=request.user).distinct()
         revenue_categories = Category.objects.filter(revenues__user=request.user).distinct()
+
         return render(request, 'core/index.html', {
             'accounts': accounts,
             'expenses': expenses,
