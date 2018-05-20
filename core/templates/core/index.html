@@ -165,18 +165,53 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="product-area-title text-center">
-                    <p class="text-uppercase">Top categorias</p>
-                    <h2 class="h1">Categorias</h2>
-                    {% for category in expense_categories %}
-                    {{ category }}
-                    {% endfor %}
+                    <h2 class="h1">Top Categorias</h2>
+                    <p class="text-uppercase mt-80">top categorias de despesas</p>
                 </div>
             </div>
         </div>
         <div class="row">
-                <div class="col-lg-3 col-md-6">
-
+            {% for category in expense_categories %}
+                <div class="col-lg-3 col-sm-6 d-flex justify-content-center">
+                    <div class="list text-center">
+                        <div class="list-item">
+                            <div class="progressBar progressBar--animateNone" data-progress="80">
+                                <svg class="progressBar-contentCircle" viewBox="0 0 200 200">
+                                    <circle transform="rotate(-90, 100, 100)" class="progressBar-background" cx="100" cy="100" r="95"></circle>
+                                    <circle transform="rotate(-90, 100, 100)" class="progressBar-circle" cx="100" cy="100" r="95" style="stroke-dasharray: 597px; stroke-dashoffset: 119.4px;"></circle>
+                                </svg>
+                                <span class="progressBar-percentage progressBar-percentage-count">{{ nada }}</span>
+                            </div>
+                        </div>
+                        <p class="text-uppercase">{{ category.title }}</p>
+                        Total: R$ {{ category.expenses.total }}
+                    </div>
                 </div>
+            {% endfor %}
+        </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="product-area-title text-center">
+                        <p class="text-uppercase mt-100">top categorias de receitas</p>
+                    </div>
+                </div>
+            {% for category in revenue_categories %}
+                <div class="col-lg-3 col-sm-6 d-flex justify-content-center">
+                    <div class="list text-center">
+                        <div class="list-item">
+                            <div class="progressBar progressBar--animateNone" data-progress="80">
+                                <svg class="progressBar-contentCircle" viewBox="0 0 200 200">
+                                    <circle transform="rotate(-90, 100, 100)" class="progressBar-background" cx="100" cy="100" r="95"></circle>
+                                    <circle transform="rotate(-90, 100, 100)" class="progressBar-circle" cx="100" cy="100" r="95" style="stroke-dasharray: 597px; stroke-dashoffset: 119.4px;"></circle>
+                                </svg>
+                                <span class="progressBar-percentage progressBar-percentage-count">{{ nada }}</span>
+                            </div>
+                        </div>
+                        <p class="text-uppercase">{{ category.title }}</p>
+                        Total: R$ {{ category.expenses.total }}
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </section>
