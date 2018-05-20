@@ -28,11 +28,6 @@ class Category(models.Model):
 
     objects = CategoryQuerySet.as_manager()
 
-    def total_expenses(self):
-        print('CHAMOU TOTAL_EXPENSES ')
-        print(self.expenses.all().aggregate(Sum('total'))['total__sum']) or 0
-        return self.expenses.all().aggregate(Sum('total'))['total__sum'] or 0
-
 
 class Tag(models.Model):
     title = models.CharField(max_length=50)

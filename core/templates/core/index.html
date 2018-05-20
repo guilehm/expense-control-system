@@ -159,35 +159,27 @@
     Crie sua conta agora
 </section>
 {% endif %}
-
+{% if expense_categories and revenue_categories %}
 <section id="category" class="section-full">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="product-area-title text-center">
                     <h2 class="h1">Top Categorias</h2>
                     <p class="text-uppercase mt-80">top categorias de despesas</p>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            {% for category in expense_categories %}
-                <div class="col-lg-3 col-sm-6 d-flex justify-content-center">
-                    <div class="list text-center">
-                        <div class="list-item">
-                            <div class="progressBar progressBar--animateNone" data-progress="80">
-                                <svg class="progressBar-contentCircle" viewBox="0 0 200 200">
-                                    <circle transform="rotate(-90, 100, 100)" class="progressBar-background" cx="100" cy="100" r="95"></circle>
-                                    <circle transform="rotate(-90, 100, 100)" class="progressBar-circle" cx="100" cy="100" r="95" style="stroke-dasharray: 597px; stroke-dashoffset: 119.4px;"></circle>
-                                </svg>
-                                <span class="progressBar-percentage progressBar-percentage-count">{{ nada }}</span>
+                {% for category in expense_categories %}
+                    <div class="col-lg-3 col-sm-6 d-flex justify-content-center">
+                        <div class="list text-center">
+                            <p class="text-uppercase">{{ category.title }}</p>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {% widthratio category.expenses.total expense_categories.total_expenses 100 %}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
+                            Total: R$ {{ category.expenses.total }}
                         </div>
-                        <p class="text-uppercase">{{ category.title }}</p>
-                        Total: R$ {{ category.expenses.total }}
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-12">
@@ -198,24 +190,18 @@
             {% for category in revenue_categories %}
                 <div class="col-lg-3 col-sm-6 d-flex justify-content-center">
                     <div class="list text-center">
-                        <div class="list-item">
-                            <div class="progressBar progressBar--animateNone" data-progress="80">
-                                <svg class="progressBar-contentCircle" viewBox="0 0 200 200">
-                                    <circle transform="rotate(-90, 100, 100)" class="progressBar-background" cx="100" cy="100" r="95"></circle>
-                                    <circle transform="rotate(-90, 100, 100)" class="progressBar-circle" cx="100" cy="100" r="95" style="stroke-dasharray: 597px; stroke-dashoffset: 119.4px;"></circle>
-                                </svg>
-                                <span class="progressBar-percentage progressBar-percentage-count">{{ nada }}</span>
-                            </div>
-                        </div>
                         <p class="text-uppercase">{{ category.title }}</p>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: {% widthratio category.revenues.total revenue_categories.total_revenues 100 %}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
                         Total: R$ {{ category.revenues.total }}
                     </div>
                 </div>
             {% endfor %}
         </div>
     </div>
-    Total Revenue: {{ revenue_categories.total_revenues }}
-    Total Expense: {{ expense_categories.total_expenses }}
+    <!--Total Revenue: {{ revenue_categories.total_revenues }}-->
+    <!--Total Expense: {{ expense_categories.total_expenses }}-->
 </section>
-
+{% endif %}
 {% endblock %}
