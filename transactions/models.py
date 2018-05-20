@@ -35,7 +35,7 @@ class Revenue(models.Model):
         blank=True,
     )
 
-    objects = RevenueQuerySet
+    objects = RevenueQuerySet.as_manager()
 
     date_added = models.DateTimeField(auto_now_add=True, db_index=True)
     date_changed = models.DateTimeField(auto_now=True, db_index=True)
