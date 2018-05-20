@@ -159,4 +159,26 @@
     Crie sua conta agora
 </section>
 {% endif %}
+
+<section id="category" class="section-full">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="product-area-title text-center">
+                    <p class="text-uppercase">Top categorias</p>
+                    <h2 class="h1">Categorias</h2>
+                    {% for category in expense_categories %}
+                    {{ category }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-lg-3 col-md-6">
+
+                </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}

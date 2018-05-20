@@ -19,10 +19,14 @@ def index(request):
         accounts = BankAccount.objects.filter(owner=request.user)
         expenses = Expense.objects.filter(user=request.user).order_by('due_date')
         revenues = Revenue.objects.filter(user=request.user).order_by('due_date')
+        expense_categories = Category.objects.filter(expenses__user=request.user).distinct()
+        revenue_categories = Category.objects.filter(revenues__user=request.user).distinct()
         return render(request, 'core/index.html', {
             'accounts': accounts,
             'expenses': expenses,
             'revenues': revenues,
+            'expense_categories': expense_categories,
+            'revenue_categories': revenue_categories,
         })
     return render(request, 'core/index.html')
 
