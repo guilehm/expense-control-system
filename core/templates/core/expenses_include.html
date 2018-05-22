@@ -38,7 +38,6 @@
                     </div>
 
                     <div class="single-input color-2 mb-10">
-                        <label for="account">Data de vencimento:</label>
                         <label class="text-dark" for="due_date">Digite a data de vencimento da despesa:</label>
                         <input type="date" name="due_date" id="due_date" placeholder="data de vencimento" onfocus="this.placeholder = ''" onblur="this.placeholder = 'data de vencimento'" required="">
                     </div>
@@ -71,6 +70,11 @@
                         </select>
                     </div>
 
+                    <div class="single-input color-2 mb-10">
+                        <label for="recurrence">Recorrência:</label>
+                        <input type="text" name="recurrence" id="recurrence">
+                    </div>
+
                     <button class="primary-btn banner-btn my-4 text-dark" type="submit">cadastrar despesa</button>
 
                     <div class="alert"></div>
@@ -79,5 +83,5 @@
         </div>
     </div>
 </section>
-
+{{ form.as_p }}
 {% endblock %}

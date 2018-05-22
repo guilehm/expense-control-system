@@ -114,13 +114,17 @@ def expenses_edit(request, expense_id):
         })
 
 
+# FIXME: find a better way to save multiple forms
 def expenses_include(request):
     if request.method == 'POST':
         form = ExpenseForm(request.user, request.POST)
         if form.is_valid():
-            expense = form.save(commit=False)
-            expense.user = request.user
-            expense.save()
+            repeat = form.save(commit=False, user=request.user)
+            for expense in range(1, repeat.recurrence):
+                print('expense', expense)
+                form = ExpenseForm(request.user, request.POST)
+                expense = form.save(user=request.user)
+
             messages.add_message(request, messages.SUCCESS, 'sua despesa foi cadastrada com sucesso'.format(request.user))
             return redirect('core:expenses')
         else:
@@ -157,6 +161,7 @@ def revenues_include(request):
 # TODO: include revenues edit form
 def revenues_edit(request, expense_id):
     pass
+
 
 def bank_accounts_create(request):
     if request.method == 'POST':
