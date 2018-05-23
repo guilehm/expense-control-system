@@ -186,7 +186,9 @@ def bank_accounts_create(request):
 def categories_detail(request, category_slug):
     category = Category.objects.filter(owner=request.user).get(slug=category_slug)
     expenses = category.expenses.filter(user=request.user)
+    revenues = category.revenues.filter(user=request.user)
     return render(request, 'core/categories_detail.html', {
         'category': category,
         'expenses': expenses,
+        'revenues': revenues,
     })
