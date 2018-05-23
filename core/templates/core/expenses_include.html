@@ -18,7 +18,7 @@
                         <label for="account">Conta:</label>
                         <select name="account" id="account" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Full Name'" required="">
                             {% for option in form.account %}
-                            {{ option }}
+                                {{ option }}
                             {% endfor %}
                         </select>
                     </div>
@@ -56,7 +56,7 @@
                         <label for="category">Categoria:</label>
                         <select name="category" id="category" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Full Name'" required="">
                             {% for option in form.category %}
-                            {{ option }}
+                                {{ option }}
                             {% endfor %}
                         </select>
                     </div>
@@ -65,7 +65,7 @@
                         <label for="tags">Tags:</label>
                         <select name="tags" id="tags" multiple="multiple" style="height: 100px;">
                             {% for option in form.tags %}
-                            {{ option }}
+                                {{ option }}
                             {% endfor %}
                         </select>
                     </div>
