@@ -12,6 +12,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('register/', views.register_view, name='register'),
     path('expenses/', views.expenses, name='expenses'),
+    path('categories/<str:category_slug>', views.categories_detail, name='categories-detail'),
     path('revenues/', views.revenues, name='revenues'),
     path('expenses/include', views.expenses_include, name='expenses-include'),
     path('revenues/include', views.revenues_include, name='revenues-include'),
