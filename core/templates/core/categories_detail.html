@@ -1,0 +1,85 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<section id="services" class="title-bg section-full">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="m-alert m-alert--outline alert alert-success alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="product-area-title text-center">
+                    <p class="text-white text-uppercase">aqui você encontra detalhe sobre uma categoria específica</p>
+                    <h2 class="text-white h1">Categoria {{ category.title }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% if request.user.accounts.first %}
+                <div class="col-lg-3 col-sm-6">
+                    <a href="{% url 'core:expenses-include'%}">
+                        <div class="single-product">
+                            <div class="desc">
+                                <h4>Incluir conta a pagar</h4>
+                                <p>Faça aqui o lançamento da sua despesa</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
+            <div class="col-lg-3 col-sm-6">
+                <div class="single-product">
+                    <div class="desc">
+                        <h4>Categorias</h4>
+                        <p>Gerencie suas categorias</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+
+<section class="section-full gray-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="section-title text-center">
+                    <h2 class="h1 mb-60">Despesas da categoria {{ category.title }}</h2>
+                </div>
+                    {% if category.expenses %}
+                        <table class="table table-sm table-responsive table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Título</th>
+                                <th scope="col">Conta</th>
+                                <th scope="col">Vencimento</th>
+                                <th scope="col">Editar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for expense in expenses %}
+                                <tr>
+                                    <td>{{ expense.title }}</td>
+                                    <td>{{ expense.account }}</td>
+                                    <td>{{ expense.due_date|date:'d/m/Y' }}</td>
+                                    <td><a href="#">editar</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        </table>
+                    {% else %}
+                        <p class=" text-uppercase text-center">nenhuma conta a pagar foi encontrada para esta categoria :)</p>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock%}
