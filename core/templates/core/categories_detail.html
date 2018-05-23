@@ -21,29 +21,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            {% if request.user.accounts.first %}
-                <div class="col-lg-3 col-sm-6">
-                    <a href="{% url 'core:expenses-include'%}">
-                        <div class="single-product">
-                            <div class="desc">
-                                <h4>Incluir conta a pagar</h4>
-                                <p>Faça aqui o lançamento da sua despesa</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            {% endif %}
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-product">
-                    <div class="desc">
-                        <h4>Categorias</h4>
-                        <p>Gerencie suas categorias</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     </section>
 
 
@@ -60,6 +37,7 @@
                             <tr>
                                 <th scope="col">Título</th>
                                 <th scope="col">Conta</th>
+                                <th scope="col">Valor</th>
                                 <th scope="col">Vencimento</th>
                                 <th scope="col">Editar</th>
                             </tr>
@@ -69,6 +47,7 @@
                                 <tr>
                                     <td>{{ expense.title }}</td>
                                     <td>{{ expense.account }}</td>
+                                    <td>R$ {{ expense.total }}</td>
                                     <td>{{ expense.due_date|date:'d/m/Y' }}</td>
                                     <td><a href="#">editar</a></td>
                                 </tr>
