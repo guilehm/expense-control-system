@@ -76,7 +76,7 @@
             {% for expense in expenses %}
                 <div class="col-lg-3 col-md-6">
                     <div class="single-publish">
-                        <img src="img/p1.jpg" class="img-fluid" alt="">
+                        <img src="#" class="img-fluid" alt="">
                         <div class="top">
                             <div class="mb-15 d-flex">
                                 <a>Banco a debitar</a>
@@ -172,7 +172,7 @@
                 {% for category in expense_categories %}
                     <div class="col-lg-3 col-sm-6 d-flex justify-content-center">
                         <div class="list text-center">
-                            <p class="text-uppercase">{{ category.title }}</p>
+                            <a href="{% url 'core:categories-detail' category.slug %}" class="text-uppercase">{{ category.title }}</a>
                             <div class="progress">
                                 <div class="progress-bar bg-success" role="progressbar" style="width: {% widthratio category.expenses.total expense_categories.total_expenses 100 %}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
@@ -190,7 +190,7 @@
             {% for category in revenue_categories %}
                 <div class="col-lg-3 col-sm-6 d-flex justify-content-center">
                     <div class="list text-center">
-                        <p class="text-uppercase">{{ category.title }}</p>
+                        <a href="{% url 'core:categories-detail' category.slug %}" class="text-uppercase">{{ category.title }}</a>
                         <div class="progress">
                             <div class="progress-bar bg-success" role="progressbar" style="width: {% widthratio category.revenues.total revenue_categories.total_revenues 100 %}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
