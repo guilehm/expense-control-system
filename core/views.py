@@ -159,23 +159,23 @@ def revenues_include(request):
 
 
 # TODO: include revenues edit form
-def revenues_edit(request, expense_id):
-    revenue = Revenue.objects.filter(user=request.user).get(id=expense_id)
+def revenues_edit(request, revenue_id):
+    revenue = Revenue.objects.filter(user=request.user).get(id=revenue_id)
 
     if request.method != 'POST':
-        form = RevenueEditForm(instance=revenue)
+        form = RevenueEditForm(instance=revenue, owner=request.user)
     else:
-        form = RevenueEditForm(instance=revenue, data=request.POST)
+        form = RevenueEditForm(instance=revenue, owner=request.user, data=request.POST)
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS, 'sua receita foi editada com sucesso')
             return redirect('core:index')
         else:
-            return render(request, 'core/revenue_edit.html', {
+            return render(request, 'core/revenues_edit.html', {
                 'form': form,
                 'revenue': revenue,
             })
-    return render(request, 'core/revenue_edit.html', {
+    return render(request, 'core/revenues_edit.html', {
         'form': form,
         'revenue': revenue,
     })

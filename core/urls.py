@@ -16,6 +16,7 @@ urlpatterns = [
     path('revenues/', views.revenues, name='revenues'),
     path('expenses/include', views.expenses_include, name='expenses-include'),
     path('revenues/include', views.revenues_include, name='revenues-include'),
+    path('revenues/edit/<int:revenue_id>', views.revenues_edit, name='revenues-edit'),
     path('expenses/edit/<int:expense_id>', views.expenses_edit, name='expenses-edit'),
     path('bank-accounts/create', views.bank_accounts_create, name='bank-accounts-create'),
 ]
