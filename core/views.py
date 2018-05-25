@@ -180,6 +180,7 @@ def revenues_edit(request, revenue_id):
         'revenue': revenue,
     })
 
+
 def bank_accounts_create(request):
     if request.method == 'POST':
         form = BankAccountCreateForm(request.POST)
