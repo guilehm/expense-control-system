@@ -74,7 +74,7 @@
                                     <td>R$ {{ revenue.total }}</td>
                                     <td>{{ revenue.category }}</td>
                                     <td>{{ revenue.due_date|date:'d/m/Y' }}</td>
-                                    <td><a href="#">editar</a></td>
+                                    <td><a href="{% url 'core:revenues-edit' revenue.id %}">editar</a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>
