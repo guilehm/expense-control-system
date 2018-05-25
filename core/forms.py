@@ -6,12 +6,14 @@ from transactions.models import Revenue
 class BankAccountCreateForm(forms.ModelForm):
     class Meta:
         model = BankAccount
-        exclude = [
+        exclude = (
             'owner',
-        ]
+        )
 
 
 class RevenueEditForm(forms.ModelForm):
     class Meta:
         model = Revenue
-        fields = '__all__'
+        exclude = (
+            'owner',
+        )
