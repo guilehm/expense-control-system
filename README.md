@@ -1,6 +1,6 @@
 # Expense-Control-System
 
-**Built with Python and Django.**
+**Built with Python, Django and PostgreSQL.**
 
 Website for expenses management
 https://gui-expenses.herokuapp.com/
