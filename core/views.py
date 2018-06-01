@@ -10,7 +10,7 @@ from core.forms import BankAccountCreateForm
 from core.models import Category, Tag
 from bank.models import BankAccount
 from transactions.models import Expense, Revenue
-from transactions.forms import ExpenseEditForm, ExpenseForm, RevenueEditForm, RevenueForm
+from transactions.forms import ExpenseEditForm, ExpenseMultipleEditForm ,ExpenseForm, RevenueEditForm, RevenueForm
 
 
 # Create your views here.
@@ -73,10 +73,21 @@ def expenses(request):
     categories = Category.objects.filter(owner=request.user)
     expenses = Expense.objects.filter(user=request.user)
     tags = Tag.objects.filter(owner=request.user)
+
+    # FIXME: It's just for testing
+    if request.method == 'POST':
+        forms = [ExpenseMultipleEditForm(prefix=str(expense.title), instance=expense, data=request.POST) for expense in expenses]
+        for form in forms:
+            if form.is_valid():
+                expense = form.save()
+    else:
+        forms = [ExpenseMultipleEditForm(prefix=str(expense.title), instance=expense) for expense in expenses]
+
     return render(request, 'core/expenses.html', {
         'expenses': expenses,
         'categories': categories,
         'tags': tags,
+        'forms': forms,
     })
 
 
