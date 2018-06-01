@@ -79,9 +79,7 @@ def expenses(request):
         forms = [ExpenseMultipleEditForm(prefix=str(expense.title), instance=expense, data=request.POST) for expense in expenses]
         for form in forms:
             if form.is_valid():
-                total = form.cleaned_data['total']
-                expense = form.save(commit=False)
-                expense.update_total(total)
+                expense = form.save()
     else:
         forms = [ExpenseMultipleEditForm(prefix=str(expense.title), instance=expense) for expense in expenses]
 
