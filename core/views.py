@@ -10,7 +10,7 @@ from core.forms import BankAccountCreateForm
 from core.models import Category, Tag
 from bank.models import BankAccount
 from transactions.models import Expense, Revenue
-from transactions.forms import ExpenseEditForm, ExpenseMultipleEditForm ,ExpenseForm, RevenueEditForm, RevenueForm
+from transactions.forms import ExpenseEditForm, ExpenseMultipleEditForm, ExpenseForm, RevenueEditForm, RevenueForm
 
 
 # Create your views here.
@@ -132,7 +132,6 @@ def expenses_include(request):
         if form.is_valid():
             repeat = form.save(commit=False, user=request.user)
             for expense in range(1, repeat.recurrence):
-                print('expense', expense)
                 form = ExpenseForm(request.user, request.POST)
                 expense = form.save(user=request.user)
 
