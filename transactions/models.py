@@ -72,8 +72,3 @@ class Expense(models.Model):
 
     def __str__(self):
         return self.title
-
-    # FIXME: just for testing, improve if works
-    def update_total(self, value):
-        if value >= 0:
-            self.total = value
