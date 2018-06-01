@@ -145,6 +145,9 @@
 
                 <form method="post">
                     {% csrf_token %}
+                    {% for form in forms %}
+                        {{ form }}
+                    {% endfor %}
 
                     <button type="submit">Salvar</button>
                 </form>
