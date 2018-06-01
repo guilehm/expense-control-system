@@ -74,6 +74,7 @@ def expenses(request):
     expenses = Expense.objects.filter(user=request.user)
     tags = Tag.objects.filter(owner=request.user)
 
+    # FIXME: It's just for testing
     if request.method == 'POST':
         forms = [ExpenseMultipleEditForm(prefix=str(expense.title), instance=expense, data=request.POST) for expense in expenses]
         for form in forms:
