@@ -10,7 +10,7 @@ from core.forms import BankAccountCreateForm
 from core.models import Category, Tag
 from bank.models import BankAccount
 from transactions.models import Expense, Revenue
-from transactions.forms import ExpenseEditForm, ExpenseMultipleEditForm ,ExpenseForm, RevenueEditForm, RevenueForm
+from transactions.forms import ExpenseEditForm, ExpenseMultipleEditForm, ExpenseForm, RevenueEditForm, RevenueForm
 
 
 # Create your views here.
