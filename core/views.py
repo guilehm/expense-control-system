@@ -132,7 +132,6 @@ def expenses_include(request):
         if form.is_valid():
             repeat = form.save(commit=False, user=request.user)
             for expense in range(1, repeat.recurrence):
-                print('expense', expense)
                 form = ExpenseForm(request.user, request.POST)
                 expense = form.save(user=request.user)
 
