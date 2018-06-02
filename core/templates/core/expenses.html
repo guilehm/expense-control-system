@@ -8,7 +8,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="section-title text-center">
-                    <h2 class="h1 mb-60">Seção para Testes</h2>
+                    <h2 class="h1 mb-60">Editar despesas</h2>
                 </div>
                     {% if expenses %}
                         <form method="post">
@@ -28,7 +28,7 @@
                                     {% csrf_token %}
                                     {% for form in formset %}
                                         <tr>
-                                            <td>{{ form.title.value }}</td>
+                                            <td>{{ form.title }}</td>
                                             <td>{{ form.account }}</td>
                                             <td>R$ {{ form.total }}</td>
                                             <td>{{ form.category }}</td>
