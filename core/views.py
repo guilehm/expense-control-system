@@ -78,6 +78,7 @@ def expenses_list(request):
     formset = expense_edit_form(request.POST or None, queryset=expenses)
     for form in formset.forms:
         form.fields['account'].queryset = BankAccount.objects.filter(owner=request.user)
+        form.fields['category'].queryset = Category.objects.filter(owner=request.user)
 
     if formset.is_valid():
         instances = formset.save(commit=False)
