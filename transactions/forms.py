@@ -48,7 +48,7 @@ class ExpenseEditForm(forms.ModelForm):
 class ExpenseMultipleEditForm(forms.ModelForm):
     class Meta:
         model = Expense
-        fields = ('total',)
+        fields = '__all__'
 
 
 class RevenueForm(forms.ModelForm):
