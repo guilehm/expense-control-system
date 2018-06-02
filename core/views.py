@@ -1,7 +1,8 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate ,login, logout
+from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
+from django.forms.models import modelformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
@@ -10,8 +11,7 @@ from core.forms import BankAccountCreateForm
 from core.models import Category, Tag
 from bank.models import BankAccount
 from transactions.models import Expense, Revenue
-from transactions.forms import ExpenseEditForm, ExpenseMultipleEditForm, ExpenseForm, RevenueEditForm, RevenueForm
-
+from transactions.forms import ExpenseEditForm, ExpenseForm, RevenueEditForm, RevenueForm, SimpleExpenseEditForm
 
 # Create your views here.
 def index(request):
@@ -74,20 +74,19 @@ def expenses_list(request):
     expenses = Expense.objects.filter(user=request.user)
     tags = Tag.objects.filter(owner=request.user)
 
-    # FIXME: It's just for testing
-    if request.method == 'POST':
-        forms = [ExpenseMultipleEditForm(prefix=str(expense.title), instance=expense, data=request.POST) for expense in expenses]
-        for form in forms:
-            if form.is_valid():
-                expense = form.save()
-    else:
-        forms = [ExpenseMultipleEditForm(prefix=str(expense.title), instance=expense) for expense in expenses]
+    expense_edit_form = modelformset_factory(Expense, form=SimpleExpenseEditForm, extra=0)
+    formset = expense_edit_form(request.POST or None, queryset=expenses)
+
+    if formset.is_valid():
+        instances = formset.save(commit=False)
+        for instance in instances:
+            instance.save()
 
     return render(request, 'core/expenses.html', {
         'expenses': expenses,
         'categories': categories,
         'tags': tags,
-        'forms': forms,
+        'formset': formset,
     })
 
 
