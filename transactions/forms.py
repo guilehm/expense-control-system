@@ -45,7 +45,7 @@ class ExpenseEditForm(forms.ModelForm):
         self.fields['account'].queryset = BankAccount.objects.filter(owner=owner)
 
 
-class SimpleExpenseEditForm(forms.ModelForm):
+class MultipleExpenseEditForm(forms.ModelForm):
     class Meta:
         model = Expense
         fields = (
