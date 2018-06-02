@@ -24,19 +24,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        {% csrf_token %}
-                                        {% for form in forms %}
-                                            <tr>
-                                                <td>{{ form.title.value }}</td>
-                                                <td>{{ form.account }}</td>
-                                                <td>R$ {{ form.total }}</td>
-                                                <td>{{ form.category }}</td>
-                                                <td>{{ form.due_date.value|date:'d/m/Y' }}</td>
-                                                <td><a href="#">editar</a></td>
-                                            </tr>
-                                        {% endfor %}
+                                {{ formset.management_form }}
+                                    {% csrf_token %}
+                                    {% for form in formset %}
+                                        <tr>
+                                            <td>{{ form.title.value }}</td>
+                                            <td class="d-none">{{ form.title }}</td>
+                                            <td>{{ form.account.value }}</td>
+                                            <td class="d-none">{{ form.account }}</td>
+                                            <td>R$ {{ form.total }}</td>
+                                            <td>{{ form.category.value }}</td>
+                                            <td class="d-none">{{ form.category }}</td>
+                                            <td>{{ form.due_date.value }}</td>
+                                            <td class="d-none">{{ form.due_date }}</td>
+                                            <td class="d-none">{{ form.id }}</td>
+                                            <td><a href="#">editar</a></td>
+                                        </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
+                            {% for error in formset.errors %}
+                                {{ error }}
+                            {% endfor %}
+
                             <button type="submit">Salvar</button>
                         </form>
                     {% else %}
@@ -46,6 +56,18 @@
         </div>
     </div>
 </section>
+
+
+{#<div>#}
+{#    <form method="post">#}
+{#        {% csrf_token %}#}
+{#        {{ formset.as_ul }}#}
+{#        {% for error in formset.errors %}#}
+{#            {{ error }}#}
+{#        {% endfor %}#}
+{#        <button type="submit">Salvar</button>#}
+{#    </form>#}
+{#</div>#}
 
 <section id="services" class="title-bg section-full">
     <div class="container">
