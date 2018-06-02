@@ -11,7 +11,7 @@ from core.forms import BankAccountCreateForm
 from core.models import Category, Tag
 from bank.models import BankAccount
 from transactions.models import Expense, Revenue
-from transactions.forms import ExpenseEditForm, ExpenseForm, RevenueEditForm, RevenueForm, SimpleExpenseEditForm
+from transactions.forms import ExpenseEditForm, ExpenseForm, RevenueEditForm, RevenueForm, MultipleExpenseEditForm
 
 # Create your views here.
 def index(request):
@@ -74,8 +74,10 @@ def expenses_list(request):
     expenses = Expense.objects.filter(user=request.user)
     tags = Tag.objects.filter(owner=request.user)
 
-    expense_edit_form = modelformset_factory(Expense, form=SimpleExpenseEditForm, extra=0)
+    expense_edit_form = modelformset_factory(Expense, form=MultipleExpenseEditForm, extra=0)
     formset = expense_edit_form(request.POST or None, queryset=expenses)
+    for form in formset.forms:
+        form.fields['account'].queryset = BankAccount.objects.filter(owner=request.user)
 
     if formset.is_valid():
         instances = formset.save(commit=False)
