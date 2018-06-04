@@ -93,7 +93,7 @@ def expenses_list(request):
     })
 
 
-def revenues(request):
+def revenues_list(request):
     categories = Category.objects.filter(owner=request.user)
     revenues = Revenue.objects.filter(user=request.user)
     tags = Tag.objects.filter(owner=request.user)
