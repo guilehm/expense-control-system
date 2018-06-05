@@ -1,6 +1,7 @@
 from django import forms
 
 from bank.models import BankAccount
+from core.models import Category
 from transactions.models import Revenue
 
 class BankAccountCreateForm(forms.ModelForm):
@@ -17,3 +18,9 @@ class RevenueEditForm(forms.ModelForm):
         exclude = (
             'owner',
         )
+
+
+class CategoryIncludeForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        exclude = ('owner',)
