@@ -6,6 +6,7 @@ from transactions.models import Expense, Revenue
 
 class ExpenseForm(forms.ModelForm):
     recurrence = forms.IntegerField()
+
     class Meta:
         model = Expense
         exclude = ('user',)
