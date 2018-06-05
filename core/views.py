@@ -7,13 +7,15 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from core.forms import BankAccountCreateForm
+from core.forms import BankAccountCreateForm, CategoryIncludeForm
 from core.models import Category, Tag
 from bank.models import BankAccount
 from transactions.models import Expense, Revenue
 from transactions.forms import ExpenseEditForm, ExpenseForm, RevenueEditForm, RevenueForm, MultipleExpenseEditForm
 
 # Create your views here.
+
+
 def index(request):
     if request.user.is_authenticated:
         accounts = BankAccount.objects.filter(owner=request.user)
@@ -221,4 +223,24 @@ def categories_detail(request, category_slug):
         'category': category,
         'expenses': expenses,
         'revenues': revenues,
+    })
+
+
+def categories_include(request):
+    if request.method != 'POST':
+        form = CategoryIncludeForm()
+    else:
+        form = CategoryIncludeForm(request.POST)
+        if form.is_valid():
+            category = form.save(commit=False)
+            category.owner = request.user
+            category.save()
+            messages.add_message(request, messages.SUCCESS, 'Parabéns, sua categoria foi criada com sucesso!')
+            return redirect('core:categories-include')
+        return render(request, 'core/categories_include.html', {
+            'form': form,
+        })
+
+    return render(request, 'core/categories_include.html', {
+        'form': form,
     })
