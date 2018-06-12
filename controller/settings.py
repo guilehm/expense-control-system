@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'bank',
     'transactions',
     'storages',
+    'API',
 ]
 
 MIDDLEWARE = [
