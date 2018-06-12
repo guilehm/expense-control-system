@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'transactions',
     'storages',
     'API',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
