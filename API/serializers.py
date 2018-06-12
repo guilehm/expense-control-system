@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from bank.models import Bank, BankAccount
+from core.models import Category, Tag
 
 
 class BankSerializer(ModelSerializer):
@@ -11,4 +12,8 @@ class BankSerializer(ModelSerializer):
 class BankAccountSerializer(ModelSerializer):
     class Meta:
         model = BankAccount
+        fields = '__all__'
+class CategorySerializer(ModelSerializer):
+    class Meta:
+        model = Category
         fields = '__all__'
