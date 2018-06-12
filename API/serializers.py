@@ -13,7 +13,15 @@ class BankAccountSerializer(ModelSerializer):
     class Meta:
         model = BankAccount
         fields = '__all__'
+
+
 class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category
+        fields = '__all__'
+
+
+class TagSerializer(ModelSerializer):
+    class Meta:
+        model = Tag
         fields = '__all__'
