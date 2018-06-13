@@ -40,3 +40,16 @@ class Tag(models.Model):
     def __str__(self):
         return self.title
 
+
+def upload_csv_file(instance, filename):
+    qs = instance.__class__.objects.filter(user=instance.user)
+    if qs.exists():
+        num_ = qs.last().id + 1
+    else:
+        num_ = 1
+    return f'csv/{num_}/{instance.user.username}/{filename}'
+
+
+class CSVUpload(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    file = models.FileField(upload_to=upload_csv_file)
