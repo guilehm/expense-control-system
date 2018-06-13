@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum
+from django.db.models.signals import post_save, pre_save
 
 
 class CategoryQuerySet(models.QuerySet):
@@ -53,3 +54,7 @@ def upload_csv_file(instance, filename):
 class CSVUpload(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     file = models.FileField(upload_to=upload_csv_file)
+    completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
