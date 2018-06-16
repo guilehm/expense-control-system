@@ -252,5 +252,5 @@ def logs(request):
     test_list = []
     for i in range(1000):
         test_list.append(i)
-    print(test_list)
+    file = open
     return redirect('core:index')

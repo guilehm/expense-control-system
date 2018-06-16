@@ -20,7 +20,7 @@ urlpatterns = [
     path('bank-accounts/create/', views.bank_accounts_create, name='bank-accounts-create'),
     path('categories/include/', views.categories_include, name='categories-include'),
     path('category/<str:category_slug>/', views.categories_detail, name='categories-detail'),
-    path('test', views.logs, name='test'),
+    path('test/', views.logs, name='test'),
 ]
 
 if settings.DEBUG:
