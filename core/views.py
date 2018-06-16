@@ -84,7 +84,9 @@ def expenses_list(request):
 
     if formset.is_valid():
         instances = formset.save(commit=False)
+        count = 0
         for instance in instances:
+            count += 1
             instance.save()
 
     return render(request, 'core/expenses.html', {
@@ -92,6 +94,7 @@ def expenses_list(request):
         'categories': categories,
         'tags': tags,
         'formset': formset,
+        'count': count,
     })
 
 
