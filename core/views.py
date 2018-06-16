@@ -247,10 +247,3 @@ def categories_include(request):
     return render(request, 'core/categories_include.html', {
         'form': form,
     })
-
-def logs(request):
-    test_list = []
-    for i in range(1000):
-        test_list.append(i)
-    file = open
-    return redirect('core:index')
