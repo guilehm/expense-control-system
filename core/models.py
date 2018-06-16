@@ -43,4 +43,3 @@ class Tag(models.Model):
 
 class Log(models.Model):
     file = models.FileField()
-    
