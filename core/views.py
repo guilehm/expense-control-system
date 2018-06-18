@@ -249,3 +249,7 @@ def categories_include(request):
     return render(request, 'core/categories_include.html', {
         'form': form,
     })
+
+
+def api_list(request):
+    return render(request, 'core/api_list.html')
