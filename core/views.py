@@ -88,6 +88,8 @@ def expenses_list(request):
         for instance in instances:
             count += 1
             instance.save()
+    else:
+        count = 0
 
     return render(request, 'core/expenses.html', {
         'expenses': expenses,
