@@ -3,65 +3,53 @@
 {% block content %}
 
 
-<section class="section-full gray-bg">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="section-title text-center">
-                    <h2 class="h1 mb-60">Editar despesas</h2>
-                </div>
-                    {% if expenses %}
-                        <form method="post">
-                            <table class="table table-sm table-responsive table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Título</th>
-                                        <th scope="col">Conta</th>
-                                        <th scope="col">Total</th>
-                                        <th scope="col">Categoria</th>
-                                        <th scope="col">Vencimento</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {{ formset.management_form }}
-                                    {% csrf_token %}
-                                    {% for form in formset %}
-                                        <tr>
-                                            <td>{{ form.title }}</td>
-                                            <td>{{ form.account }}</td>
-                                            <td>R$ {{ form.total }}</td>
-                                            <td>{{ form.category }}</td>
-                                            <td>{{ form.due_date }}</td>
-                                            <td class="d-none">{{ form.id }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            {% for error in formset.errors %}
-                                {{ error }}
-                            {% endfor %}
-
-                            <button type="submit">Salvar</button>
-                        </form>
-                    {% else %}
-                        <p class=" text-uppercase text-center">nenhuma conta a pagar foi encontrada :)</p>
-                    {% endif %}
-            </div>
-        </div>
-    </div>
-</section>
-
-
-{#<div>#}
-{#    <form method="post">#}
-{#        {% csrf_token %}#}
-{#        {{ formset.as_ul }}#}
-{#        {% for error in formset.errors %}#}
-{#            {{ error }}#}
-{#        {% endfor %}#}
-{#        <button type="submit">Salvar</button>#}
-{#    </form>#}
-{#</div>#}
+{#<section class="section-full gray-bg">#}
+{#    <div class="container">#}
+{#        <div class="row justify-content-center">#}
+{#            <div class="col-lg-10">#}
+{#                <div class="section-title text-center">#}
+{#                    <h2 class="h1 mb-60">Editar despesas</h2>#}
+{#                </div>#}
+{#                    {% if expenses %}#}
+{#                        <form method="post">#}
+{#                            <table class="table table-sm table-responsive table-hover">#}
+{#                                <thead>#}
+{#                                    <tr>#}
+{#                                        <th scope="col">Título</th>#}
+{#                                        <th scope="col">Conta</th>#}
+{#                                        <th scope="col">Total</th>#}
+{#                                        <th scope="col">Categoria</th>#}
+{#                                        <th scope="col">Vencimento</th>#}
+{#                                    </tr>#}
+{#                                </thead>#}
+{#                                <tbody>#}
+{#                                {{ formset.management_form }}#}
+{#                                    {% csrf_token %}#}
+{#                                    {% for form in formset %}#}
+{#                                        <tr>#}
+{#                                            <td>{{ form.title }}</td>#}
+{#                                            <td>{{ form.account }}</td>#}
+{#                                            <td>R$ {{ form.total }}</td>#}
+{#                                            <td>{{ form.category }}</td>#}
+{#                                            <td>{{ form.due_date }}</td>#}
+{#                                            <td class="d-none">{{ form.id }}</td>#}
+{#                                        </tr>#}
+{#                                    {% endfor %}#}
+{#                                </tbody>#}
+{#                            </table>#}
+{#                            {% for error in formset.errors %}#}
+{#                                {{ error }}#}
+{#                            {% endfor %}#}
+{##}
+{#                            <button type="submit">Salvar</button>#}
+{#                        </form>#}
+{#                    {% else %}#}
+{#                        <p class=" text-uppercase text-center">nenhuma conta a pagar foi encontrada :)</p>#}
+{#                    {% endif %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
 
 <section id="services" class="title-bg section-full">
     <div class="container">
