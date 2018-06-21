@@ -11,10 +11,10 @@
                     <h1 class="text-uppercase text-white mb-5">API</h1>
                     <div class="container">
                         <div class="controls d-flex flex-wrap justify-content-center">
-                            <a class="filter text-white">bank list</a>
-                            <a class="filter text-white">bank account list</a>
-                            <a class="filter text-white">category list</a>
-                            <a class="filter text-white">tag list</a>
+                            <a href="{% url 'api:bank-list' %}" class="filter text-white">bank list</a>
+                            <a href="{% url 'api:bank-account-list' %}" class="filter text-white">bank account list</a>
+                            <a href="{% url 'api:category-list' %}" class="filter text-white">category list</a>
+                            <a href="{% url 'api:tag-list' %}" class="filter text-white">tag list</a>
                         </div>
                     </div>
                 </div>
