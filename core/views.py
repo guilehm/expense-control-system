@@ -44,7 +44,7 @@ def login_view(request):
             return redirect('core:index')
     else:
         form = AuthenticationForm()
-    return render(request, 'core/login.html', {'login_form':form})
+    return render(request, 'core/login.html', {'login_form': form})
 
 
 def logout_view(request):
@@ -65,7 +65,7 @@ def register_view(request):
                 return render(request,'core/register.html', context)
     else:
         form = UserCreationForm()
-        context = {'form':form}
+        context = {'form': form}
         return render(request, 'core/register.html', context)
 
 
@@ -155,10 +155,6 @@ def revenues_include(request):
             revenue.save()
             messages.add_message(request, messages.SUCCESS, 'sua receita foi cadastrada com sucesso')
             return redirect('core:index')
-        else:
-            return render(request, 'core/revenues_include.html', {
-                'form': form,
-            })
     else:
         form = ExpenseForm(request.user)
         return render(request, 'core/revenues_include.html', {
