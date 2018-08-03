@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate,login, logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms.models import modelformset_factory
@@ -40,7 +40,11 @@ def login_view(request):
         if form.is_valid():
             authenticated_user = authenticate(username=request.POST['username'], password=request.POST['password'])
             login(request, authenticated_user)
-            messages.add_message(request, messages.SUCCESS, 'Olá, {}, seu login foi efetuado com sucesso'.format(request.user))
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Olá, {}, seu login foi efetuado com sucesso'.format(request.user)
+            )
             return redirect('core:index')
     else:
         form = AuthenticationForm()
@@ -55,14 +59,14 @@ def logout_view(request):
 def register_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-        context = {'form':form}
+        context = {'form': form}
         if form.is_valid():
             user = form.save()
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('core:index')
         else:
             if form.errors:
-                return render(request,'core/register.html', context)
+                return render(request, 'core/register.html', context)
     else:
         form = UserCreationForm()
         context = {'form': form}
@@ -137,7 +141,11 @@ def expenses_include(request):
                 form = ExpenseForm(request.user, request.POST)
                 form.save(user=request.user)
 
-            messages.add_message(request, messages.SUCCESS, 'sua despesa foi cadastrada com sucesso'.format(request.user))
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'sua despesa foi cadastrada com sucesso'.format(request.user)
+            )
             return redirect('core:expenses')
     else:
         form = ExpenseForm(request.user)
