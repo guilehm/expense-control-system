@@ -178,11 +178,6 @@ def revenues_edit(request, revenue_id):
             form.save()
             messages.add_message(request, messages.SUCCESS, 'sua receita foi editada com sucesso')
             return redirect('core:index')
-        else:
-            return render(request, 'core/revenues_edit.html', {
-                'form': form,
-                'revenue': revenue,
-            })
     return render(request, 'core/revenues_edit.html', {
         'form': form,
         'revenue': revenue,
