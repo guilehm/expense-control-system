@@ -121,11 +121,6 @@ def expenses_edit(request, expense_id):
             form.save()
             messages.add_message(request, messages.SUCCESS, 'Despesa editada com sucesso.')
             return redirect('core:expenses')
-        else:
-            return render(request, 'core/expenses_edit.html', {
-                'expense': expense,
-                'form': form,
-            })
     else:
         form = ExpenseEditForm(instance=expense, owner=request.user)
         return render(request, 'core/expenses_edit.html', {
@@ -142,14 +137,10 @@ def expenses_include(request):
             repeat = form.save(commit=False, user=request.user)
             for expense in range(1, repeat.recurrence):
                 form = ExpenseForm(request.user, request.POST)
-                expense = form.save(user=request.user)
+                form.save(user=request.user)
 
             messages.add_message(request, messages.SUCCESS, 'sua despesa foi cadastrada com sucesso'.format(request.user))
             return redirect('core:expenses')
-        else:
-            return render(request, 'core/expenses_include.html', {
-                'form': form,
-            })
     else:
         form = ExpenseForm(request.user)
         return render(request, 'core/expenses_include.html', {
