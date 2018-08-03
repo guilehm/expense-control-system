@@ -42,8 +42,6 @@ def login_view(request):
             login(request, authenticated_user)
             messages.add_message(request, messages.SUCCESS, 'Olá, {}, seu login foi efetuado com sucesso'.format(request.user))
             return redirect('core:index')
-        else:
-            return render(request, 'core/login.html', {'login_form':form})
     else:
         form = AuthenticationForm()
     return render(request, 'core/login.html', {'login_form':form})
@@ -200,10 +198,6 @@ def bank_accounts_create(request):
             bank_account.save()
             messages.add_message(request, messages.SUCCESS, 'Parabéns, sua conta foi criada com sucesso!')
             return redirect('core:index')
-        else:
-            return render(request, 'core/bank_accounts_create.html', {
-                'form': form,
-            })
     else:
         form = BankAccountCreateForm()
         return render(request, 'core/bank_accounts_create.html', {
