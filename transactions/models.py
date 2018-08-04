@@ -54,7 +54,11 @@ class Expense(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
-    total = models.DecimalField(max_digits=9, decimal_places=2)
+    total = models.DecimalField(
+        max_digits=9,
+        decimal_places=2,
+        validators=[MinValueValidator(0), ]
+    )
     competition_date = models.DateField(db_index=True, blank=True, null=True)
     due_date = models.DateField(db_index=True)
     paid_out = models.BooleanField(default=False)
