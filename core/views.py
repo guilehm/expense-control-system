@@ -133,7 +133,7 @@ def expense_edit(request, expense_id):
 
 
 # FIXME: find a better way to save multiple forms
-def expenses_include(request):
+def expense_include(request):
     if request.method == 'POST':
         form = ExpenseForm(request.user, request.POST)
         if form.is_valid():
@@ -155,7 +155,7 @@ def expenses_include(request):
         })
 
 
-def revenues_include(request):
+def revenue_include(request):
     if request.method == 'POST':
         form = RevenueForm(request.user, request.POST)
         if form.is_valid():
@@ -172,7 +172,7 @@ def revenues_include(request):
 
 
 # TODO: include revenues edit form
-def revenues_edit(request, revenue_id):
+def revenue_edit(request, revenue_id):
     revenue = Revenue.objects.filter(user=request.user).get(id=revenue_id)
 
     if request.method != 'POST':
@@ -206,7 +206,7 @@ def bank_accounts_create(request):
         })
 
 
-def categories_detail(request, category_slug):
+def category_detail(request, category_slug):
     category = Category.objects.filter(owner=request.user).get(slug=category_slug)
     expenses = category.expenses.filter(user=request.user)
     revenues = category.revenues.filter(user=request.user)
@@ -217,7 +217,7 @@ def categories_detail(request, category_slug):
     })
 
 
-def categories_include(request):
+def category_include(request):
     if request.method != 'POST':
         form = CategoryIncludeForm()
     else:
