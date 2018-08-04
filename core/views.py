@@ -74,7 +74,7 @@ def register_view(request):
         return render(request, 'core/register.html', context)
 
 
-def expenses_list(request):
+def expense_list(request):
     categories = Category.objects.filter(owner=request.user)
     expenses = Expense.objects.filter(user=request.user)
     tags = Tag.objects.filter(owner=request.user)
