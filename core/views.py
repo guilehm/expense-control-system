@@ -162,7 +162,7 @@ def revenues_include(request):
             revenue.user = request.user
             revenue.save()
             messages.add_message(request, messages.SUCCESS, 'sua receita foi cadastrada com sucesso')
-            return redirect('core:index')
+            return redirect('core:revenues')
     else:
         form = ExpenseForm(request.user)
         return render(request, 'core/revenues_include.html', {
@@ -181,7 +181,8 @@ def revenues_edit(request, revenue_id):
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS, 'sua receita foi editada com sucesso')
-            return redirect('core:index')
+            return redirect('core:revenues')
+
     return render(request, 'core/revenues_edit.html', {
         'form': form,
         'revenue': revenue,
