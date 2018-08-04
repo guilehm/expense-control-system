@@ -1,5 +1,7 @@
 from django.contrib import admin
+
 from bank.models import Bank, BankAccount
+
 
 # Register your models here.
 class BankAdmin(admin.ModelAdmin):
