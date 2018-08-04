@@ -1,6 +1,7 @@
 {% extends 'core/base.html' %}
-
+{% load i18n %}
 {% block content %}
+{% language 'pt-BR' %}
 <section id="contact" class="section-full gray-bg">
     <div class="container">
         <div class="row justify-content-center">
@@ -12,6 +13,13 @@
         </div>
         <div class="row">
             <div class="col-lg-12 mt-30 ">
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <div class="form-control-feedback text-danger">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 <form id="myForm" method="post" class="contact-form">
                     {% csrf_token %}
                     <div class="single-input color-2 mb-10">
@@ -21,35 +29,70 @@
                                 {{ option }}
                             {% endfor %}
                         </select>
+                        {% for error in form.account.errors %}
+                            <div class="form-control-feedback text-danger">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
                     </div>
                     <div class="single-input color-2 mb-10">
-                        <label for="account">Nome da despesa:</label>
+                        <label for="title">Nome da despesa:</label>
                         <input type="text" name="title" placeholder="título da despesa" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Título'" required="">
+                        {% for error in form.title.errors %}
+                            <div class="form-control-feedback text-danger">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
                     </div>
 
                     <div class="single-input color-2 mb-10">
                         <label for="account">Descrição:</label>
                         <textarea name="description" placeholder="insira uma descrição" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Digite aqui uma descrição'"></textarea>
+                        {% for error in form.description.errors %}
+                            <div class="form-control-feedback text-danger">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
                     </div>
 
                     <div class="single-input color-2 mb-10">
                         <label for="account">Valor:</label>
                         <input type="number" name="total" step="0.01" placeholder="valor da despesa" onfocus="this.placeholder = ''" onblur="this.placeholder = 'valor da despesa'" required="">
+                        {% for error in form.total.errors %}
+                            <div class="form-control-feedback text-danger">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
                     </div>
 
                     <div class="single-input color-2 mb-10">
                         <label class="text-dark" for="due_date">Digite a data de vencimento da despesa:</label>
                         <input type="date" name="due_date" id="due_date" placeholder="data de vencimento" onfocus="this.placeholder = ''" onblur="this.placeholder = 'data de vencimento'" required="">
+                        {% for error in form.due_date.errors %}
+                            <div class="form-control-feedback text-danger">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
                     </div>
 
                     <div class="single-input color-2 mb-10">
                         <label for="id_paid_out">Marcar como pago:</label>
                         <input type="checkbox" name="paid_out" id="id_paid_out">
+                        {% for error in form.paid_out.errors %}
+                            <div class="form-control-feedback text-danger">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
                     </div>
 
                     <div class="single-input color-2 mb-10">
                         <label for="id_note">Observação:</label>
                         <textarea name="note" cols="40" rows="10" id="id_note" placeholder="caso tenha alguma observação a fazer, escreva aqui"></textarea>
+                        {% for error in form.note.errors %}
+                            <div class="form-control-feedback text-danger">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
                     </div>
 
                     <div class="single-input color-2 mb-10">
@@ -59,6 +102,11 @@
                                 {{ option }}
                             {% endfor %}
                         </select>
+                        {% for error in form.category.errors %}
+                            <div class="form-control-feedback text-danger">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
                     </div>
 
                     <div class="single-input color-2 mb-10">
@@ -68,11 +116,21 @@
                                 {{ option }}
                             {% endfor %}
                         </select>
+                        {% for error in form.tags.errors %}
+                            <div class="form-control-feedback text-danger">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
                     </div>
 
                     <div class="single-input color-2 mb-10">
                         <label for="recurrence">Recorrência:</label>
                         <input type="text" name="recurrence" id="recurrence">
+                        {% for error in form.recurrence.errors %}
+                            <div class="form-control-feedback text-danger">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
                     </div>
 
                     <button class="primary-btn banner-btn my-4 text-dark" type="submit">cadastrar despesa</button>
@@ -83,4 +141,5 @@
         </div>
     </div>
 </section>
+{% endlanguage %}
 {% endblock %}

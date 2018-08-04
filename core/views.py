@@ -150,9 +150,9 @@ def expense_include(request):
             return redirect('core:expenses')
     else:
         form = ExpenseForm(request.user)
-        return render(request, 'core/expenses_include.html', {
-            'form': form,
-        })
+    return render(request, 'core/expenses_include.html', {
+        'form': form,
+    })
 
 
 def revenue_include(request):
