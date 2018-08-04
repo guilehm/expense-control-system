@@ -5,14 +5,14 @@ from core.models import Category, Tag
 
 # Register your models here.
 class TagAdmin(admin.ModelAdmin):
-    list_display = ['title',]
+    list_display = ['title', ]
     prepopulated_fields = {
         'slug': ('title',)
     }
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['title',]
+    list_display = ['title', ]
     prepopulated_fields = {
         'slug': ('title',)
     }
