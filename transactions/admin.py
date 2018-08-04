@@ -1,5 +1,7 @@
 from django.contrib import admin
-from transactions.models import Revenue, Expense
+
+from transactions.models import Expense, Revenue
+
 
 # Register your models here.
 class RevenueTagInline(admin.StackedInline):

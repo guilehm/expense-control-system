@@ -1,17 +1,18 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.forms.models import modelformset_factory
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
+from bank.models import BankAccount
 from core.forms import BankAccountCreateForm, CategoryIncludeForm
 from core.models import Category, Tag
-from bank.models import BankAccount
+from transactions.forms import (ExpenseEditForm, ExpenseForm,
+                                MultipleExpenseEditForm, RevenueEditForm,
+                                RevenueForm)
 from transactions.models import Expense, Revenue
-from transactions.forms import ExpenseEditForm, ExpenseForm, RevenueEditForm, RevenueForm, MultipleExpenseEditForm
 
 # Create your views here.
 

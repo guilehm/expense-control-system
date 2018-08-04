@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+
 from bank.models import Bank, BankAccount
 from core.models import Category, Tag
 

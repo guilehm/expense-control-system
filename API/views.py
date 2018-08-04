@@ -1,7 +1,8 @@
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from API.serializers import BankSerializer, BankAccountSerializer, CategorySerializer, TagSerializer
+from API.serializers import (BankAccountSerializer, BankSerializer,
+                             CategorySerializer, TagSerializer)
 from bank.models import Bank, BankAccount
 from core.models import Category, Tag
 
