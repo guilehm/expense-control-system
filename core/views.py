@@ -9,9 +9,7 @@ from django.urls import reverse
 from bank.models import BankAccount
 from core.forms import BankAccountCreateForm, CategoryIncludeForm
 from core.models import Category, Tag
-from transactions.forms import (ExpenseEditForm, ExpenseForm,
-                                MultipleExpenseEditForm, RevenueEditForm,
-                                RevenueForm)
+from transactions.forms import ExpenseEditForm, ExpenseForm, MultipleExpenseEditForm, RevenueEditForm, RevenueForm
 from transactions.models import Expense, Revenue
 
 # Create your views here.
@@ -150,9 +148,9 @@ def expense_include(request):
             return redirect('core:expenses')
     else:
         form = ExpenseForm(request.user)
-        return render(request, 'core/expenses_include.html', {
-            'form': form,
-        })
+    return render(request, 'core/expenses_include.html', {
+        'form': form,
+    })
 
 
 def revenue_include(request):
