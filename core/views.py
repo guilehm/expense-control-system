@@ -114,7 +114,7 @@ def revenue_list(request):
     })
 
 
-def expenses_edit(request, expense_id):
+def expense_edit(request, expense_id):
     expense = get_object_or_404(
         Expense.objects.filter(user=request.user).filter(id=expense_id)
     )
