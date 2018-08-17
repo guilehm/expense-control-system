@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 
 from API.serializers import BankAccountSerializer, BankSerializer, CategorySerializer, TagSerializer
 from bank.models import Bank, BankAccount
+from core.models import Category, Tag
 
 
 # Create your views here.
