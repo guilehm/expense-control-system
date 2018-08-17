@@ -23,5 +23,5 @@ before_script:
 
 script:
   - python manage.py test
-  - isort
+  - isort --check-only
   - flake8
