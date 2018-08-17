@@ -23,3 +23,5 @@ before_script:
 
 script:
   - python manage.py test
+  - isort
+  - flake8
