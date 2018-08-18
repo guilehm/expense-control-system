@@ -82,7 +82,20 @@ def expenses_fixed(user, bank_account):
         user=user,
         account=bank_account,
         _quantity=50,
-        total=10
+        total=10,
+        paid_out=True,
+    )
+
+
+@pytest.fixture
+def expenses_fixed_unpaid(user, bank_account):
+    return mommy.make(
+        'transactions.Expense',
+        user=user,
+        account=bank_account,
+        _quantity=22,
+        total=10,
+        paid_out=False,
     )
 
 
@@ -93,5 +106,19 @@ def revenues_fixed(user, bank_account):
         user=user,
         account=bank_account,
         _quantity=60,
-        total=20
+        total=20,
+        received_out=True,
     )
+
+
+@pytest.fixture
+def revenues_fixed_unpaid(user, bank_account):
+    return mommy.make(
+        'transactions.Revenue',
+        user=user,
+        account=bank_account,
+        _quantity=30,
+        total=15,
+        received_out=False,
+    )
+
