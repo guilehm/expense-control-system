@@ -1,5 +1,4 @@
 import pytest
-from model_mommy import mommy
 
 from transactions.models import Expense, Revenue
 
