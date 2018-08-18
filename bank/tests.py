@@ -2,7 +2,7 @@ import pytest
 from django.urls import reverse
 from rest_framework import status
 
-from bank.models import Bank
+from bank.models import Bank, BankAccount
 
 
 @pytest.mark.django_db
@@ -76,3 +76,20 @@ class TestBankViews:
         json_response = response.json()
         assert response.status_code == status.HTTP_200_OK
         assert json_response == bank_accounts_payload
+
+
+@pytest.mark.django_db
+class TestBankModels:
+
+    def test_should_create_bank(
+            self,
+            bank
+    ):
+        assert Bank.objects.count() == 1
+
+    def test_should_create_bank_account(
+            self,
+            bank_account,
+            bank_account_two,
+    ):
+        assert BankAccount.objects.count() == 2
