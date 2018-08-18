@@ -89,3 +89,6 @@ class TestBankModels:
         assert BankAccount.objects.count() == 2
         assert BankAccount.objects.first() == bank_account
         assert BankAccount.objects.last() == bank_account_two
+
+    def test_should_return_right_total_expenses(self, bank_account, expenses_fixed):
+        assert bank_account.total_expenses == 500
