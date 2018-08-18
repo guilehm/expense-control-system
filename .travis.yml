@@ -26,4 +26,4 @@ script:
   - python manage.py test
   - isort --check-only
   - flake8
-  - pytest
+  - pytest -v
