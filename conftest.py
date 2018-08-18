@@ -12,3 +12,13 @@ def public_client():
 @pytest.fixture
 def bank():
     return mommy.make('bank.Bank')
+
+
+@pytest.fixture
+def bank_account(bank):
+    return mommy.make(
+        'bank.BankAccount',
+        bank=bank,
+        agency='1440',
+        account_number='14404-4'
+    )
