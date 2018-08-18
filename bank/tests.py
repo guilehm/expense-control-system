@@ -23,6 +23,27 @@ class TestBankViews:
             },
         ]
 
+    @pytest.fixture
+    def bank_accounts_payload(self, bank_account, bank_account_two):
+        return [
+            {
+                "id": bank_account.id,
+                "agency": bank_account.agency,
+                "account_number": bank_account.account_number,
+                "when_opened": bank_account.when_opened.isoformat(),
+                "bank": bank_account.bank.id,
+                "owner": bank_account.owner.id
+            },
+            {
+                "id": bank_account_two.id,
+                "agency": bank_account_two.agency,
+                "account_number": bank_account_two.account_number,
+                "when_opened": bank_account_two.when_opened.isoformat(),
+                "bank": bank_account_two.bank.id,
+                "owner": bank_account_two.owner.id
+            },
+        ]
+
     def test_should_return_correct_bank_payload(
             self,
             public_client,
