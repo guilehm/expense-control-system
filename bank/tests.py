@@ -1,7 +1,8 @@
 import pytest
+from django.contrib.auth import authenticate
 from django.urls import reverse
 from rest_framework import status
-from django.contrib.auth import authenticate
+
 from bank.models import Bank
 
 

@@ -1,7 +1,7 @@
 import pytest
+from django.contrib.auth.models import User
 from model_mommy import mommy
 from rest_framework.test import APIClient
-from django.contrib.auth.models import User
 
 
 @pytest.fixture
