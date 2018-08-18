@@ -81,15 +81,11 @@ class TestBankViews:
 @pytest.mark.django_db
 class TestBankModels:
 
-    def test_should_create_bank(
-            self,
-            bank
-    ):
+    def test_should_create_bank(self, bank):
         assert Bank.objects.count() == 1
+        assert Bank.objects.first() == bank
 
-    def test_should_create_bank_account(
-            self,
-            bank_account,
-            bank_account_two,
-    ):
+    def test_should_create_bank_account(self, bank_account, bank_account_two,):
         assert BankAccount.objects.count() == 2
+        assert BankAccount.objects.first() == bank_account
+        assert BankAccount.objects.last() == bank_account_two
