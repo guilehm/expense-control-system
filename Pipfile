@@ -66,6 +66,8 @@ Pillow = "==5.1.0"
 prompt_toolkit = "==1.0.15"
 Pygments = "==2.2.0"
 Werkzeug = "==0.14.1"
+django-filter = "==1.1.0"
+"psycopg2-binary" = "*"
 
 [dev-packages]
 
