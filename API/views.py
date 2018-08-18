@@ -1,35 +1,55 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import viewsets
 
+from django_filters import FilterSet
+
+from rest_framework.permissions import AllowAny
 from API.serializers import BankAccountSerializer, BankSerializer, CategorySerializer, TagSerializer
 from bank.models import Bank, BankAccount
 from core.models import Category, Tag
 
 
+class TagFilterSet(FilterSet):
+    class Meta:
+        model = Tag
+        fields = [
+            'title',
+            'slug',
+            'description',
+            'date_added',
+            'date_changed',
+            'owner',
+        ]
+
+
 # Create your views here.
-class BankList(APIView):
-    def get(self, request):
-        banks = Bank.objects.all()
-        serializer = BankSerializer(banks, context={'request': request}, many=True)
-        return Response(serializer.data)
+class BankViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Bank.objects.all()
+    serializer_class = BankSerializer
+    permission_classes = (AllowAny,)
 
 
-class BankAccountList(APIView):
-    def get(self, request):
-        bank_accounts = BankAccount.objects.filter(owner=request.user)
-        serializer = BankAccountSerializer(bank_accounts, context={'request': request}, many=True)
-        return Response(serializer.data)
+class BankAccountViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = BankAccount.objects.all()
+    serializer_class = BankAccountSerializer
+    permission_classes = (AllowAny,)
+
+    def get_queryset(self):
+        return BankAccount.objects.filter(owner=self.request.user)
 
 
-class CategoryList(APIView):
-    def get(self, request):
-        categories = Category.objects.filter(owner=request.user)
-        serializer = CategorySerializer(categories, context={'request': request}, many=True)
-        return Response(serializer.data)
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = (AllowAny,)
+
+    def get_queryset(self):
+        return Category.objects.filter(owner=self.request.user)
 
 
-class TagList(APIView):
-    def get(self, request):
-        tags = Tag.objects.filter(owner=request.user)
-        serializer = TagSerializer(tags, context={'request': request}, many=True)
-        return Response(serializer.data)
+class TagViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = (AllowAny,)
+
+    def get_queryset(self):
+        return Tag.objects.filter(owner=self.request.user)
