@@ -45,6 +45,13 @@ def user():
 
 
 @pytest.fixture
+def user_two():
+    user_two = User.objects.create(username='Gui', password='Django2')
+    user_two.save()
+    return user_two
+
+
+@pytest.fixture
 def category(user):
     return mommy.make('core.Category', owner=user)
 
