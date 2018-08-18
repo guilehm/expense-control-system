@@ -3,6 +3,8 @@ from django.urls import reverse
 
 from rest_framework import status
 
+from bank.models import Bank
+
 
 @pytest.mark.django_db
 class TestBankViews:
@@ -22,7 +24,7 @@ class TestBankViews:
             },
         ]
 
-    def test_should_return_correct_payload(
+    def test_should_return_correct_bank_payload(
             self,
             public_client,
             bank,
@@ -31,5 +33,7 @@ class TestBankViews:
     ):
         response = public_client.get(banks_endpoint)
         json_response = response.json()
+        assert Bank.objects.count() == 1
+        assert Bank.objects.first() == bank
         assert response.status_code == status.HTTP_200_OK
         assert json_response == banks_payload
