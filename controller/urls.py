@@ -20,6 +20,18 @@ from drf_yasg.views import get_schema_view
 from rest_framework.documentation import include_docs_urls
 from rest_framework.permissions import AllowAny
 
+from rest_framework import routers
+
+from API import views as api_views
+
+router = routers.DefaultRouter()
+
+router.register(r'banks', api_views.BankViewSet)
+router.register(r'bank-accounts', api_views.BankAccountViewSet)
+router.register(r'categories', api_views.CategoryViewSet)
+router.register(r'tags', api_views.TagViewSet)
+
+
 schema_view = get_schema_view(
    openapi.Info(
       title="ECS",
@@ -35,8 +47,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls', namespace='core')),
     path('bank/', include('bank.urls', namespace='bank')),
-    path('api/', include('API.urls', namespace='api')),
+    # path('api/', include('API.urls', namespace='api')),
     path('docs/', include_docs_urls(title='ECS')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('api/', include((router.urls, 'api'), namespace='api')),
 ]
