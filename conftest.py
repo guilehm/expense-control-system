@@ -121,4 +121,3 @@ def revenues_fixed_unpaid(user, bank_account):
         total=15,
         received_out=False,
     )
-
