@@ -1,6 +1,7 @@
-from model_mommy import mommy
 import pytest
-from transactions.models import Revenue, Expense
+from model_mommy import mommy
+
+from transactions.models import Expense, Revenue
 
 
 @pytest.mark.django_db
