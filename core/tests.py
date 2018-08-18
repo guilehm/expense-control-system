@@ -1,10 +1,11 @@
+import pytest
 from django.contrib.auth.models import User
 from django.test import Client, TestCase
-from model_mommy import mommy
-import pytest
-from core.models import Category, Tag
 from django.urls import reverse
+from model_mommy import mommy
 from rest_framework import status
+
+from core.models import Category, Tag
 
 
 class PagesTestView(TestCase):
