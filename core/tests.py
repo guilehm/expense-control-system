@@ -29,7 +29,7 @@ class TestCategoryViews:
 
     @pytest.fixture
     def category_endpoint(self):
-        return reverse('API:category-list')
+        return reverse('api:category-list')
 
     @pytest.fixture
     def category_payload(self, category, user):
@@ -78,7 +78,7 @@ class TestTagViews:
 
     @pytest.fixture
     def tag_endpoint(self):
-        return reverse('API:tag-list')
+        return reverse('api:tag-list')
 
     @pytest.fixture
     def tag_payload(self, tag, user):

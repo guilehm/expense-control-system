@@ -10,11 +10,11 @@ class TestBankViews:
 
     @pytest.fixture
     def banks_endpoint(self):
-        return reverse('API:bank-list')
+        return reverse('api:bank-list')
 
     @pytest.fixture
     def bank_accounts_endpoint(self):
-        return reverse('API:bank-account-list')
+        return reverse('api:bankaccount-list')
 
     @pytest.fixture
     def banks_payload(self, bank):
