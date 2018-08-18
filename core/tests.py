@@ -55,6 +55,14 @@ class TestCategoryViews:
         public_client.force_login(user)
         response = public_client.get(category_endpoint)
         json_response = response.json()
-        assert Category.objects.count() == 1
         assert response.status_code == status.HTTP_200_OK
         assert json_response == category_payload
+
+    def test_should_create_category(self, category):
+        assert Category.objects.count() == 1
+        assert Category.objects.first() == category
+
+    def test_should_link_category_to_right_user(self, user, user_two, category):
+        assert Category.objects.first() == category
+        assert Category.objects.first().owner == user
+        assert Category.objects.first().owner != user_two
