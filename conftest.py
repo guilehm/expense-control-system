@@ -84,3 +84,14 @@ def expenses_fixed(user, bank_account):
         _quantity=50,
         total=10
     )
+
+
+@pytest.fixture
+def revenues_fixed(user, bank_account):
+    return mommy.make(
+        'transactions.Revenue',
+        user=user,
+        account=bank_account,
+        _quantity=60,
+        total=20
+    )
