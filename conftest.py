@@ -39,7 +39,16 @@ def bank_account_two(bank, user):
 
 @pytest.fixture
 def user():
-    user = mommy.prepare(User)
-    user.set_password('password')
+    user = User.objects.create(username='Guilherme', password='Django')
     user.save()
     return user
+
+
+@pytest.fixture
+def category(user):
+    return mommy.make('core.Category', owner=user)
+
+
+@pytest.fixture
+def tag(user):
+    return mommy.make('core.Tag', owner=user)
