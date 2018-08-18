@@ -66,3 +66,48 @@ class TestCategoryViews:
         assert Category.objects.first() == category
         assert Category.objects.first().owner == user
         assert Category.objects.first().owner != user_two
+
+
+@pytest.mark.django_db
+class TestTagViews:
+
+    @pytest.fixture
+    def tag_endpoint(self):
+        return reverse('API:tag-list')
+
+    @pytest.fixture
+    def tag_payload(self, tag, user):
+        return [
+            {
+                "id": tag.id,
+                "title": tag.title,
+                "slug": tag.slug,
+                "description": tag.description,
+                "date_added": tag.date_added.isoformat().replace('+00:00', 'Z'),
+                "date_changed": tag.date_changed.isoformat().replace('+00:00', 'Z'),
+                "owner": user.id,
+            },
+        ]
+
+    def test_should_return_correct_tag_payload(
+            self,
+            user,
+            tag,
+            public_client,
+            tag_payload,
+            tag_endpoint,
+    ):
+        public_client.force_login(user)
+        response = public_client.get(tag_endpoint)
+        json_response = response.json()
+        assert response.status_code == status.HTTP_200_OK
+        assert json_response == tag_payload
+
+    def test_should_create_tag(self, tag):
+        assert Tag.objects.count() == 1
+        assert Tag.objects.first() == tag
+
+    def test_should_link_tag_to_right_user(self, user, user_two, tag):
+        assert Tag.objects.first() == tag
+        assert Tag.objects.first().owner == user
+        assert Tag.objects.first().owner != user_two
