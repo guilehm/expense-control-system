@@ -107,3 +107,6 @@ class TestBankModels:
 
     def test_should_return_right_total_expenses_to_pay(self, bank_account, expenses_fixed_unpaid):
         assert bank_account.total_expenses_to_pay == 220
+
+    def test_should_return_right_balance(self, bank_account, revenues_fixed, expenses_fixed):
+        assert bank_account.balance == 700
