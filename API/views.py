@@ -1,8 +1,7 @@
-from rest_framework import viewsets
-
 from django_filters import FilterSet
-
+from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
+
 from API.serializers import BankAccountSerializer, BankSerializer, CategorySerializer, TagSerializer
 from bank.models import Bank, BankAccount
 from core.models import Category, Tag
