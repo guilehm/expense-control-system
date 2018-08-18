@@ -102,7 +102,7 @@ class TestBankModels:
     def test_should_return_right_total_revenues_to_receive(self, bank_account, revenues_fixed_unpaid):
         assert bank_account.total_revenues_to_receive == 450
 
-    def test_should_return_right_received_total_expenses(self, bank_account, expenses_fixed):
+    def test_should_return_right_payed_total_expenses(self, bank_account, expenses_fixed):
         assert bank_account.total_paid_expenses == 500
 
     def test_should_return_right_total_expenses_to_pay(self, bank_account, expenses_fixed_unpaid):
