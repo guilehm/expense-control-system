@@ -92,3 +92,6 @@ class TestBankModels:
 
     def test_should_return_right_total_expenses(self, bank_account, expenses_fixed):
         assert bank_account.total_expenses == 500
+
+    def test_should_return_right_total_revenues(self, bank_account, revenues_fixed):
+        assert bank_account.total_revenues == 1200
