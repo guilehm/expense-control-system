@@ -59,3 +59,17 @@ def category(user):
 @pytest.fixture
 def tag(user):
     return mommy.make('core.Tag', owner=user)
+
+
+@pytest.fixture
+def expenses(user, bank_account):
+    return mommy.make(
+        'transactions.Expense', user=user, account=bank_account, _quantity=50
+    )
+
+
+@pytest.fixture
+def revenues(user, bank_account):
+    return mommy.make(
+        'transactions.Revenue', user=user, account=bank_account, _quantity=50
+    )
