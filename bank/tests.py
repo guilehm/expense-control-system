@@ -1,5 +1,4 @@
 import pytest
-from django.contrib.auth import authenticate
 from django.urls import reverse
 from rest_framework import status
 
