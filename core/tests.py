@@ -58,6 +58,10 @@ class TestCategoryViews:
         assert response.status_code == status.HTTP_200_OK
         assert json_response == category_payload
 
+
+@pytest.mark.django_db
+class TestCategoryModels:
+
     def test_should_create_category(self, category):
         assert Category.objects.count() == 1
         assert Category.objects.first() == category
@@ -102,6 +106,10 @@ class TestTagViews:
         json_response = response.json()
         assert response.status_code == status.HTTP_200_OK
         assert json_response == tag_payload
+
+
+@pytest.mark.django_db
+class TestTagModels:
 
     def test_should_create_tag(self, tag):
         assert Tag.objects.count() == 1
