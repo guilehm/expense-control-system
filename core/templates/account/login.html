@@ -7,40 +7,138 @@
 
 {% block content %}
 
-<h1>{% trans "Sign In" %}</h1>
+    <script>
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else {
+      // The person is not logged into your app or we are unable to tell.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    }
+  }
 
-{% get_providers as socialaccount_providers %}
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
 
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,  // enable cookies to allow the server to access
+                          // the session
+      xfbml      : true,  // parse social plugins on this page
+      version    : 'v2.8' // use graph api version 2.8
+    });
 
-<div class="socialaccount_ballot">
+    // Now that we've initialized the JavaScript SDK, we call
+    // FB.getLoginStatus().  This function gets the state of the
+    // person visiting this page and can return one of three states to
+    // the callback you provide.  They can be:
+    //
+    // 1. Logged into your app ('connected')
+    // 2. Logged into Facebook, but not your app ('not_authorized')
+    // 3. Not logged into Facebook and can't tell if they are logged into
+    //    your app or not.
+    //
+    // These three cases are handled in the callback function.
 
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
 
-  <div class="login-or">{% trans 'or' %}</div>
+  };
 
-</div>
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
-{% include "socialaccount/snippets/login_extra.html" %}
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    });
+  }
+</script>
 
-{% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-{% endif %}
+<section class="banner-area relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row fullscreen justify-content-center align-items-center">
+            <div class="col-lg-8">
+                <div class="banner-content" align="center">
+                    <p class="text-uppercase text-white">Aproveite nosso sistema</p>
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-</form>
+                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                    </fb:login-button>
 
+                    <div id="status">
+                    </div>
+
+
+                    <h1 class="text-uppercase text-white mb-2">Faça o login</h1>
+
+                    {% get_providers as socialaccount_providers %}
+                    {% for provider in socialaccount_providers %}
+                        <a href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"
+                           class="text-uppercase text-white">Via {{ provider.name }}
+                        </a>
+                    {% endfor %}
+
+                    <form class="form-signin" method="post">
+                        {% csrf_token %}
+                        <div class="single-input color-2 mb-10">
+                            <input type="text"
+                             class="form-control"
+                             name="{{ login_form.username.name }}"
+                             placeholder="nome de usuário"
+                             id="{{ login_form.username.id_for_label }}"
+                             {% if login_form.username.value != None %}value="{{ login_form.username.value|stringformat:'s' }}"{% endif %}
+                             maxlength="{{ login_form.username.field.max_length }}"
+                             {% if login_form.username.field.required %}required{% endif %} style="max-width:300px;">
+                        </div>
+                        <div class="single-input color-2">
+                            <input type="password"
+                             class="form-control"
+                             name="{{ login_form.password.name }}"
+                             placeholder="senha"
+                             id="{{ login_form.password.id_for_label }}"
+                             {% if login_form.password.value != None %}value="{{ login_form.password.value|stringformat:'s' }}"{% endif %}
+                             maxlength="{{ login_form.password.field.max_length }}"
+                             {% if login_form.password.field.required %}required{% endif %} style="max-width:300px;">
+                        </div>
+                        {% if login_form.errors %}
+                        <p class="text-white mt-3">usuário ou senha inválidos</p>
+                        {% endif %}
+                        <button class="primary-btn banner-btn my-4" type="submit">Login</button>
+                        <br>
+                        <a href="{% url 'core:register' %}" class="text-white">Ou registre-se aqui</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
