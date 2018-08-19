@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8683a2e1490fef05e21c3cbedfd53eb7cddc118a261b71347e3e08a62fdf2717"
+            "sha256": "cee8dcd4d8ea4e9e8c26c411233d7518bdbaba8cc5685175186c7032f7c913a4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -96,6 +96,13 @@
             "index": "pypi",
             "version": "==4.3.0"
         },
+        "defusedxml": {
+            "hashes": [
+                "sha256:24d7f2f94f7f3cb6061acb215685e5125fbcdc40a857eff9de22518820b0a4f4",
+                "sha256:702a91ade2968a82beb0db1e0766a6a273f33d4616a6ce8cde475d8e09853b20"
+            ],
+            "version": "==0.5.0"
+        },
         "dj-database-url": {
             "hashes": [
                 "sha256:4aeaeb1f573c74835b0686a2b46b85990571159ffc21aa57ecd4d1e1cb334163",
@@ -118,6 +125,13 @@
             ],
             "index": "pypi",
             "version": "==2.0.8"
+        },
+        "django-allauth": {
+            "hashes": [
+                "sha256:7d9646e3560279d6294ebb4c361fef829708d106da697658cf158bf2ca57b474"
+            ],
+            "index": "pypi",
+            "version": "==0.36.0"
         },
         "django-extensions": {
             "hashes": [
@@ -291,6 +305,13 @@
             ],
             "index": "pypi",
             "version": "==4.3.0"
+        },
+        "oauthlib": {
+            "hashes": [
+                "sha256:ac35665a61c1685c56336bda97d5eefa246f1202618a1d6f34fccb1bdd404162",
+                "sha256:d883b36b21a6ad813953803edfa563b1b579d79ca758fe950d1bc9e8b326025b"
+            ],
+            "version": "==2.1.0"
         },
         "openapi-codec": {
             "hashes": [
@@ -506,6 +527,13 @@
             "index": "pypi",
             "version": "==2.7.3"
         },
+        "python3-openid": {
+            "hashes": [
+                "sha256:0086da6b6ef3161cfe50fb1ee5cceaf2cda1700019fda03c2c5c440ca6abe4fa",
+                "sha256:628d365d687e12da12d02c6691170f4451db28d6d68d050007e4a40065868502"
+            ],
+            "version": "==3.1.0"
+        },
         "pytz": {
             "hashes": [
                 "sha256:65ae0c8101309c45772196b21b74c46b2e5d11b6275c45d251b150d5da334555",
@@ -521,6 +549,14 @@
             ],
             "index": "pypi",
             "version": "==2.19.1"
+        },
+        "requests-oauthlib": {
+            "hashes": [
+                "sha256:8886bfec5ad7afb391ed5443b1f697c6f4ae98d0e5620839d8b4499c032ada3f",
+                "sha256:e21232e2465808c0e892e0e4dbb8c2faafec16ac6dc067dd546e9b466f3deac8"
+            ],
+            "markers": "python_version != '3.0.*' and python_version != '3.3.*' and python_version >= '2.6' and python_version != '3.2.*' and python_version != '3.1.*' and python_version < '4'",
+            "version": "==1.0.0"
         },
         "ruamel.yaml": {
             "hashes": [
