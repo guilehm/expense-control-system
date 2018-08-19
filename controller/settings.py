@@ -39,10 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
     'django_filters',
     'core',
     'bank',
@@ -52,6 +48,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'drf_yasg',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 SITE_ID = 1
