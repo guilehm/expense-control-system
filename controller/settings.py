@@ -187,4 +187,4 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-LOGIN_REDIRECT_URL = '/accounts/facebook/login/callback/'
+# LOGIN_REDIRECT_URL = '/accounts/facebook/login/callback/'
