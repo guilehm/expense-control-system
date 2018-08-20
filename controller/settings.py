@@ -12,6 +12,21 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
+from kombu import Exchange, Queue
+
+# Celery
+task_default_queue = 'default'
+default_exchange = Exchange('media', type='direct')
+task_queues = (
+    Queue(
+        'media_queue',
+        exchange=default_exchange,
+        routing_key='video'
+    )
+)
+broker_url = 'amqp://localhost//'
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -52,6 +67,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'controller',
 ]
 
 SITE_ID = 1
