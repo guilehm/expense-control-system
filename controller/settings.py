@@ -195,6 +195,7 @@ if os.getcwd() == '/app':
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
     CELERY_BROKER_URL = os.environ.get('CLOUDAMQP_URL')
+    CELERY_RESULT_BACKEND = os.environ.get('CLOUDAMQP_URL')
 
 
 REST_FRAMEWORK = {
