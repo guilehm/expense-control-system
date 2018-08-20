@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'controller',
+    'django_celery_results',
 ]
 
 SITE_ID = 1
