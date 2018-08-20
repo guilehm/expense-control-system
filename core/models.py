@@ -22,6 +22,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
+        unique_together = ('title', 'owner')
 
     def __str__(self):
         return self.title
@@ -39,3 +40,6 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        unique_together = ('title', 'owner')
