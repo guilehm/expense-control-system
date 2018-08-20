@@ -69,6 +69,8 @@ Werkzeug = "==0.14.1"
 django-filter = "==1.1.0"
 "psycopg2-binary" = "*"
 django-allauth = "*"
+celery = "*"
+django-celery-results = "*"
 
 [dev-packages]
 
