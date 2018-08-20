@@ -194,6 +194,8 @@ if os.getcwd() == '/app':
 
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+    CELERY_BROKER_URL = os.environ.get('AWS_ACCESS_KEY_ID')
+
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
