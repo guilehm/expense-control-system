@@ -24,8 +24,10 @@ task_queues = (
         routing_key='video'
     )
 )
-broker_url = 'amqp://localhost//'
-
+CELERY_BROKER_URL = 'amqp://localhost//'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'django-db'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
