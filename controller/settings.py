@@ -24,10 +24,18 @@ task_queues = (
         routing_key='video'
     )
 )
-CELERY_BROKER_URL = 'amqp://localhost//'
+if os.getcwd() == '/app':
+    CELERY_BROKER_URL = os.environ.get('CLOUDAMQP_URL')
+    CELERY_RESULT_BACKEND = os.environ.get('CLOUDAMQP_URL')
+    CELERY_BROKER_POOL_LIMIT = 1
+    CELERY_BROKER_CONNECTION_TIMEOUT = 10
+else:
+    CELERY_BROKER_URL = 'amqp://localhost//'
+    CELERY_RESULT_BACKEND = 'django-db'
+
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_BACKEND = 'django-db'
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -193,9 +201,6 @@ if os.getcwd() == '/app':
     STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-    CELERY_BROKER_URL = os.environ.get('CLOUDAMQP_URL')
-    CELERY_RESULT_BACKEND = os.environ.get('CLOUDAMQP_URL')
 
 
 REST_FRAMEWORK = {
