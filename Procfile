@@ -1,2 +1,2 @@
 web: gunicorn controller.wsgi --log-file -
-celery: python manage.py celery
+celery: celery worker -A controller -l info
