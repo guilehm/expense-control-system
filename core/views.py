@@ -9,6 +9,7 @@ from django.urls import reverse
 from bank.models import BankAccount
 from core.forms import BankAccountCreateForm, CategoryIncludeForm
 from core.models import Category, Tag
+from core.tasks import create_tag
 from transactions.forms import ExpenseEditForm, ExpenseForm, MultipleExpenseEditForm, RevenueEditForm, RevenueForm
 from transactions.models import Expense, Revenue
 
@@ -237,3 +238,7 @@ def category_include(request):
 
 def api_list(request):
     return render(request, 'core/api_list.html')
+
+
+def test_celery(request):
+    create_tag.delay()
