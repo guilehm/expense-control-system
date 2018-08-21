@@ -22,6 +22,7 @@ urlpatterns = [
     path('categories/include/', views.category_include, name='categories-include'),
     path('category/<str:category_slug>/', views.category_detail, name='categories-detail'),
     path('api/', views.api_list, name='api-list'),
+    path('tests/celery/', views.test_celery)
 ]
 
 if settings.DEBUG:
