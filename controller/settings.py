@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'controller',
     'django_celery_results',
+    'debug_toolbar',
 ]
 
 SITE_ID = 1
