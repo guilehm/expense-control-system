@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.db.models import Prefetch
 from django.forms.models import modelformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
@@ -20,16 +21,17 @@ def index(request):
     if request.user.is_authenticated:
         accounts = BankAccount.objects.prefetch_related(
             'bank',
-        ).filter(
-            owner=request.user
-        )
+        ).filter(owner=request.user)
         expenses = Expense.objects.prefetch_related(
             'account',
             'category',
-        ).filter(
-            user=request.user
-        ).order_by('due_date')
-        revenues = Revenue.objects.filter(user=request.user).order_by('due_date')
+            'tags',
+        ).filter(user=request.user).order_by('due_date')
+        revenues = Revenue.objects.prefetch_related(
+            'account',
+            'category',
+            'tags',
+        ).filter(user=request.user).order_by('due_date')
         expense_categories = Category.objects.filter(expenses__user=request.user).distinct()
         revenue_categories = Category.objects.filter(revenues__user=request.user).distinct()
 
