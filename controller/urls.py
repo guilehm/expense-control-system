@@ -36,7 +36,7 @@ router.register(r'tags', api_views.TagViewSet)
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="ECS",
+      title="Expense Control System",
       default_version='v1',
       description="Expense Control System",
       contact=openapi.Contact(email="guile.hm@hotmail.com"),
@@ -50,7 +50,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls', namespace='core')),
     path('bank/', include('bank.urls', namespace='bank')),
-    path('docs/', include_docs_urls(title='ECS')),
+    path('docs/', include_docs_urls(title='Expense Control System')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     re_path(
