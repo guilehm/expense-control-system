@@ -74,8 +74,12 @@ def register_view(request):
 
 
 def expense_list(request):
+    expenses = Expense.objects.prefetch_related(
+        'account',
+    ).filter(
+        user=request.user
+    )
     categories = Category.objects.filter(owner=request.user)
-    expenses = Expense.objects.filter(user=request.user)
     tags = Tag.objects.filter(owner=request.user)
 
     expense_edit_form = modelformset_factory(Expense, form=MultipleExpenseEditForm, extra=0)
