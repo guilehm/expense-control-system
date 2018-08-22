@@ -120,7 +120,9 @@ def expense_list(request):
 
 def revenue_list(request):
     categories = Category.objects.filter(owner=request.user)
-    revenues = Revenue.objects.filter(user=request.user)
+    revenues = Revenue.objects.prefetch_related(
+        'category',
+    ).filter(user=request.user)
     tags = Tag.objects.filter(owner=request.user)
     return render(request, 'core/revenues.html', {
         'revenues': revenues,
