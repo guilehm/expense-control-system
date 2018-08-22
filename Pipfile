@@ -71,6 +71,7 @@ django-filter = "==1.1.0"
 django-allauth = "*"
 celery = "*"
 django-celery-results = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 
