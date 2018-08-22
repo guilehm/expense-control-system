@@ -1,6 +1,6 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum
-from django.contrib.auth.models import User
 
 
 class Bank(models.Model):
@@ -28,11 +28,17 @@ class BankAccount(models.Model):
 
     @property
     def total_expenses(self):
-        return self.expenses.all().aggregate(Sum('total'))['total__sum'] or 0
+        return self.expenses.all().aggregate(
+            Sum('total')
+        )['total__sum'] or 0
 
     @property
     def total_paid_expenses(self):
-        return self.expenses.filter(paid_out=True).aggregate(Sum('total'))['total__sum'] or 0
+        return self.expenses.filter(
+            paid_out=True
+        ).aggregate(
+            Sum('total')
+        )['total__sum'] or 0
 
     @property
     def total_expenses_to_pay(self):
@@ -40,11 +46,17 @@ class BankAccount(models.Model):
 
     @property
     def total_revenues(self):
-        return self.revenues.all().aggregate(Sum('total'))['total__sum'] or 0
+        return self.revenues.all().aggregate(
+            Sum('total')
+        )['total__sum'] or 0
 
     @property
     def total_received_revenues(self):
-        return self.revenues.filter(received_out=True).aggregate(Sum('total'))['total__sum'] or 0
+        return self.revenues.filter(
+            received_out=True
+        ).aggregate(
+            Sum('total')
+        )['total__sum'] or 0
 
     @property
     def total_revenues_to_receive(self):

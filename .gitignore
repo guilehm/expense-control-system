@@ -104,3 +104,7 @@ db.sqlite3
 core/media/
 static/
 core/media.rar
+
+\.pytest_cache/v/cache/
+
+\.pytest_cache/

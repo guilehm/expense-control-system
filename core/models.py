@@ -23,6 +23,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
+        unique_together = ('title', 'owner')
 
     def __str__(self):
         return self.title
@@ -40,7 +41,7 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.title
-
+      
 
 def upload_csv_file(instance, filename):
     qs = instance.__class__.objects.filter(user=instance.user)
@@ -58,3 +59,5 @@ class CSVUpload(models.Model):
 
     def __str__(self):
         return self.user.username
+    class Meta:
+        unique_together = ('title', 'owner')

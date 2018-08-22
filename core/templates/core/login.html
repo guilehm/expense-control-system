@@ -1,6 +1,8 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load i18n %}
 {% block main-banner %}
+{% language 'pt-BR' %}
 <!-- Start Banner Area -->
 <section class="banner-area relative">
     <div class="overlay overlay-bg"></div>
@@ -45,4 +47,5 @@
     </div>
 </section>
 <!-- End Banner Area -->
+{% endlanguage %}
 {% endblock %}

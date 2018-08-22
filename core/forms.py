@@ -4,6 +4,7 @@ from bank.models import BankAccount
 from core.models import Category
 from transactions.models import Revenue
 
+
 class BankAccountCreateForm(forms.ModelForm):
     class Meta:
         model = BankAccount

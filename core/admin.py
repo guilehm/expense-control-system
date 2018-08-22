@@ -1,16 +1,20 @@
 from django.contrib import admin
+
 from core.models import Category, Tag
+
 
 # Register your models here.
 class TagAdmin(admin.ModelAdmin):
-    list_display = ['title',]
+    list_display = ('title', 'owner')
+    list_filter = ('owner', 'date_added',)
     prepopulated_fields = {
         'slug': ('title',)
     }
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['title',]
+    list_display = ('title', 'owner')
+    list_filter = ('owner', 'date_added',)
     prepopulated_fields = {
         'slug': ('title',)
     }

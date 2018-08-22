@@ -1,26 +1,36 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate,login, logout
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.forms.models import modelformset_factory
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
+from bank.models import BankAccount
 from core.forms import BankAccountCreateForm, CategoryIncludeForm
 from core.models import Category, Tag
-from bank.models import BankAccount
+from core.tasks import create_tag
+from transactions.forms import ExpenseEditForm, ExpenseForm, MultipleExpenseEditForm, RevenueEditForm, RevenueForm
 from transactions.models import Expense, Revenue
-from transactions.forms import ExpenseEditForm, ExpenseForm, RevenueEditForm, RevenueForm, MultipleExpenseEditForm
 
 # Create your views here.
 
 
 def index(request):
     if request.user.is_authenticated:
-        accounts = BankAccount.objects.filter(owner=request.user)
-        expenses = Expense.objects.filter(user=request.user).order_by('due_date')
-        revenues = Revenue.objects.filter(user=request.user).order_by('due_date')
+        accounts = BankAccount.objects.prefetch_related(
+            'bank',
+        ).filter(owner=request.user)
+        expenses = Expense.objects.prefetch_related(
+            'account',
+            'category',
+            'tags',
+        ).filter(user=request.user).order_by('due_date')
+        revenues = Revenue.objects.prefetch_related(
+            'account',
+            'category',
+            'tags',
+        ).filter(user=request.user).order_by('due_date')
         expense_categories = Category.objects.filter(expenses__user=request.user).distinct()
         revenue_categories = Category.objects.filter(revenues__user=request.user).distinct()
 
@@ -40,13 +50,15 @@ def login_view(request):
         if form.is_valid():
             authenticated_user = authenticate(username=request.POST['username'], password=request.POST['password'])
             login(request, authenticated_user)
-            messages.add_message(request, messages.SUCCESS, 'Olá, {}, seu login foi efetuado com sucesso'.format(request.user))
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Olá, {}, seu login foi efetuado com sucesso'.format(request.user)
+            )
             return redirect('core:index')
-        else:
-            return render(request, 'core/login.html', {'login_form':form})
     else:
         form = AuthenticationForm()
-    return render(request, 'core/login.html', {'login_form':form})
+    return render(request, 'core/login.html', {'login_form': form})
 
 
 def logout_view(request):
@@ -57,23 +69,28 @@ def logout_view(request):
 def register_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-        context = {'form':form}
+        context = {'form': form}
         if form.is_valid():
             user = form.save()
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('core:index')
         else:
             if form.errors:
-                return render(request,'core/register.html', context)
+                return render(request, 'core/register.html', context)
     else:
         form = UserCreationForm()
-        context = {'form':form}
+        context = {'form': form}
         return render(request, 'core/register.html', context)
 
 
-def expenses_list(request):
+def expense_list(request):
+    expenses = Expense.objects.prefetch_related(
+        'account',
+        'category',
+    ).filter(
+        user=request.user
+    )
     categories = Category.objects.filter(owner=request.user)
-    expenses = Expense.objects.filter(user=request.user)
     tags = Tag.objects.filter(owner=request.user)
 
     expense_edit_form = modelformset_factory(Expense, form=MultipleExpenseEditForm, extra=0)
@@ -84,20 +101,27 @@ def expenses_list(request):
 
     if formset.is_valid():
         instances = formset.save(commit=False)
+        count = 0
         for instance in instances:
+            count += 1
             instance.save()
+    else:
+        count = 0
 
     return render(request, 'core/expenses.html', {
         'expenses': expenses,
         'categories': categories,
         'tags': tags,
         'formset': formset,
+        'count': count,
     })
 
 
-def revenues_list(request):
+def revenue_list(request):
     categories = Category.objects.filter(owner=request.user)
-    revenues = Revenue.objects.filter(user=request.user)
+    revenues = Revenue.objects.prefetch_related(
+        'category',
+    ).filter(user=request.user)
     tags = Tag.objects.filter(owner=request.user)
     return render(request, 'core/revenues.html', {
         'revenues': revenues,
@@ -106,7 +130,7 @@ def revenues_list(request):
     })
 
 
-def expenses_edit(request, expense_id):
+def expense_edit(request, expense_id):
     expense = get_object_or_404(
         Expense.objects.filter(user=request.user).filter(id=expense_id)
     )
@@ -116,11 +140,6 @@ def expenses_edit(request, expense_id):
             form.save()
             messages.add_message(request, messages.SUCCESS, 'Despesa editada com sucesso.')
             return redirect('core:expenses')
-        else:
-            return render(request, 'core/expenses_edit.html', {
-                'expense': expense,
-                'form': form,
-            })
     else:
         form = ExpenseEditForm(instance=expense, owner=request.user)
         return render(request, 'core/expenses_edit.html', {
@@ -130,29 +149,29 @@ def expenses_edit(request, expense_id):
 
 
 # FIXME: find a better way to save multiple forms
-def expenses_include(request):
+def expense_include(request):
     if request.method == 'POST':
         form = ExpenseForm(request.user, request.POST)
         if form.is_valid():
             repeat = form.save(commit=False, user=request.user)
             for expense in range(1, repeat.recurrence):
                 form = ExpenseForm(request.user, request.POST)
-                expense = form.save(user=request.user)
+                form.save(user=request.user)
 
-            messages.add_message(request, messages.SUCCESS, 'sua despesa foi cadastrada com sucesso'.format(request.user))
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'sua despesa foi cadastrada com sucesso'.format(request.user)
+            )
             return redirect('core:expenses')
-        else:
-            return render(request, 'core/expenses_include.html', {
-                'form': form,
-            })
     else:
         form = ExpenseForm(request.user)
-        return render(request, 'core/expenses_include.html', {
-            'form': form,
-        })
+    return render(request, 'core/expenses_include.html', {
+        'form': form,
+    })
 
 
-def revenues_include(request):
+def revenue_include(request):
     if request.method == 'POST':
         form = RevenueForm(request.user, request.POST)
         if form.is_valid():
@@ -160,11 +179,7 @@ def revenues_include(request):
             revenue.user = request.user
             revenue.save()
             messages.add_message(request, messages.SUCCESS, 'sua receita foi cadastrada com sucesso')
-            return redirect('core:index')
-        else:
-            return render(request, 'core/revenues_include.html', {
-                'form': form,
-            })
+            return redirect('core:revenues')
     else:
         form = ExpenseForm(request.user)
         return render(request, 'core/revenues_include.html', {
@@ -173,7 +188,7 @@ def revenues_include(request):
 
 
 # TODO: include revenues edit form
-def revenues_edit(request, revenue_id):
+def revenue_edit(request, revenue_id):
     revenue = Revenue.objects.filter(user=request.user).get(id=revenue_id)
 
     if request.method != 'POST':
@@ -183,19 +198,15 @@ def revenues_edit(request, revenue_id):
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS, 'sua receita foi editada com sucesso')
-            return redirect('core:index')
-        else:
-            return render(request, 'core/revenues_edit.html', {
-                'form': form,
-                'revenue': revenue,
-            })
+            return redirect('core:revenues')
+
     return render(request, 'core/revenues_edit.html', {
         'form': form,
         'revenue': revenue,
     })
 
 
-def bank_accounts_create(request):
+def bank_account_create(request):
     if request.method == 'POST':
         form = BankAccountCreateForm(request.POST)
         if form.is_valid():
@@ -204,10 +215,6 @@ def bank_accounts_create(request):
             bank_account.save()
             messages.add_message(request, messages.SUCCESS, 'Parabéns, sua conta foi criada com sucesso!')
             return redirect('core:index')
-        else:
-            return render(request, 'core/bank_accounts_create.html', {
-                'form': form,
-            })
     else:
         form = BankAccountCreateForm()
         return render(request, 'core/bank_accounts_create.html', {
@@ -215,7 +222,7 @@ def bank_accounts_create(request):
         })
 
 
-def categories_detail(request, category_slug):
+def category_detail(request, category_slug):
     category = Category.objects.filter(owner=request.user).get(slug=category_slug)
     expenses = category.expenses.filter(user=request.user)
     revenues = category.revenues.filter(user=request.user)
@@ -226,7 +233,7 @@ def categories_detail(request, category_slug):
     })
 
 
-def categories_include(request):
+def category_include(request):
     if request.method != 'POST':
         form = CategoryIncludeForm()
     else:
@@ -244,3 +251,11 @@ def categories_include(request):
     return render(request, 'core/categories_include.html', {
         'form': form,
     })
+
+
+def api_list(request):
+    return render(request, 'core/api_list.html')
+
+
+def test_celery(request):
+    create_tag.delay()

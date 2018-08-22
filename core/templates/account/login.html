@@ -1,0 +1,90 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .fa {
+          padding: 20px;
+          font-size: 30px;
+          text-align: center;
+          text-decoration: none;
+          margin: 5px 2px;
+        }
+
+        .fa:hover {
+            opacity: 0.7;
+        }
+
+        .fa-facebook {
+          background: #3B5998;
+          color: white;
+        }
+    </style>
+
+
+<section class="banner-area relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row fullscreen justify-content-center align-items-center">
+            <div class="col-lg-8">
+                <div class="banner-content" align="center">
+{#                    <p class="text-uppercase text-white">Aproveite nosso sistema</p>#}
+
+                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                    </fb:login-button>
+
+                    <div id="status">
+                    </div>
+
+
+                    <h1 class="text-uppercase text-white mb-2">Faça o login</h1>
+
+                    {% get_providers as socialaccount_providers %}
+                    {% for provider in socialaccount_providers %}
+                    <a href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}" class="fa fa-facebook px-4 mb-4"></a>
+                    {% endfor %}
+
+
+                    <p class="text-uppercase text-white">Pelo Facebook ou nosso formulário</p>
+
+                    <form class="form-signin" method="post">
+                        {% csrf_token %}
+                        <div class="single-input color-2 mb-10">
+                            <input type="text"
+                             class="form-control"
+                             name="{{ login_form.username.name }}"
+                             placeholder="nome de usuário"
+                             id="{{ login_form.username.id_for_label }}"
+                             {% if login_form.username.value != None %}value="{{ login_form.username.value|stringformat:'s' }}"{% endif %}
+                             maxlength="{{ login_form.username.field.max_length }}"
+                             {% if login_form.username.field.required %}required{% endif %} style="max-width:300px;">
+                        </div>
+                        <div class="single-input color-2">
+                            <input type="password"
+                             class="form-control"
+                             name="{{ login_form.password.name }}"
+                             placeholder="senha"
+                             id="{{ login_form.password.id_for_label }}"
+                             {% if login_form.password.value != None %}value="{{ login_form.password.value|stringformat:'s' }}"{% endif %}
+                             maxlength="{{ login_form.password.field.max_length }}"
+                             {% if login_form.password.field.required %}required{% endif %} style="max-width:300px;">
+                        </div>
+                        {% if login_form.errors %}
+                        <p class="text-white mt-3">usuário ou senha inválidos</p>
+                        {% endif %}
+                        <button class="primary-btn banner-btn my-4" type="submit">Login</button>
+                        <br>
+                        <a href="{% url 'core:register' %}" class="text-white">Ou registre-se aqui</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
