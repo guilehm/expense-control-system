@@ -53,12 +53,12 @@ urlpatterns = [
     path('docs/', include_docs_urls(title='Expense Control System')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('api/', include((router.urls, 'api'), namespace='api')),
     re_path(
         r'^swagger(?P<format>\.json|\.yaml)$',
         schema_view.without_ui(cache_timeout=None),
         name='schema-json',
     ),
-    path('api/', include((router.urls, 'api'), namespace='api')),
 ]
 if os.getcwd() != '/app':
     import debug_toolbar
