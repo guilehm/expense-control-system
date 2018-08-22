@@ -76,6 +76,7 @@ def register_view(request):
 def expense_list(request):
     expenses = Expense.objects.prefetch_related(
         'account',
+        'category',
     ).filter(
         user=request.user
     )
