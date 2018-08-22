@@ -18,9 +18,19 @@ from transactions.models import Expense, Revenue
 
 def index(request):
     if request.user.is_authenticated:
-        accounts = BankAccount.objects.filter(owner=request.user)
-        expenses = Expense.objects.filter(user=request.user).order_by('due_date')
-        revenues = Revenue.objects.filter(user=request.user).order_by('due_date')
+        accounts = BankAccount.objects.prefetch_related(
+            'bank',
+        ).filter(owner=request.user)
+        expenses = Expense.objects.prefetch_related(
+            'account',
+            'category',
+            'tags',
+        ).filter(user=request.user).order_by('due_date')
+        revenues = Revenue.objects.prefetch_related(
+            'account',
+            'category',
+            'tags',
+        ).filter(user=request.user).order_by('due_date')
         expense_categories = Category.objects.filter(expenses__user=request.user).distinct()
         revenue_categories = Category.objects.filter(revenues__user=request.user).distinct()
 
@@ -74,8 +84,13 @@ def register_view(request):
 
 
 def expense_list(request):
+    expenses = Expense.objects.prefetch_related(
+        'account',
+        'category',
+    ).filter(
+        user=request.user
+    )
     categories = Category.objects.filter(owner=request.user)
-    expenses = Expense.objects.filter(user=request.user)
     tags = Tag.objects.filter(owner=request.user)
 
     expense_edit_form = modelformset_factory(Expense, form=MultipleExpenseEditForm, extra=0)
@@ -104,7 +119,9 @@ def expense_list(request):
 
 def revenue_list(request):
     categories = Category.objects.filter(owner=request.user)
-    revenues = Revenue.objects.filter(user=request.user)
+    revenues = Revenue.objects.prefetch_related(
+        'category',
+    ).filter(user=request.user)
     tags = Tag.objects.filter(owner=request.user)
     return render(request, 'core/revenues.html', {
         'revenues': revenues,
