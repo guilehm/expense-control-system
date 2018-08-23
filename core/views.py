@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -14,6 +16,7 @@ from transactions.forms import ExpenseEditForm, ExpenseForm, MultipleExpenseEdit
 from transactions.models import Expense, Revenue
 
 # Create your views here.
+logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -62,6 +65,8 @@ def login_view(request):
 
 
 def logout_view(request):
+    message = 'The user {user} has logged out.'.format(user=request.user)
+    logger.info(message, exc_info=True)
     logout(request)
     return HttpResponseRedirect(reverse('core:index'))
 
