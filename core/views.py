@@ -263,4 +263,6 @@ def api_list(request):
 
 
 def test_celery(request):
+    message = 'Celery Tests' * 30
+    logger.exception(message, exc_info=True)
     create_tag.delay()
