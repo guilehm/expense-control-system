@@ -16,7 +16,7 @@ from transactions.forms import ExpenseEditForm, ExpenseForm, MultipleExpenseEdit
 from transactions.models import Expense, Revenue
 
 # Create your views here.
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('controller')
 
 
 def index(request):
@@ -65,8 +65,6 @@ def login_view(request):
 
 
 def logout_view(request):
-    message = 'The user {user} has logged out.'.format(user=request.user)
-    logger.info(message, exc_info=True)
     logout(request)
     return HttpResponseRedirect(reverse('core:index'))
 
@@ -263,6 +261,4 @@ def api_list(request):
 
 
 def test_celery(request):
-    message = 'Celery Tests' * 30
-    logger.error(message, exc_info=True)
     create_tag.delay()
