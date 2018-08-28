@@ -11,9 +11,9 @@ class ExpenseForm(forms.ModelForm):
         model = Expense
         exclude = ('user',)
 
-    def __init__(self, owner, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['account'].queryset = BankAccount.objects.filter(owner=owner)
+        self.fields['account'].queryset = BankAccount.objects.filter(user=user)
 
     def save(self, user, commit=True):
         expense = super().save(commit=False)
