@@ -67,6 +67,7 @@ class Expense(models.Model):
         'core.Category',
         related_name='expenses',
         on_delete=models.CASCADE,
+        null=True,
     )
     tags = models.ManyToManyField(
         'core.Tag',
