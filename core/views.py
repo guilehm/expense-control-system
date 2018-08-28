@@ -153,7 +153,9 @@ def expense_edit(request, expense_id):
 
 # FIXME: find a better way to save multiple forms
 def expense_include(request):
-    if request.method == 'POST':
+    if request.method != 'POST':
+        form = ExpenseForm(request.user)
+    else:
         form = ExpenseForm(request.user, request.POST)
         if form.is_valid():
             repeat = form.save(commit=False, user=request.user)
@@ -167,8 +169,6 @@ def expense_include(request):
                 'sua despesa foi cadastrada com sucesso'.format(request.user)
             )
             return redirect('core:expenses')
-    else:
-        form = ExpenseForm(request.user)
     return render(request, 'core/expenses_include.html', {
         'form': form,
     })
