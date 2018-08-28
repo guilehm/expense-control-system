@@ -7,6 +7,8 @@ from django.forms.models import modelformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from django.utils import timezone
+from dateutil.relativedelta import relativedelta
 
 from bank.models import BankAccount
 from core.forms import BankAccountCreateForm, CategoryIncludeForm
@@ -158,10 +160,22 @@ def expense_include(request):
     else:
         form = ExpenseForm(request.user, request.POST)
         if form.is_valid():
-            repeat = form.save(commit=False, user=request.user)
-            for expense in range(1, repeat.recurrence):
-                form = ExpenseForm(request.user, request.POST)
-                form.save(user=request.user)
+            expense = form.save(user=request.user)
+            due_date = expense.due_date
+            delta = due_date + relativedelta(months=1)
+            for loop in range(1, expense.recurrence):
+                Expense.objects.create(
+                    user=request.user,
+                    account=expense.account,
+                    title=expense.title,
+                    description=expense.description,
+                    total=expense.total,
+                    competition_date=expense.competition_date,
+                    due_date=delta,
+                    paid_out=expense.paid_out,
+                    note=expense.note,
+                )
+                delta = delta + relativedelta(months=1)
 
             messages.add_message(
                 request,
