@@ -1,5 +1,6 @@
 import logging
 
+from dateutil.relativedelta import relativedelta
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -153,13 +154,27 @@ def expense_edit(request, expense_id):
 
 # FIXME: find a better way to save multiple forms
 def expense_include(request):
-    if request.method == 'POST':
+    if request.method != 'POST':
+        form = ExpenseForm(request.user)
+    else:
         form = ExpenseForm(request.user, request.POST)
         if form.is_valid():
-            repeat = form.save(commit=False, user=request.user)
-            for expense in range(1, repeat.recurrence):
-                form = ExpenseForm(request.user, request.POST)
-                form.save(user=request.user)
+            expense = form.save(user=request.user)
+            due_date = expense.due_date
+            delta = due_date + relativedelta(months=1)
+            for loop in range(1, expense.recurrence):
+                Expense.objects.create(
+                    user=request.user,
+                    account=expense.account,
+                    title=expense.title,
+                    description=expense.description,
+                    total=expense.total,
+                    competition_date=expense.competition_date,
+                    due_date=delta,
+                    paid_out=expense.paid_out,
+                    note=expense.note,
+                )
+                delta = delta + relativedelta(months=1)
 
             messages.add_message(
                 request,
@@ -167,8 +182,6 @@ def expense_include(request):
                 'sua despesa foi cadastrada com sucesso'.format(request.user)
             )
             return redirect('core:expenses')
-    else:
-        form = ExpenseForm(request.user)
     return render(request, 'core/expenses_include.html', {
         'form': form,
     })
