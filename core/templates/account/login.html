@@ -58,9 +58,9 @@
                         <div class="single-input color-2 mb-10">
                             <input type="text"
                              class="form-control"
-                             name="{{ login_form.username.name }}"
+                             name="username"
                              placeholder="nome de usuário"
-                             id="{{ login_form.username.id_for_label }}"
+                             id="id_username"
                              {% if login_form.username.value != None %}value="{{ login_form.username.value|stringformat:'s' }}"{% endif %}
                              maxlength="{{ login_form.username.field.max_length }}"
                              {% if login_form.username.field.required %}required{% endif %} style="max-width:300px;">
@@ -68,9 +68,9 @@
                         <div class="single-input color-2">
                             <input type="password"
                              class="form-control"
-                             name="{{ login_form.password.name }}"
+                             name="password"
                              placeholder="senha"
-                             id="{{ login_form.password.id_for_label }}"
+                             id="id_password"
                              {% if login_form.password.value != None %}value="{{ login_form.password.value|stringformat:'s' }}"{% endif %}
                              maxlength="{{ login_form.password.field.max_length }}"
                              {% if login_form.password.field.required %}required{% endif %} style="max-width:300px;">
