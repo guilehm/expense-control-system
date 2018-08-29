@@ -223,6 +223,7 @@ def revenue_edit(request, revenue_id):
 
 
 def bank_account_create(request):
+    form = BankAccountCreateForm()
     if request.method == 'POST':
         form = BankAccountCreateForm(request.POST)
         if form.is_valid():
@@ -231,11 +232,9 @@ def bank_account_create(request):
             bank_account.save()
             messages.add_message(request, messages.SUCCESS, 'Parabéns, sua conta foi criada com sucesso!')
             return redirect('core:index')
-    else:
-        form = BankAccountCreateForm()
-        return render(request, 'core/bank_accounts_create.html', {
-            'form': form,
-        })
+    return render(request, 'core/bank_accounts_create.html', {
+        'form': form,
+    })
 
 
 def category_detail(request, category_slug):
