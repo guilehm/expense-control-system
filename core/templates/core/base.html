@@ -43,7 +43,7 @@
 							<nav class="d-flex align-items-center">
 								<ul class="main-menu-items">
                                     {% if request.user.is_authenticated %}
-                                    <li><a>Olá, {{ request.user }}</a></li> |
+                                    <li><a>Olá, {{ request.user }}</a></li>
                                     {% endif %}
 									<li><a href="{% url 'core:index' %}">Home</a></li>
 									<li><a href="{% url 'core:api-list' %}">API</a></li>
