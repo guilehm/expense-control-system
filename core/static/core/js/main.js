@@ -29,7 +29,7 @@ $(document).ready(function(){
         $(".main-menu").addClass('mobile-menu');
     });
      $(".main-menu li a").on('click', function(e){
-        e.preventDefault();
+        // e.preventDefault();
         $(".mobile-menu").slideUp();
         $(".mobile-btn span").toggleClass("lnr-menu lnr-cross");
     });
