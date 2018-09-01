@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from bank.models import BankAccount
-from core.forms import BankAccountCreateForm, CategoryIncludeForm
+from core.forms import BankAccountCreateForm, CategoryIncludeForm, CSVImportForm
 from core.models import Category, Tag
 from core.tasks import create_tag
 from transactions.forms import ExpenseEditForm, ExpenseForm, MultipleExpenseEditForm, RevenueEditForm, RevenueForm
@@ -269,7 +269,16 @@ def category_include(request):
 
 
 def category_import(request):
-    return render(request, 'core/categories_import.html')
+    if request.method != 'POST':
+        form = CSVImportForm()
+    else:
+        form = CSVImportForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Arquivo salvo com sucesso!')
+    return render(request, 'core/categories_import.html', {
+        'form': form,
+    })
 
 
 def api_list(request):
