@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<section id="services" class="title-bg section-full">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="m-alert m-alert--outline alert alert-success alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="product-area-title text-center">
+                    <p class="text-white text-uppercase">importe aqui suas categorias</p>
+                    <h2 class="text-white h1">Importador</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="section-title text-center">
+                    <p class="text-white">faça upload do arquivo aqui</p>
+                </div>
+            </div>
+            <div class="custom-file">
+                <div class="container bg-dark pt-2">
+                    <input type="file">
+                    <label class="custom-file-label" for="customFileLang">Selecionar arquivo</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
