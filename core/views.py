@@ -279,7 +279,7 @@ def category_import(request):
             csv.owner = request.user
             csv.save()
             messages.add_message(request, messages.SUCCESS, 'Arquivo salvo com sucesso!')
-            process_csv_category_file(csv)
+            process_csv_category_file(csv)  #TODO: make this an async task
     return render(request, 'core/categories_import.html', {
         'form': form,
     })
