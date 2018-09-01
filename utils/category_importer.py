@@ -58,6 +58,7 @@ def process_csv_category_file(instance_id):
                 )
             )
             if category.slug != slug:
+                category.slug = slug
                 logger.info(
                     'Updating category #{id} {title} slug from "{old_slug}" to "{new_slug}".'.format(
                         id=category.id,
@@ -66,8 +67,8 @@ def process_csv_category_file(instance_id):
                         new_slug=slug,
                     )
                 )
-            category.slug = slug
             if category.description != description:
+                category.description = description
                 logger.info(
                     'Updating category #{id} {title} description '
                     'from "{old_description}" to "{new_description}".'.format(
@@ -77,5 +78,4 @@ def process_csv_category_file(instance_id):
                         new_description=description,
                     )
                 )
-            category.description = description
             category.save()
