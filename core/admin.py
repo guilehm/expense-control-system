@@ -20,3 +20,10 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {
         'slug': ('title',)
     }
+
+
+@admin.register(CSV)
+class CSVAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'original_file_name', 'date_added')
+    list_filter = ('owner', 'date_added')
+    search_fields = ('owner', 'file', 'original_file_name')
