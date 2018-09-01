@@ -73,6 +73,7 @@ celery = "*"
 django-celery-results = "*"
 django-debug-toolbar = "*"
 newrelic = "*"
+python-slugify = "*"
 
 [dev-packages]
 
