@@ -1,7 +1,7 @@
 from django import forms
 
 from bank.models import BankAccount
-from core.models import Category, CSV
+from core.models import CSV, Category
 from transactions.models import Revenue
 
 
