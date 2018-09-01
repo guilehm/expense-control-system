@@ -1,7 +1,7 @@
 from django import forms
 
 from bank.models import BankAccount
-from core.models import Category
+from core.models import Category, CSV
 from transactions.models import Revenue
 
 
@@ -25,3 +25,9 @@ class CategoryIncludeForm(forms.ModelForm):
     class Meta:
         model = Category
         exclude = ('owner',)
+
+
+class CSVImportForm(forms.ModelForm):
+    class Meta:
+        model = CSV
+        exclude = ('owner', 'original_file_name')
