@@ -20,6 +20,7 @@ urlpatterns = [
     path('expenses/edit/<int:expense_id>/', views.expense_edit, name='expenses-edit'),
     path('bank-accounts/create/', views.bank_account_create, name='bank-accounts-create'),
     path('categories/include/', views.category_include, name='categories-include'),
+    path('categories/import/', views.category_import, name='categories-import'),
     path('category/<str:category_slug>/', views.category_detail, name='categories-detail'),
     path('api/', views.api_list, name='api-list'),
     path('tests/celery/', views.test_celery)
