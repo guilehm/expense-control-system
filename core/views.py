@@ -13,6 +13,7 @@ from bank.models import BankAccount
 from core.forms import BankAccountCreateForm, CategoryIncludeForm, CSVImportForm
 from core.models import Category, Tag
 from core.tasks import create_tag
+from utils.category_importer import process_csv_category_file
 from transactions.forms import ExpenseEditForm, ExpenseForm, MultipleExpenseEditForm, RevenueEditForm, RevenueForm
 from transactions.models import Expense, Revenue
 
@@ -278,6 +279,7 @@ def category_import(request):
             csv.owner = request.user
             csv.save()
             messages.add_message(request, messages.SUCCESS, 'Arquivo salvo com sucesso!')
+            process_csv_category_file(csv)
     return render(request, 'core/categories_import.html', {
         'form': form,
     })
