@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Category, CSV, Tag
+from core.models import CSV, Category, Tag
 
 
 # Register your models here.
