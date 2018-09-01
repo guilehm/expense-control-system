@@ -13,9 +13,9 @@ from bank.models import BankAccount
 from core.forms import BankAccountCreateForm, CategoryIncludeForm, CSVImportForm
 from core.models import Category, Tag
 from core.tasks import create_tag
-from utils.category_importer import process_csv_category_file
 from transactions.forms import ExpenseEditForm, ExpenseForm, MultipleExpenseEditForm, RevenueEditForm, RevenueForm
 from transactions.models import Expense, Revenue
+from utils.category_importer import process_csv_category_file
 
 # Create your views here.
 logger = logging.getLogger('controller')
