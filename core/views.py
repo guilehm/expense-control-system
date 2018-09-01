@@ -10,11 +10,12 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from bank.models import BankAccount
-from core.forms import BankAccountCreateForm, CategoryIncludeForm
+from core.forms import BankAccountCreateForm, CategoryIncludeForm, CSVImportForm
 from core.models import Category, Tag
 from core.tasks import create_tag
 from transactions.forms import ExpenseEditForm, ExpenseForm, MultipleExpenseEditForm, RevenueEditForm, RevenueForm
 from transactions.models import Expense, Revenue
+from utils.category_importer import process_csv_category_file
 
 # Create your views here.
 logger = logging.getLogger('controller')
@@ -264,6 +265,22 @@ def category_include(request):
         })
 
     return render(request, 'core/categories_include.html', {
+        'form': form,
+    })
+
+
+def category_import(request):
+    if request.method != 'POST':
+        form = CSVImportForm()
+    else:
+        form = CSVImportForm(request.POST, request.FILES)
+        if form.is_valid():
+            csv = form.save(commit=False)
+            csv.owner = request.user
+            csv.save()
+            messages.add_message(request, messages.SUCCESS, 'Arquivo salvo com sucesso!')
+            process_csv_category_file(csv)  # TODO: make this an async task
+    return render(request, 'core/categories_import.html', {
         'form': form,
     })
 

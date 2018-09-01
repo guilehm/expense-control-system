@@ -1,6 +1,10 @@
+import os
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum
+
+from core.validators import csv_file_validator
 
 
 class CategoryQuerySet(models.QuerySet):
@@ -43,3 +47,17 @@ class Tag(models.Model):
 
     class Meta:
         unique_together = ('title', 'owner')
+
+
+class CSV(models.Model):
+    owner = models.ForeignKey(User, related_name='csvs', on_delete=models.CASCADE)
+    file = models.FileField(upload_to='core/csv', validators=[csv_file_validator])
+    original_file_name = models.CharField(max_length=500, blank=True, null=True)
+
+    error_detail = models.CharField(max_length=200, null=True, blank=True)
+
+    date_added = models.DateTimeField(auto_now_add=True)
+    date_changed = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return os.path.basename(self.file.name)

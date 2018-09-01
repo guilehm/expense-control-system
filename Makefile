@@ -3,4 +3,6 @@ lint:
 	@isort --check
 
 test: 
+	flake8
+	isort
 	py.test -v
