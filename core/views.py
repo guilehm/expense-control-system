@@ -268,6 +268,10 @@ def category_include(request):
     })
 
 
+def category_import(request):
+    return render(request, 'core/categories_import.html')
+
+
 def api_list(request):
     return render(request, 'core/api_list.html')
 
