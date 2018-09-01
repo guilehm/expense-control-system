@@ -274,7 +274,9 @@ def category_import(request):
     else:
         form = CSVImportForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            csv = form.save(commit=False)
+            csv.owner = request.user
+            csv.save()
             messages.add_message(request, messages.SUCCESS, 'Arquivo salvo com sucesso!')
     return render(request, 'core/categories_import.html', {
         'form': form,
