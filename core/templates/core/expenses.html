@@ -2,7 +2,7 @@
 
 {% block content %}
 
-
+{# Expense edit section #}
 {#<section class="section-full gray-bg">#}
 {#    <div class="container">#}
 {#        <div class="row justify-content-center">#}
@@ -93,6 +93,18 @@
                     </div>
                 </a>
             </div>
+            {% if request.user.accounts.first %}
+                <div class="col-lg-3 col-sm-6">
+                    <a href="#">
+                        <div class="single-product">
+                            <div class="desc">
+                                <h4>Importar</h4>
+                                <p>Importe suas categorias</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
         </div>
     </div>
 </section>
