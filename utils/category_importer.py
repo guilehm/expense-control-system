@@ -1,17 +1,20 @@
 import csv
 import logging
 
+from celery import shared_task
 from slugify import slugify
 
-from core.models import Category
+from core.models import CSV, Category
 
 logger = logging.getLogger('controller')
 
 CATEGORY_HEADER = ['title', 'slug', 'description']
 
 
-def process_csv_category_file(instance):
+@shared_task
+def process_csv_category_file(instance_id):
 
+    instance = CSV.objects.get(id=instance_id)
     reader = csv.DictReader(instance.file.read().decode('utf-8').splitlines())
     header_ = reader.fieldnames
 
