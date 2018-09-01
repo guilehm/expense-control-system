@@ -1,9 +1,9 @@
 import csv
 import logging
 
-from core.models import Category
 from slugify import slugify
 
+from core.models import Category
 
 logger = logging.getLogger('controller')
 
