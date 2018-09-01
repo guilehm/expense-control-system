@@ -2,6 +2,7 @@ import csv
 import logging
 
 from core.models import Category
+from slugify import slugify
 
 
 logger = logging.getLogger('controller')
@@ -27,6 +28,8 @@ def process_csv_category_file(instance):
         title = row['title']
         slug = row['slug']
         description = row['description']
+
+        slug = slugify(title) if slug == "" else slugify(slug)
 
         category, created = Category.objects.get_or_create(
             owner=instance.owner,
