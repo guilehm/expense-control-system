@@ -42,6 +42,18 @@
                     </div>
                 </div>
             </div>
+            {% if request.user.accounts.first %}
+                <div class="col-lg-3 col-sm-6">
+                    <a href="{% url 'core:categories-import' %}">
+                        <div class="single-product">
+                            <div class="desc">
+                                <h4>Importar</h4>
+                                <p>Importe suas categorias</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
         </div>
     </div>
     </section>
