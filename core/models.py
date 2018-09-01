@@ -54,6 +54,8 @@ class CSV(models.Model):
     file = models.FileField(upload_to='core/csv', validators=[csv_file_validator])
     original_file_name = models.CharField(max_length=500, blank=True, null=True)
 
+    error_detail = models.CharField(max_length=200, null=True, blank=True)
+
     date_added = models.DateTimeField(auto_now_add=True)
     date_changed = models.DateTimeField(auto_now=True)
 
