@@ -8,8 +8,21 @@ https://gui-expenses.herokuapp.com/
 
 ## Features
 
-
-* Interface to create your User
+* Social login with Facebook
+* Asynchronous tasks with Celery and RabbitMQ
+* CSV importer for categories
+* Tests for Views
+* Tests for Models
+* Rest API
+* Swagger at https://gui-expenses.herokuapp.com/swagger
+* Redoc at https://gui-expenses.herokuapp.com/redoc/
+* Building Pull Requests with Travis CI
+* New Relic configurated with Heroku
+* Django Debug Toolbar
+* Django Extensions
+* Isort
+* FLake8
+* Pipenv
 * Interface to create your Bank Account, Expenses and Revenues
 * You may edit your Expenses and Revenues as you want
 * Progress bar for easy viewing your expenses and revenues sorted by categories
