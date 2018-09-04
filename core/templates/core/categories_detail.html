@@ -1,7 +1,5 @@
 {% extends 'core/base.html' %}
-
 {% block content %}
-
 <section id="services" class="title-bg section-full">
     <div class="container">
         <div class="row justify-content-center">
@@ -23,7 +21,6 @@
         </div>
     </div>
 </section>
-
 {% if category.expenses.first %}
 <section class="section-full gray-bg">
     <div class="container">
@@ -32,7 +29,7 @@
                 <div class="section-title text-center">
                     <h2 class="h1 mb-60">Despesas da categoria {{ category.title }}</h2>
                 </div>
-                    <table class="table table-sm table-responsive table-hover">
+                <table class="table table-sm table-responsive table-hover">
                     <thead>
                         <tr>
                             <th scope="col">Título</th>
@@ -53,13 +50,12 @@
                             </tr>
                         {% endfor %}
                     </tbody>
-                    </table>
+                </table>
             </div>
         </div>
     </div>
 </section>
 {% endif %}
-
 {% if category.revenues.first %}
 <section class="section-full bg12">
     <div class="container">

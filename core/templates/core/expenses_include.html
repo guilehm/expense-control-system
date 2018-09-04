@@ -44,7 +44,6 @@
                             </div>
                         {% endfor %}
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="account">Descrição:</label>
                         <textarea name="description" placeholder="insira uma descrição" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Digite aqui uma descrição'"></textarea>
@@ -54,7 +53,6 @@
                             </div>
                         {% endfor %}
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="account">Valor:</label>
                         <input type="number" name="total" step="0.01" placeholder="valor da despesa" onfocus="this.placeholder = ''" onblur="this.placeholder = 'valor da despesa'" required="">
@@ -64,7 +62,6 @@
                             </div>
                         {% endfor %}
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label class="text-dark" for="due_date">Digite a data de vencimento da despesa:</label>
                         <input type="date" name="due_date" id="due_date" placeholder="data de vencimento" onfocus="this.placeholder = ''" onblur="this.placeholder = 'data de vencimento'" required="">
@@ -74,7 +71,6 @@
                             </div>
                         {% endfor %}
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="id_paid_out">Marcar como pago:</label>
                         <input type="checkbox" name="paid_out" id="id_paid_out">
@@ -84,7 +80,6 @@
                             </div>
                         {% endfor %}
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="id_note">Observação:</label>
                         <textarea name="note" cols="40" rows="10" id="id_note" placeholder="caso tenha alguma observação a fazer, escreva aqui"></textarea>
@@ -94,7 +89,6 @@
                             </div>
                         {% endfor %}
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="category">Categoria:</label>
                         <select name="category" id="category" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Full Name'" required="">
@@ -108,7 +102,6 @@
                             </div>
                         {% endfor %}
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="tags">Tags:</label>
                         <select name="tags" id="tags" multiple="multiple" style="height: 100px;">
@@ -122,7 +115,6 @@
                             </div>
                         {% endfor %}
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="recurrence">Recorrência:</label>
                         <input type="text" name="recurrence" id="recurrence">
@@ -132,9 +124,7 @@
                             </div>
                         {% endfor %}
                     </div>
-
                     <button class="primary-btn banner-btn my-4 text-dark" type="submit">cadastrar despesa</button>
-
                     <div class="alert"></div>
                 </form>
             </div>

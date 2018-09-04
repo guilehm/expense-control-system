@@ -1,5 +1,4 @@
 {% extends 'core/base.html' %}
-
 {% block content %}
 <section id="contact" class="section-full gray-bg">
     <div class="container">
@@ -26,37 +25,30 @@
                         <label for="account">Nome da receita:</label>
                         <input type="text" name="title" value="{{ form.title.value|default:'' }}" placeholder="título da receita" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Título'" required="">
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="account">Descrição:</label>
                         <textarea name="description" placeholder="insira uma descrição" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Digite aqui uma descrição'">{{ form.description.value|default:'' }}</textarea>
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="account">Valor:</label>
                         <input type="number" name="total"  value="{{ form.total.value|default:'' }}" step="0.01" placeholder="valor da receita" onfocus="this.placeholder = ''" onblur="this.placeholder = 'valor da receita'" required="">
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="account">Data de competência:</label>
                         {{ form.competition_date }}
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="account">Data de vencimento:</label>
                         {{ form.due_date }}
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="id_paid_out">Marcar como pago:</label>
                         {{ form.paid_out }}
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="id_note">Observação:</label>
                         <textarea name="note" cols="40" rows="10" id="id_note" placeholder="caso tenha alguma observação a fazer, escreva aqui">{{ form.note.value|default:'' }}</textarea>
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="category">Categoria:</label>
                         <select name="category" id="category" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Full Name'" required="">
@@ -65,7 +57,6 @@
                             {% endfor %}
                         </select>
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="tags">Tags:</label>
                         <select name="tags" id="tags" multiple="multiple" style="height: 100px;">

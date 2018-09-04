@@ -1,5 +1,4 @@
 {% extends 'core/base.html' %}
-
 {% block content %}
 <section id="contact" class="section-full gray-bg">
     <div class="container">
@@ -27,19 +26,15 @@
                         <label for="account">Nome da categoria:</label>
                         <input type="text" name="title" placeholder="título da categoria" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Título'" required="">
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="account">Descrição:</label>
                         <textarea name="description" placeholder="insira uma descrição" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Digite aqui uma descrição'"></textarea>
                     </div>
-
                     <div class="single-input color-2 mb-10">
                         <label for="slug">Slug:</label>
                         <input type="text" name="slug" placeholder="Insira o slug" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Slug'" required="">
                     </div>
-
                     <button class="primary-btn banner-btn my-4 text-dark" type="submit">cadastrar categoria</button>
-
                     <div class="alert"></div>
                 </form>
             </div>
