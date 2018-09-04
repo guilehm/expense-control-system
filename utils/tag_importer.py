@@ -29,10 +29,5 @@ def process_csv_tag_file(instance_id):
             title=title
         )
 
-        if created:
-            tag.slug = slug
-            tag.save()
-        else:
-            if tag.slug != slug:
-                tag.slug = slug
-            tag.save()
+        tag.slug = slug
+        tag.save()
