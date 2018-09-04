@@ -31,7 +31,7 @@ https://gui-expenses.herokuapp.com/
 ## Built With:
 
 * Python 3.6.4
-* Django Framework 2.0.4
+* Django Framework 2.0.8
 * Datarc Template
 
 ## Contributing
