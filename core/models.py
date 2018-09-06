@@ -18,7 +18,7 @@ class CategoryQuerySet(models.QuerySet):
 # Create your models here.
 class Category(models.Model):
     title = models.CharField(max_length=50)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='categories')
     slug = models.SlugField()
     description = models.TextField(blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True, db_index=True)
@@ -36,7 +36,7 @@ class Category(models.Model):
 
 class Tag(models.Model):
     title = models.CharField(max_length=50)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tags')
     slug = models.SlugField()
     description = models.TextField(blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True, db_index=True)
