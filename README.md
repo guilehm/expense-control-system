@@ -1,5 +1,5 @@
 # Expense-Control-System
-[![Build Status](https://travis-ci.com/Guilehm/Expense-Control-System.svg?branch=master)](https://travis-ci.com/Guilehm/Expense-Control-System)
+[![Build Status](https://travis-ci.com/Guilehm/expense-control-system.svg?branch=master)](https://travis-ci.com/Guilehm/Expense-Control-System)
 
 **Built with Python, Django and PostgreSQL.**
 
